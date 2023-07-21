@@ -27,8 +27,8 @@ Card <|-- terrain
 
 Utopify *--> Board
 Board o--> "*" Square
+Board o--> "*" Connection
 Square o--> "0..1" Card
-Square o--> "1..4" Connection
-Connection *--> Square
+Connection *--> "2" Square
  
 @enduml
