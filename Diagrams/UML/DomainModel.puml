@@ -40,5 +40,10 @@ Connection *--> Happiness
 Connection <|-- Positive
 Connection <|-- Neutral
 Connection <|-- Negative
- 
+
+Utopify *--> "*" Milestone
+Milestone --> Score
+Milestone --> Deck
+Milestone ..> "*" Card 
+
 @enduml
