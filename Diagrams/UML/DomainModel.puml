@@ -11,9 +11,9 @@ entity Trait
 entity Board
 entity Square
 entity Connection
-entity Green
-entity Gray
-entity Red
+entity Positive
+entity Neutral
+entity Negative
 entity Happiness
 entity Score
 entity Milestone
@@ -34,8 +34,8 @@ Board o--> "*" Connection
 Square o--> "0..1" Card
 Connection *--> "2" Square
 Connection *--> Happiness
-Connection <|-- Green
-Connection <|-- Gray
-Connection <|-- Red
+Connection <|-- Positive
+Connection <|-- Neutral
+Connection <|-- Negative
  
 @enduml
