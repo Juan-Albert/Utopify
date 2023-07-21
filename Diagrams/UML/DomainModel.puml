@@ -15,4 +15,14 @@ entity Happiness
 entity Score
 entity Milestone
 
+Utopify *--> Player
+Player *--> Deck
+Player *--> Hand
+Hand --> Deck
+Hand o--> "*" Card
+Deck o--> "*" Card
+Card o--> "1..3" Trait
+Card <|-- character
+Card <|-- terrain
+ 
 @enduml
