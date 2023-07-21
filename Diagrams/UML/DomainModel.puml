@@ -1,6 +1,6 @@
 ﻿@startuml
 
-class Utopify
+entity Utopify
 entity Player
 entity Deck
 entity Hand
@@ -11,6 +11,9 @@ entity Trait
 entity Board
 entity Square
 entity Connection
+entity Green
+entity Gray
+entity Red
 entity Happiness
 entity Score
 entity Milestone
@@ -30,5 +33,9 @@ Board o--> "*" Square
 Board o--> "*" Connection
 Square o--> "0..1" Card
 Connection *--> "2" Square
+Connection *--> Happiness
+Connection <|-- Green
+Connection <|-- Gray
+Connection <|-- Red
  
 @enduml
