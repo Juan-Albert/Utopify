@@ -24,5 +24,11 @@ Deck o--> "*" Card
 Card o--> "1..3" Trait
 Card <|-- character
 Card <|-- terrain
+
+Utopify *--> Board
+Board o--> "*" Square
+Square o--> "0..1" Card
+Square o--> "1..4" Connection
+Connection *--> Square
  
 @enduml
