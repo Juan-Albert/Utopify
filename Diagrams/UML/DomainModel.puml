@@ -1,3 +1,18 @@
 ﻿@startuml
 
+class Utopify
+entity Player
+entity Deck
+entity Hand
+entity Card
+entity character
+entity terrain
+entity Trait
+entity Board
+entity Square
+entity Connection
+entity Happiness
+entity Score
+entity Milestone
+
 @enduml
