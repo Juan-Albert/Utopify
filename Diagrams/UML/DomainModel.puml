@@ -28,6 +28,9 @@ Card o--> "1..3" Trait
 Card <|-- character
 Card <|-- terrain
 
+Player *--> Score
+Score -> Happiness
+
 Utopify *--> Board
 Board o--> "*" Square
 Board o--> "*" Connection
