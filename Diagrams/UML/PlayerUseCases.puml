@@ -1,0 +1,7 @@
+﻿@startuml
+
+Player --> (Play)
+Player --> (Put a Card In Board)
+Player --> (Replay)
+
+@enduml
