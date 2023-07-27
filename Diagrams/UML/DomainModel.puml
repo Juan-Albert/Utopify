@@ -5,8 +5,8 @@ entity Player
 entity Deck
 entity Hand
 entity Card
-entity character
-entity terrain
+entity Character
+entity Terrain
 entity Trait
 entity Board
 entity Square
@@ -15,7 +15,6 @@ entity Positive
 entity Neutral
 entity Negative
 entity Happiness
-entity Score
 entity Milestone
 
 Utopify *--> Player
@@ -25,11 +24,10 @@ Hand --> Deck
 Hand o--> "*" Card
 Deck o--> "*" Card
 Card o--> "1..3" Trait
-Card <|-- character
-Card <|-- terrain
+Card <|-- Character
+Card <|-- Terrain
 
-Player *--> Score
-Score -> Happiness
+Player *--> Happiness
 
 Utopify *--> Board
 Board o--> "*" Square
@@ -37,12 +35,12 @@ Board o--> "*" Connection
 Square o--> "0..1" Card
 Connection *--> "2" Square
 Connection *--> Happiness
-Connection <|-- Positive
-Connection <|-- Neutral
-Connection <|-- Negative
+Connection <|--- Positive
+Connection <|--- Neutral
+Connection <|--- Negative
 
 Utopify *--> "*" Milestone
-Milestone --> Score
+Milestone --> Happiness
 Milestone --> Deck
 Milestone ..> "*" Card 
 
