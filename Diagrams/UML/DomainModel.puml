@@ -20,6 +20,7 @@ entity Milestone
 Utopify *--> Player
 Player *--> Deck
 Player *--> Hand
+Player --> "*" PutCard
 Hand --> Deck
 Hand o--> "*" Card
 Deck o--> "*" Card
@@ -38,6 +39,9 @@ Connection *--> Happiness
 Connection <|--- Positive
 Connection <|--- Neutral
 Connection <|--- Negative
+
+PutCard --> Board
+PutCard ..> Card
 
 Utopify *--> "*" Milestone
 Milestone --> Happiness
