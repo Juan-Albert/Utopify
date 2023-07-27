@@ -1,0 +1,11 @@
+﻿@startuml
+
+
+[*] --> PlayCard
+PlayCard --> PlayCard : CardInHand
+PlayCard --> Draw : HandEmpty
+Draw --> PlayCard
+Draw --> [*] : DeckEmpty
+
+
+@enduml
