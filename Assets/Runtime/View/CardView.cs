@@ -20,7 +20,8 @@ namespace Runtime.View
     public class CardView : MonoBehaviour
     {
         private bool _grabbed;
-    
+        private Card _card;
+
         private void Update()
         {
             if (Input.GetMouseButtonDown(0))
@@ -54,9 +55,9 @@ namespace Runtime.View
             }
         }
 
-        public void Setup(CardConfig cardConfig)
+        public void Setup(Card card)
         {
-            throw new System.NotImplementedException();
+            _card = card;
         }
     }
 }
