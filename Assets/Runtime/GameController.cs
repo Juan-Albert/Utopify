@@ -15,9 +15,6 @@ namespace Runtime
         [SerializeField]
         private CardView cardView;
         
-        private Board _board;
-        private List<Card> _cards;
-        
         private void Awake()
         {
             InitGame();
@@ -27,21 +24,21 @@ namespace Runtime
         {
             var boardConfig = Resources.Load<BoardConfig>($"");
             Assert.IsNotNull(boardConfig);
-            _board = new Board(boardConfig);
+            var board = new Board(boardConfig);
 
             CardConfig[] cardConfigs = Resources.LoadAll<CardConfig>($"/Cards");
             Assert.IsTrue(cardConfigs.Length > 0);
-            _cards = new List<Card>();
+            List<Card> cards = new List<Card>();
             for (int i = 0; i < cardConfigs.Length; i++)
             {
-                _cards.Add(new Card(cardConfigs[i]));
+                cards.Add(new Card(cardConfigs[i]));
             }
 
-            Instantiate(boardView, Vector3.zero, Quaternion.identity).Setup(boardConfig);
+            Instantiate(boardView, Vector3.zero, Quaternion.identity).Setup(board);
 
-            foreach (var cardConfig in cardConfigs)
+            foreach (Card card in cards)
             {
-                Instantiate(cardView, Vector3.zero, Quaternion.identity).Setup(cardConfig);
+                Instantiate(cardView, Vector3.zero, Quaternion.identity).Setup(card);
             }
         }
     }

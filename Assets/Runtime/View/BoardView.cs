@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Runtime.Domain;
 using Runtime.Scriptable;
 using UnityEngine;
 
@@ -8,20 +9,20 @@ namespace Runtime.View
     {
         [SerializeField]
         private Square squarePrefab;
+
+        private Board _board;
         private List<Square> _squares;
 
         private void Awake()
         {
             _squares = new List<Square>();
-            BuildBoard();
         }
 
         private void BuildBoard()
         {
-            int size = 5;
-            for (int i = -size/2; i <= size/2; i++)
+            for (int i = -_board.Columns/2; i <= _board.Columns/2; i++)
             {
-                for (int j = -size/2; j <= size/2; j++)
+                for (int j = -_board.Rows/2; j <= _board.Rows/2; j++)
                 {
                     var square = Instantiate(squarePrefab, new Vector3(i + i * 0.1f, j + j * 0.1f, 0), Quaternion.identity);
                     _squares.Add(square);
@@ -29,9 +30,10 @@ namespace Runtime.View
             }
         }
 
-        public void Setup(BoardConfig boardConfig)
+        public void Setup(Board board)
         {
-            throw new System.NotImplementedException();
+            _board = board;
+            BuildBoard();
         }
     }
 }
