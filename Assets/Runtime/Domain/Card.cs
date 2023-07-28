@@ -5,10 +5,15 @@ namespace Runtime.Domain
 {
     public class Card
     {
-        private List<Trait> _traits;
+        private readonly List<Trait> _traits;
 
-        public Card(CardConfig traits)
+        public Card(CardConfig cardConfig)
         {
+            _traits = new List<Trait>();
+            foreach (var traitType in cardConfig.traitTypes)
+            {
+                _traits.Add(new Trait(traitType));
+            }
         }
     }
 }
