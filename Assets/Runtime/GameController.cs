@@ -22,11 +22,11 @@ namespace Runtime
 
         private void InitGame()
         {
-            var boardConfig = Resources.Load<BoardConfig>($"");
+            var boardConfig = Resources.Load<BoardConfig>($"BoardConfig");
             Assert.IsNotNull(boardConfig);
             var board = new Board(boardConfig);
 
-            CardConfig[] cardConfigs = Resources.LoadAll<CardConfig>($"/Cards");
+            CardConfig[] cardConfigs = Resources.LoadAll<CardConfig>($"Cards/");
             Assert.IsTrue(cardConfigs.Length > 0);
             List<Card> cards = new List<Card>();
             for (int i = 0; i < cardConfigs.Length; i++)
