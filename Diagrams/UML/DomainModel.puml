@@ -19,6 +19,7 @@ entity Connection
 
 entity Happiness
 entity Milestone
+note right: Each milestone adds cards when\ncertain Happiness has been reached
 
 Utopify *--> Player
 Player *--> Deck
