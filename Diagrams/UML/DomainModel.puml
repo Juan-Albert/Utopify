@@ -11,9 +11,12 @@ entity Trait
 entity Board
 entity Square
 entity Connection
-entity Positive
-entity Neutral
-entity Negative
+{
+    positive
+    negative
+    neutral
+}
+
 entity Happiness
 entity Milestone
 
@@ -36,9 +39,6 @@ Board o--> "*" Connection
 Square o--> "0..1" Card
 Connection *--> "2" Square
 Connection *--> Happiness
-Connection <|--- Positive
-Connection <|--- Neutral
-Connection <|--- Negative
 
 PutCard --> Board
 PutCard ..> Card
