@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using Runtime.Domain;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Runtime.Scriptable
 {
-    [CreateAssetMenu(fileName = "TraitConfig", menuName = "ScriptableObjects/TraitConfig", order = 3)]
+    [CreateAssetMenu(fileName = "CardConfig", menuName = "ScriptableObjects/CardConfig", order = 2)]
     public class CardConfig : ScriptableObject
     {
-        
+        public List<Trait.TraitType> traitTypes;
     }
 }
