@@ -1,3 +1,4 @@
+using Runtime.Scriptable;
 using UnityEngine;
 
 /*
@@ -13,9 +14,9 @@ using UnityEngine;
   
  */
 
-namespace Runtime
+namespace Runtime.View
 {
-    public class Card : MonoBehaviour
+    public class CardView : MonoBehaviour
     {
         private bool _grabbed;
     
@@ -31,6 +32,15 @@ namespace Runtime
             }
             else if(_grabbed && Input.GetMouseButtonUp(0))
             {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast (ray, out var hit, 100))
+                {
+                    if (hit.transform.gameObject.CompareTag("Square"))
+                    {
+                        hit.transform.gameObject.GetComponent<Square>().CardViewInSquare = this;
+                        transform.position = hit.transform.position;
+                    }
+                }
                 _grabbed = false;
             }
 
@@ -41,6 +51,11 @@ namespace Runtime
                 Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mousePosition);
                 transform.position = mouseWorldPos;
             }
+        }
+
+        public void Setup(CardConfig cardConfig)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

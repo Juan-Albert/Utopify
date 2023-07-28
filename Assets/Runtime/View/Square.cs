@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-namespace Runtime
+namespace Runtime.View
 {
     public class Square : MonoBehaviour
     {
-        
+        public CardView CardViewInSquare { get; set; }
     }
 }

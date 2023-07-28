@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Runtime.Scriptable;
 using UnityEngine;
 
-namespace Runtime
+namespace Runtime.View
 {
-    public class Board : MonoBehaviour
+    public class BoardView : MonoBehaviour
     {
         [SerializeField]
         private Square squarePrefab;
@@ -27,6 +27,11 @@ namespace Runtime
                     _squares.Add(square);
                 }
             }
+        }
+
+        public void Setup(BoardConfig boardConfig)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
