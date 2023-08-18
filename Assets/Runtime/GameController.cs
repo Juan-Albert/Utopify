@@ -30,7 +30,21 @@ namespace Runtime
             CardConfig[] cardConfigs = Resources.LoadAll<CardConfig>($"Cards/");
             Assert.IsTrue(cardConfigs.Length > 0);
 
-            TraitComparer traitComparer = new TraitComparer();
+            Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.TraitComparerResult> traitComparisons = new Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.TraitComparerResult>
+            {
+                { (Trait.TraitType.Good, Trait.TraitType.Good), TraitComparer.TraitComparerResult.Positive },
+                { (Trait.TraitType.Good, Trait.TraitType.Evil), TraitComparer.TraitComparerResult.Negative },
+                { (Trait.TraitType.Good, Trait.TraitType.Happy), TraitComparer.TraitComparerResult.Neutral },
+                { (Trait.TraitType.Good, Trait.TraitType.Sad), TraitComparer.TraitComparerResult.Neutral },
+                { (Trait.TraitType.Evil, Trait.TraitType.Evil), TraitComparer.TraitComparerResult.Positive },
+                { (Trait.TraitType.Evil, Trait.TraitType.Happy), TraitComparer.TraitComparerResult.Negative },
+                { (Trait.TraitType.Evil, Trait.TraitType.Sad), TraitComparer.TraitComparerResult.Negative },
+                { (Trait.TraitType.Happy, Trait.TraitType.Happy), TraitComparer.TraitComparerResult.Positive },
+                { (Trait.TraitType.Happy, Trait.TraitType.Sad), TraitComparer.TraitComparerResult.Negative },
+                { (Trait.TraitType.Sad, Trait.TraitType.Sad), TraitComparer.TraitComparerResult.Positive }
+            };
+            TraitComparer traitComparer = new TraitComparer(traitComparisons);
+            
             List<Trait> traits = new List<Trait>();
             traits.Add(new Trait(Trait.TraitType.Good, traitComparer));
             traits.Add(new Trait(Trait.TraitType.Evil, traitComparer));
