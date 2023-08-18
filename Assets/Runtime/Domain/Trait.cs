@@ -20,6 +20,11 @@ namespace Runtime.Domain
             _traitType = traitType;
             _traitComparer = traitComparer;
         }
+
+        public TraitComparer.TraitComparerResult Compare(TraitType otherTraitType)
+        {
+            return _traitComparer.Compare(_traitType, otherTraitType);
+        }
     
     }
 }

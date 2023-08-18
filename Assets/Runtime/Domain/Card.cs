@@ -7,12 +7,12 @@ namespace Runtime.Domain
     {
         private readonly List<Trait> _traits;
 
-        public Card(CardConfig cardConfig)
+        public Card(CardConfig cardConfig, TraitComparer traitComparer)
         {
             _traits = new List<Trait>();
             foreach (var traitType in cardConfig.traitTypes)
             {
-                _traits.Add(new Trait(traitType));
+                _traits.Add(new Trait(traitType, traitComparer));
             }
         }
     }
