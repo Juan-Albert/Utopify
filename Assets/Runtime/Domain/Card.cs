@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Runtime.Scriptable;
 
 namespace Runtime.Domain
 {
@@ -7,13 +6,9 @@ namespace Runtime.Domain
     {
         private readonly List<Trait> _traits;
 
-        public Card(CardConfig cardConfig, TraitComparer traitComparer)
+        public Card(List<Trait> traits)
         {
-            _traits = new List<Trait>();
-            foreach (var traitType in cardConfig.traitTypes)
-            {
-                _traits.Add(new Trait(traitType, traitComparer));
-            }
+            _traits = traits;
         }
     }
 }

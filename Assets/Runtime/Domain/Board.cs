@@ -1,6 +1,4 @@
-﻿using Runtime.Scriptable;
-
-namespace Runtime.Domain
+﻿namespace Runtime.Domain
 {
     public class Board
     {
@@ -8,10 +6,10 @@ namespace Runtime.Domain
 
         public int Rows { get; }
 
-        public Board(BoardConfig boardConfig)
+        public Board(int columns, int rows)
         {
-            Columns = boardConfig.columns;
-            Rows = boardConfig.rows;
+            Columns = columns;
+            Rows = rows;
         }
     }
 }

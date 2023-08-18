@@ -1,5 +1,4 @@
 using Runtime.Domain;
-using Runtime.Scriptable;
 using UnityEngine;
 
 /*

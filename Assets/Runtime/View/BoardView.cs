@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Runtime.Domain;
-using Runtime.Scriptable;
 using UnityEngine;
 
 namespace Runtime.View
