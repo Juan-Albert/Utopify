@@ -1,4 +1,6 @@
-﻿namespace Runtime.Domain
+﻿using System.Linq;
+
+namespace Runtime.Domain
 {
     public class Trait 
     {
@@ -11,10 +13,12 @@
         }
 
         private TraitType _traitType;
+        private TraitComparer _traitComparer;
     
-        public Trait(TraitType traitType)
+        public Trait(TraitType traitType, TraitComparer traitComparer)
         {
             _traitType = traitType;
+            _traitComparer = traitComparer;
         }
     
     }
