@@ -1,3 +1,5 @@
+using System;
+
 namespace Runtime.Domain
 {
     public class Square

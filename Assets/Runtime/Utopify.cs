@@ -23,8 +23,8 @@ namespace Runtime
 
         private void InitGame()
         {
-            var board = new Board(5,5);
-
+            var board = BuildBoard();
+            
             Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.TraitComparerResult> traitComparisons = new Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.TraitComparerResult>
             {
                 { (Trait.TraitType.Good, Trait.TraitType.Good), TraitComparer.TraitComparerResult.Positive },
@@ -59,6 +59,53 @@ namespace Runtime
             foreach (Card card in cards)
             {
                 Instantiate(cardView, Vector3.zero, Quaternion.identity).Setup(card);
+            }
+        }
+
+        private Board BuildBoard()
+        {
+            var columns = 5;
+            var rows = 5;
+
+            List<Square> squares = new List<Square>();
+            for (int i = - columns/2; i <= columns/2; i++)
+            {
+                for (int j = -rows/2; j <= rows/2; j++)
+                {
+                    var square = new Square(new Coordinate(i,j));
+                    squares.Add(square);
+                }
+            }
+            var boardSquares = new BoardSquares(squares);
+
+            List<Connection> connections = new List<Connection>();
+            for (int i = 0; i < boardSquares.Squares.Count; i++)
+            {
+                CheckForValidConnectionCreation(boardSquares.Squares[i],
+                    new Coordinate(boardSquares.Squares[i].Coordinate.Row + 1,
+                        boardSquares.Squares[i].Coordinate.Column));
+                CheckForValidConnectionCreation(boardSquares.Squares[i],
+                    new Coordinate(boardSquares.Squares[i].Coordinate.Row - 1,
+                        boardSquares.Squares[i].Coordinate.Column));
+                CheckForValidConnectionCreation(boardSquares.Squares[i],
+                    new Coordinate(boardSquares.Squares[i].Coordinate.Row,
+                        boardSquares.Squares[i].Coordinate.Column + 1));
+                CheckForValidConnectionCreation(boardSquares.Squares[i],
+                    new Coordinate(boardSquares.Squares[i].Coordinate.Row,
+                        boardSquares.Squares[i].Coordinate.Column - 1));
+            }
+            var boardConnections = new BoardConnections(connections, boardSquares);
+            
+            return new Board(columns,rows, boardSquares, boardConnections);
+
+            void CheckForValidConnectionCreation(Square fromSquare, Coordinate toCoordinate)
+            {
+                if (boardSquares.SquareExist(toCoordinate) &&
+                    !BoardConnections.ConnectionExist(connections, fromSquare.Coordinate,toCoordinate))
+                {
+                    var connection = new Connection(fromSquare, boardSquares.GetSquare(toCoordinate));
+                    connections.Add(connection);
+                }
             }
         }
     }

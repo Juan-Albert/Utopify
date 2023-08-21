@@ -1,36 +1,21 @@
-﻿using System.Collections.Generic;
-
-namespace Runtime.Domain
+﻿namespace Runtime.Domain
 {
     public class Board
     {
         public int Columns { get; }
         public int Rows { get; }
 
-        private List<Square> _squares;
+        private BoardSquares _boardSquares;
+        private BoardConnections _boardConnections;
 
-        public List<Square> Squares => _squares;
-
-        public Board(int columns, int rows)
+        public Board(int columns, int rows, BoardSquares boardSquares, BoardConnections boardConnections)
         {
             Columns = columns;
             Rows = rows;
+            
+            _boardSquares = boardSquares;
+            _boardConnections = boardConnections;
 
-            _squares = new List<Square>();
-            BuildBoard();
-        }
-
-        private void BuildBoard()
-        {
-            _squares.Clear();
-            for (int i = - Columns/2; i <= Columns/2; i++)
-            {
-                for (int j = -Rows/2; j <= Rows/2; j++)
-                {
-                    var square = new Square(new Coordinate(i,j));
-                    _squares.Add(square);
-                }
-            }
         }
     }
 }
