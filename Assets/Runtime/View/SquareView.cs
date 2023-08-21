@@ -2,7 +2,7 @@
 
 namespace Runtime.View
 {
-    public class Square : MonoBehaviour
+    public class SquareView : MonoBehaviour
     {
         public CardView CardViewInSquare { get; set; }
     }

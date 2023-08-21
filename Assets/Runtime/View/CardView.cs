@@ -38,7 +38,7 @@ namespace Runtime.View
                 {
                     if (hit.transform.gameObject.CompareTag("Square"))
                     {
-                        hit.transform.gameObject.GetComponent<Square>().CardViewInSquare = this;
+                        hit.transform.gameObject.GetComponent<SquareView>().CardViewInSquare = this;
                         transform.position = hit.transform.position;
                     }
                 }
