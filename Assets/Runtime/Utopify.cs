@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 
 namespace Runtime
 {
-    public class GameController : MonoBehaviour
+    public class Utopify : MonoBehaviour
     {
         [SerializeField]
         private BoardView boardView;
@@ -23,12 +23,7 @@ namespace Runtime
 
         private void InitGame()
         {
-            var boardConfig = Resources.Load<BoardConfig>($"BoardConfig");
-            Assert.IsNotNull(boardConfig);
             var board = new Board(5,5);
-
-            CardConfig[] cardConfigs = Resources.LoadAll<CardConfig>($"Cards/");
-            Assert.IsTrue(cardConfigs.Length > 0);
 
             Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.TraitComparerResult> traitComparisons = new Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.TraitComparerResult>
             {
@@ -52,7 +47,7 @@ namespace Runtime
             traits.Add(new Trait(Trait.TraitType.Sad, traitComparer));
             
             List<Card> cards = new List<Card>();
-            for (int i = 0; i < cardConfigs.Length; i++)
+            for (int i = 0; i < 5; i++)
             {
                 List<Trait> cardTrait = new List<Trait>();
                 cardTrait.Add(traits[Random.Range(0, traits.Count)]);
