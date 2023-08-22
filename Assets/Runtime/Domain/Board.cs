@@ -45,6 +45,7 @@ namespace Runtime.Domain
         {
             Assert.IsTrue(_boardSquares.SquareExist(coordinate));
             _boardSquares.PlayCard(playedCard, coordinate);
+            _boardConnections.UpdateConnections(coordinate);
         }
     }
 }
