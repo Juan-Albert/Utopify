@@ -24,5 +24,10 @@ namespace Runtime.Domain
 
             return square;
         }
+
+        public void PlayCard(Card playedCard, Coordinate coordinate)
+        {
+            GetSquare(coordinate).PlayCard(playedCard);
+        }
     }
 }

@@ -1,4 +1,7 @@
-﻿namespace Runtime.Domain
+﻿using System.Collections.Generic;
+using UnityEngine.Assertions;
+
+namespace Runtime.Domain
 {
     public class Board
     {
@@ -16,6 +19,18 @@
             _boardSquares = boardSquares;
             _boardConnections = boardConnections;
 
+        }
+
+        public List<Square> GetSquares()
+        {
+            return _boardSquares.Squares;
+        }
+
+        public void PlayCard(Card playedCard, Coordinate coordinate)
+        {
+            Assert.IsTrue(_boardSquares.SquareExist(coordinate));
+
+            _boardSquares.PlayCard(playedCard, coordinate);
         }
     }
 }

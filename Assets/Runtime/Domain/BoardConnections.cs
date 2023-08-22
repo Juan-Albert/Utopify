@@ -25,5 +25,6 @@ namespace Runtime.Domain
                                            || (x.FromSquare.Coordinate.Equals(to)
                                                && x.ToSquare.Coordinate.Equals(from)));
         }
+        
     }
 }
