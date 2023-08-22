@@ -17,7 +17,12 @@ namespace Tests.EditMode
             });
             var boardConnections = new BoardConnections(new List<Connection>(), boardSquares);
             var sut = new Board(boardSquares, boardConnections);
-            var card = new Card(new List<Trait>());
+            var card = new Card(new List<Trait>
+            {
+                new (Trait.TraitType.Good,
+                    new TraitComparer(
+                        new Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.TraitComparerResult>()))
+            });
             
             sut.PlayCard(card, coordinate);
             
@@ -34,7 +39,11 @@ namespace Tests.EditMode
             });
             var boardConnections = new BoardConnections(new List<Connection>(), boardSquares);
             var sut = new Board(boardSquares, boardConnections);
-            var card = new Card(new List<Trait>());
+            var card = new Card(new List<Trait>{
+                new (Trait.TraitType.Good,
+                    new TraitComparer(
+                        new Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.TraitComparerResult>()))
+            });
             
             sut.PlayCard(card, coordinate);
             
@@ -54,7 +63,11 @@ namespace Tests.EditMode
             });
             var boardConnections = new BoardConnections(new List<Connection>(), boardSquares);
             var sut = new Board(boardSquares, boardConnections);
-            var card = new Card(new List<Trait>());
+            var card = new Card(new List<Trait>{
+                new (Trait.TraitType.Good,
+                    new TraitComparer(
+                        new Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.TraitComparerResult>()))
+            });
             
             sut.PlayCard(card, coordinate);
             
