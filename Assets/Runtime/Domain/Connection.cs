@@ -42,5 +42,10 @@ namespace Runtime.Domain
         {
             return HashCode.Combine(_happiness, FromSquare, ToSquare);
         }
+
+        public void UpdateHappiness()
+        {
+            _happiness = FromSquare.Compare(ToSquare);
+        }
     }
 }

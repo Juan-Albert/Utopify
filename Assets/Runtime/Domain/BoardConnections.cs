@@ -31,9 +31,10 @@ namespace Runtime.Domain
             return connection;
         }
 
-        public void UpdateConnections(Coordinate coordinate)
+        public void CardPlayedAt(Coordinate coordinate)
         {
             CheckSurroundingsForNewConnections(coordinate);
+            UpdateConnectionsAt(coordinate);
         }
 
         private void CheckSurroundingsForNewConnections(Coordinate coordinate)
@@ -42,6 +43,14 @@ namespace Runtime.Domain
             CreateConnectionIfNoExist(coordinate, new Coordinate(coordinate.Row - 1, coordinate.Column));
             CreateConnectionIfNoExist(coordinate, new Coordinate(coordinate.Row, coordinate.Column + 1));
             CreateConnectionIfNoExist(coordinate, new Coordinate(coordinate.Row, coordinate.Column - 1));
+        }
+
+        private void UpdateConnectionsAt(Coordinate coordinate)
+        {
+            GetConnection(coordinate, new Coordinate(coordinate.Row + 1, coordinate.Column)).UpdateHappiness();
+            GetConnection(coordinate, new Coordinate(coordinate.Row - 1, coordinate.Column)).UpdateHappiness();
+            GetConnection(coordinate, new Coordinate(coordinate.Row, coordinate.Column + 1)).UpdateHappiness();
+            GetConnection(coordinate, new Coordinate(coordinate.Row, coordinate.Column - 1)).UpdateHappiness();
         }
 
         private void CreateConnectionIfNoExist(Coordinate from, Coordinate to)
