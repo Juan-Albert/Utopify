@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine.Assertions;
 
 namespace Runtime.Domain
 {
@@ -20,10 +21,14 @@ namespace Runtime.Domain
 
         public static bool ConnectionExist(List<Connection> connections, Coordinate from, Coordinate to)
         {
-            return connections.Exists(x => (x.FromSquare.Coordinate.Equals(from)
-                                            && x.ToSquare.Coordinate.Equals(to))
-                                           || (x.FromSquare.Coordinate.Equals(to)
-                                               && x.ToSquare.Coordinate.Equals(from)));
+            return connections.Exists(x => x.Equals(from, to));
+        }
+
+        public Connection GetConnection(Coordinate from, Coordinate to)
+        {
+            var connection = _connections.Find(x => x.Equals(from, to));
+            Assert.IsNotNull(connection);
+            return connection;
         }
 
         public void UpdateConnections(Coordinate coordinate)

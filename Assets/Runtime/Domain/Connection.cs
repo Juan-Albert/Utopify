@@ -14,5 +14,11 @@ namespace Runtime.Domain
 
             _happiness = 0;
         }
+
+        public bool Equals(Coordinate from, Coordinate to)
+        {
+            return (FromSquare.Coordinate.Equals(from)&& ToSquare.Coordinate.Equals(to))
+                || (FromSquare.Coordinate.Equals(to)&& ToSquare.Coordinate.Equals(from));
+        }
     }
 }
