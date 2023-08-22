@@ -96,7 +96,7 @@ namespace Runtime
             }
             var boardConnections = new BoardConnections(connections, boardSquares);
             
-            return new Board(columns,rows, boardSquares, boardConnections);
+            return new Board(boardSquares, boardConnections);
 
             void CheckForValidConnectionCreation(Square fromSquare, Coordinate toCoordinate)
             {

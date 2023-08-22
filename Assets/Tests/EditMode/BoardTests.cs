@@ -16,7 +16,7 @@ namespace Tests.EditMode
                 new (coordinate)
             });
             var boardConnections = new BoardConnections(new List<Connection>(), boardSquares);
-            var sut = new Board(1,1, boardSquares, boardConnections);
+            var sut = new Board(boardSquares, boardConnections);
             var card = new Card(new List<Trait>());
             
             sut.PlayCard(card, coordinate);
@@ -33,7 +33,7 @@ namespace Tests.EditMode
                 new (coordinate)
             });
             var boardConnections = new BoardConnections(new List<Connection>(), boardSquares);
-            var sut = new Board(1,1, boardSquares, boardConnections);
+            var sut = new Board(boardSquares, boardConnections);
             var card = new Card(new List<Trait>());
             
             sut.PlayCard(card, coordinate);
