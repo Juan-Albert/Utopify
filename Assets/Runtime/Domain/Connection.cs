@@ -4,17 +4,17 @@ namespace Runtime.Domain
 {
     public class Connection : IEquatable<Connection>
     {
-        public Square FromSquare { get; }
-        public Square ToSquare { get; }
+        private Square FromSquare { get; }
+        private Square ToSquare { get; }
 
-        private int _happiness;
+        public int Happiness { get; private set; }
 
         public Connection(Square fromSquare, Square toSquare)
         {
             FromSquare = fromSquare;
             ToSquare = toSquare;
 
-            _happiness = 0;
+            Happiness = 0;
         }
 
         public bool Equals(Coordinate from, Coordinate to)
@@ -40,12 +40,12 @@ namespace Runtime.Domain
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(_happiness, FromSquare, ToSquare);
+            return HashCode.Combine(FromSquare.Coordinate.GetHashCode(), ToSquare.Coordinate.GetHashCode());
         }
 
         public void UpdateHappiness()
         {
-            _happiness = FromSquare.Compare(ToSquare);
+            Happiness = FromSquare.Compare(ToSquare);
         }
     }
 }
