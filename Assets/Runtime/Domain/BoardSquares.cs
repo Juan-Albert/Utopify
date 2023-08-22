@@ -28,6 +28,21 @@ namespace Runtime.Domain
         public void PlayCard(Card playedCard, Coordinate coordinate)
         {
             GetSquare(coordinate).PlayCard(playedCard);
+            CheckSurroundingsForNewSquares(coordinate);
+        }
+
+        private void CheckSurroundingsForNewSquares(Coordinate coordinate)
+        {
+            CreateSquareIfNoExist(new Coordinate(coordinate.Row + 1, coordinate.Column));
+            CreateSquareIfNoExist(new Coordinate(coordinate.Row - 1, coordinate.Column));
+            CreateSquareIfNoExist(new Coordinate(coordinate.Row, coordinate.Column + 1));
+            CreateSquareIfNoExist(new Coordinate(coordinate.Row, coordinate.Column - 1));
+        }
+
+        private void CreateSquareIfNoExist(Coordinate coordinate)
+        {
+            if(!SquareExist(coordinate))
+                Squares.Add(new Square(coordinate));
         }
     }
 }
