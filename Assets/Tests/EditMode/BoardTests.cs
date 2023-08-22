@@ -44,5 +44,25 @@ namespace Tests.EditMode
             Assert.IsTrue(boardSquares.SquareExist(new Coordinate(0,-1)));
         }
         
+        [Test]
+        public void WhenCardPlayed_NeighboursAreConnected()
+        {
+            var coordinate = new Coordinate(0, 0);
+            var boardSquares = new BoardSquares(new List<Square>()
+            {
+                new (coordinate)
+            });
+            var boardConnections = new BoardConnections(new List<Connection>(), boardSquares);
+            var sut = new Board(boardSquares, boardConnections);
+            var card = new Card(new List<Trait>());
+            
+            sut.PlayCard(card, coordinate);
+            
+            Assert.IsTrue(boardConnections.ConnectionExist(coordinate, new Coordinate(1,0)));
+            Assert.IsTrue(boardConnections.ConnectionExist(coordinate, new Coordinate(-1,0)));
+            Assert.IsTrue(boardConnections.ConnectionExist(coordinate, new Coordinate(0,1)));
+            Assert.IsTrue(boardConnections.ConnectionExist(coordinate, new Coordinate(0,-1)));
+        }
+        
     }
 }

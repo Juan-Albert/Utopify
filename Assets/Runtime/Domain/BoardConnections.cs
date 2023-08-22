@@ -13,6 +13,19 @@ namespace Runtime.Domain
             _boardSquares = boardSquares;
         }
 
+        public bool ConnectionExist(Coordinate from, Coordinate to)
+        {
+            return ConnectionExist(_connections, from, to);
+        }
+
+        public static bool ConnectionExist(List<Connection> connections, Coordinate from, Coordinate to)
+        {
+            return connections.Exists(x => (x.FromSquare.Coordinate.Equals(from)
+                                            && x.ToSquare.Coordinate.Equals(to))
+                                           || (x.FromSquare.Coordinate.Equals(to)
+                                               && x.ToSquare.Coordinate.Equals(from)));
+        }
+
         public void UpdateConnections(Coordinate coordinate)
         {
             CheckSurroundingsForNewConnections(coordinate);
@@ -30,19 +43,6 @@ namespace Runtime.Domain
         {
             if(!ConnectionExist(from, to))
                 _connections.Add(new Connection(_boardSquares.GetSquare(from), _boardSquares.GetSquare(to)));
-        }
-        
-        private bool ConnectionExist(Coordinate from, Coordinate to)
-        {
-            return ConnectionExist(_connections, from, to);
-        }
-
-        public static bool ConnectionExist(List<Connection> connections, Coordinate from, Coordinate to)
-        {
-            return connections.Exists(x => (x.FromSquare.Coordinate.Equals(from)
-                                            && x.ToSquare.Coordinate.Equals(to))
-                                           || (x.FromSquare.Coordinate.Equals(to)
-                                               && x.ToSquare.Coordinate.Equals(from)));
         }
     }
 }
