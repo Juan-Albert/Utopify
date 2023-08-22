@@ -9,6 +9,15 @@ namespace Runtime.Domain
 
         private Card _card;
 
+        public Card CardInSquare
+        {
+            get
+            {
+                Assert.IsNotNull(_card);
+                return _card;
+            }
+        }
+
         public bool HasCard => _card != null;
         
         public Square(Coordinate coordinate)
@@ -21,6 +30,11 @@ namespace Runtime.Domain
             Assert.IsFalse(HasCard);
 
             _card = playedCard;
+        }
+
+        public int Compare(Square otherSquare)
+        {
+            return HasCard ? (otherSquare.HasCard ? _card.CompareTraits(otherSquare.CardInSquare) : 0) : 0;
         }
     }
 }

@@ -12,18 +12,19 @@ namespace Runtime.Domain
             Sad
         }
 
-        private TraitType _traitType;
+        private TraitType Type { get; }
+
         private TraitComparer _traitComparer;
     
         public Trait(TraitType traitType, TraitComparer traitComparer)
         {
-            _traitType = traitType;
+            Type = traitType;
             _traitComparer = traitComparer;
         }
 
-        public TraitComparer.TraitComparerResult Compare(TraitType otherTraitType)
+        public TraitComparer.TraitComparerResult Compare(Trait otherTrait)
         {
-            return _traitComparer.Compare(_traitType, otherTraitType);
+            return _traitComparer.Compare(Type, otherTrait.Type);
         }
     
     }
