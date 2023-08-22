@@ -9,7 +9,7 @@ namespace Runtime.Domain
 
         private Card _card;
 
-        private bool HasCard => _card != null;
+        public bool HasCard => _card != null;
         
         public Square(Coordinate coordinate)
         {
