@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Assertions;
 
 namespace Runtime.Domain
 {
@@ -10,6 +11,7 @@ namespace Runtime.Domain
 
         public Card(List<Trait> traits)
         {
+            Assert.IsTrue(traits.Count > 0);
             Traits = traits;
         }
 
