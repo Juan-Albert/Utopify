@@ -47,6 +47,5 @@ namespace Runtime.Domain
                 Cards = shuffledDeck as Stack<Card>;
             }
         }
-        
     }
 }

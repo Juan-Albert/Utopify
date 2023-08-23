@@ -7,32 +7,33 @@ namespace Runtime.Domain
     public class Hand
     {
         private readonly int _handSize;
-        private readonly List<Card> _cards;
         private readonly Deck _deck;
+        public List<Card> Cards { get; }
 
-        public Hand(int handSize, List<Card> cards, Deck deck)
+        public Hand(int handSize, Deck deck, List<Card> cards)
         {
             _handSize = handSize;
-            _cards = cards;
             _deck = deck;
+            Cards = cards;
         }
 
         public void PlayCard(Card card)
         {
-            Assert.IsTrue(_cards.Contains(card));
-            _cards.Remove(card);
+            Assert.IsTrue(Cards.Contains(card));
+            Cards.Remove(card);
 
-            if (_cards.Count == 0)
+            if (Cards.Count == 0)
             {
                 for (int i = 0; i < Math.Min(_handSize, _deck.Cards.Count); i++)
                 {
-                    _cards.Add(DrawCard());
+                    Cards.Add(DrawCard());
                 }
             }
         }
 
         private Card DrawCard()
         {
+            Assert.IsTrue(Cards.Count < _handSize);
             return _deck.DrawCard();
         }
     }
