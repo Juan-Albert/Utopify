@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine.Assertions;
 
 namespace Runtime.Domain
@@ -8,12 +9,14 @@ namespace Runtime.Domain
         private readonly List<Connection> _connections;
         private BoardSquares _boardSquares;
 
+        public int BoardHappiness => _connections.Sum(connection => connection.Happiness);
+
         public BoardConnections(List<Connection> connections, BoardSquares boardSquares)
         {
             _connections = connections;
             _boardSquares = boardSquares;
         }
-
+        
         public bool ConnectionExist(Coordinate from, Coordinate to)
         {
             return ConnectionExist(_connections, from, to);

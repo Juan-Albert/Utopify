@@ -14,7 +14,7 @@ namespace Runtime.Domain
 
         private TraitType Type { get; }
 
-        private TraitComparer _traitComparer;
+        private readonly TraitComparer _traitComparer;
     
         public Trait(TraitType traitType, TraitComparer traitComparer)
         {

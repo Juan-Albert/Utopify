@@ -41,6 +41,11 @@ namespace Runtime.Domain
             return _boardSquares.Squares;
         }
 
+        public int GetBoardHappiness()
+        {
+            return _boardConnections.BoardHappiness;
+        }
+
         public void PlayCard(Card playedCard, Coordinate coordinate)
         {
             Assert.IsTrue(_boardSquares.SquareExist(coordinate));
