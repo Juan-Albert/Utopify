@@ -14,10 +14,12 @@ namespace Tests.EditMode
                 new Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.TraitComparerResult>
                 {
                     { (Trait.TraitType.Good, Trait.TraitType.Good), TraitComparer.TraitComparerResult.Positive },
-                    { (Trait.TraitType.Good, Trait.TraitType.Sad), TraitComparer.TraitComparerResult.Negative }
+                    { (Trait.TraitType.Good, Trait.TraitType.Sad), TraitComparer.TraitComparerResult.Positive },
+                    { (Trait.TraitType.Good, Trait.TraitType.Evil), TraitComparer.TraitComparerResult.Negative }
                 });
             var goodTrait = new Trait(Trait.TraitType.Good, traitComparer);
             var sadTrait = new Trait(Trait.TraitType.Sad, traitComparer);
+            var evilTrait = new Trait(Trait.TraitType.Evil, traitComparer);
             var sut1 = new Card(new List<Trait>
             {
                 goodTrait
@@ -25,12 +27,13 @@ namespace Tests.EditMode
             var sut2 = new Card(new List<Trait>
             {
                 goodTrait,
-                sadTrait
+                sadTrait,
+                evilTrait
             });
 
             var result = sut1.CompareTraits(sut2);
             
-            Assert.AreEqual(0, result);
+            Assert.AreEqual(2, result);
         }
     }
 }
