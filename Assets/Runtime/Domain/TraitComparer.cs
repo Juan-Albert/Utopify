@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine.Assertions;
 
 namespace Runtime.Domain
 {
@@ -11,7 +12,7 @@ namespace Runtime.Domain
             Neutral
         }
 
-        private Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparerResult> _comparisons;
+        private readonly Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparerResult> _comparisons;
             
         public TraitComparer(Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparerResult> comparisons)
         {
@@ -20,6 +21,8 @@ namespace Runtime.Domain
 
         public TraitComparerResult Compare(Trait.TraitType firstTrait, Trait.TraitType secondTrait)
         {
+            Assert.IsTrue(_comparisons.ContainsKey((firstTrait, secondTrait)) ||
+                          _comparisons.ContainsKey((secondTrait, firstTrait)));
             return _comparisons.ContainsKey((firstTrait, secondTrait))
                 ? _comparisons[(firstTrait, secondTrait)]
                 : _comparisons[(secondTrait, firstTrait)];

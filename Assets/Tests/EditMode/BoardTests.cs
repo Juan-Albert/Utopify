@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
 using Runtime.Domain;
+using UnityEngine;
 using Assert = UnityEngine.Assertions.Assert;
 
 namespace Tests.EditMode
@@ -106,6 +107,32 @@ namespace Tests.EditMode
             Assert.AreEqual(boardConnections.GetConnection(fromCoordinate, toCoordinate).Happiness, 2);
             
         }
-        
+
+        [Test]
+        public void WhenCalculateBoardHappiness_ReturnCorrectValue()
+        {
+            var coordinate = new Coordinate(0, 0);
+            var boardSquares = new BoardSquares(new List<Square>()
+            {
+                new (coordinate)
+            });
+            var boardConnections = new BoardConnections(new List<Connection>(), boardSquares);
+            var sut = new Board(boardSquares, boardConnections);
+            var card = new Card(new List<Trait>{
+                new (Trait.TraitType.Good,
+                    new TraitComparer(
+                        new Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.TraitComparerResult>
+                        {
+                            { (Trait.TraitType.Good, Trait.TraitType.Good), TraitComparer.TraitComparerResult.Positive }
+                        }))
+            });
+            
+            sut.PlayCard(card, coordinate);
+            sut.PlayCard(card, new Coordinate(coordinate.Row + 1, coordinate.Column));
+            sut.PlayCard(card, new Coordinate(coordinate.Row - 1, coordinate.Column));
+            var result = sut.GetBoardHappiness();
+            
+            Assert.AreEqual(4, result);
+        }
     }
 }
