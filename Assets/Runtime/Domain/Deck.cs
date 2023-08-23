@@ -7,24 +7,24 @@ namespace Runtime.Domain
 {
     public class Deck
     {
-        private Stack<Card> _cards;
+        public Stack<Card> Cards { get; private set; }
 
         public Deck(IEnumerable<Card> cards)
         {
-            _cards = cards as Stack<Card>;
+            Cards = new Stack<Card>(cards);
             Shuffle();
         }
 
         public Card DrawCard()
         {
-            Assert.IsTrue(_cards.Count > 0);
-            return _cards.Pop();
+            Assert.IsTrue(Cards.Count > 0);
+            return Cards.Pop();
         }
 
         public void AddCard(Card card)
         {
             Assert.IsNotNull(card);
-            _cards.Push(card);
+            Cards.Push(card);
             Shuffle();
         }
 
@@ -38,11 +38,14 @@ namespace Runtime.Domain
         
         private void Shuffle() 
         {
-            var random = new Random((int)DateTime.Now.Ticks);
-            var shuffledDeck = _cards.Select(x => new { Number = random.Next(), Card = x })
-                .OrderBy(x => x.Number)
-                .Select(x => x.Card);
-            _cards = shuffledDeck as Stack<Card>;
+            if (Cards.Count > 1)
+            {
+                var random = new Random((int)DateTime.Now.Ticks);
+                var shuffledDeck = Cards.Select(x => new { Number = random.Next(), Card = x })
+                    .OrderBy(x => x.Number)
+                    .Select(x => x.Card);
+                Cards = shuffledDeck as Stack<Card>;
+            }
         }
         
     }
