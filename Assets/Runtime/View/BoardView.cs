@@ -18,6 +18,12 @@ namespace Runtime.View
             _squareViews = new List<SquareView>();
         }
 
+        public void Setup(Board board)
+        {
+            _board = board;
+            BuildBoard();
+        }
+
         private void BuildBoard()
         {
             foreach (var square in _board.GetSquares())
@@ -25,14 +31,10 @@ namespace Runtime.View
                 var squareView = Instantiate(squareViewPrefab, 
                     new Vector3(square.Coordinate.Row + square.Coordinate.Row * 0.1f, 
                         square.Coordinate.Column + square.Coordinate.Column * 0.1f, 0), Quaternion.identity);
+                
+                squareView.Setup(square);
                 _squareViews.Add(squareView);
             }
-        }
-
-        public void Setup(Board board)
-        {
-            _board = board;
-            BuildBoard();
         }
     }
 }

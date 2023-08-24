@@ -23,7 +23,7 @@ namespace Runtime.View
             ClickUp();
         }
 
-        private void EnableInput(bool value)
+        public void EnableInput(bool value)
         {
             _listening = value;
         }

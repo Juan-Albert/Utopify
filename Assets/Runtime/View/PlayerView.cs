@@ -6,9 +6,9 @@ namespace Runtime.View
     public class PlayerView : MonoBehaviour
     {
         private bool _cardGrabbed;
-        private CardView _cardToPlay;
         private PlayerInput _playerInput;
         private HandView _handView;
+        private CardView _cardToPlay;
         private Player _player;
         
         private void OnEnable()
@@ -23,6 +23,15 @@ namespace Runtime.View
             _playerInput.OnClickDown -= CheckCardGrab;
             _playerInput.OnDrag -= CheckCardDrag;
             _playerInput.OnClickUp -= CheckCardDrop;
+        }
+
+        public void Setup(Player player, HandView handView)
+        {
+            _player = player;
+            _handView = handView;
+
+            _playerInput = gameObject.AddComponent<PlayerInput>();
+            _playerInput.EnableInput(true);
         }
 
         private void CheckCardGrab(Vector3 mousePos)
@@ -66,7 +75,7 @@ namespace Runtime.View
             if (Physics.Raycast(cameraPos, Camera.main.ScreenToWorldPoint(mousePos) - cameraPos, out RaycastHit hit,
                     Mathf.Infinity, LayerMask.GetMask("Slot")))
             {
-                Square currentSquare = hit.collider.GetComponent<Square>();
+                SquareView currentSquare = hit.collider.GetComponent<SquareView>();
 
                 if (currentSquare.HasCard)
                 {
@@ -74,7 +83,7 @@ namespace Runtime.View
                 }
                 else
                 {
-                    PutCard(_cardToPlay.Card, currentSquare.Coordinate);
+                    PutCard(_cardToPlay, currentSquare);
                 }
             }
             else
@@ -86,10 +95,11 @@ namespace Runtime.View
             _cardGrabbed = false;
         }
 
-        private void PutCard(Card cardToPlay, Coordinate coordinate)
+        private void PutCard(CardView cardToPlay, SquareView squareView)
         {
-            _player.PlayCard(cardToPlay, coordinate);
+            _player.PlayCard(cardToPlay.Card, squareView.Square.Coordinate);
             _handView.DropCard(_cardToPlay, true);
+            squareView.PutCard(cardToPlay);
         }
     }
 }
