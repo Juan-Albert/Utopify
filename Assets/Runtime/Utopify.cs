@@ -54,6 +54,8 @@ namespace Runtime
                 cards.Add(new Card(cardTrait));
             }
 
+            var player = new Player(new Hand(1, new Deck(cards), new List<Card>()), board);
+
             Instantiate(boardView, Vector3.zero, Quaternion.identity).Setup(board);
 
             foreach (Card card in cards)

@@ -15,13 +15,24 @@ namespace Runtime.Domain
             _handSize = handSize;
             _deck = deck;
             Cards = cards;
+            DrawFullHandIfEmpty();
         }
 
         public void PlayCard(Card card)
         {
             Assert.IsTrue(Cards.Contains(card));
             Cards.Remove(card);
+            DrawFullHandIfEmpty();
+        }
 
+        private Card DrawCard()
+        {
+            Assert.IsTrue(Cards.Count < _handSize);
+            return _deck.DrawCard();
+        }
+
+        private void DrawFullHandIfEmpty()
+        {
             if (Cards.Count == 0)
             {
                 for (int i = 0; i < Math.Min(_handSize, _deck.Cards.Count); i++)
@@ -29,12 +40,6 @@ namespace Runtime.Domain
                     Cards.Add(DrawCard());
                 }
             }
-        }
-
-        private Card DrawCard()
-        {
-            Assert.IsTrue(Cards.Count < _handSize);
-            return _deck.DrawCard();
         }
     }
 }
