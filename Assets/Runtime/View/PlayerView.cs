@@ -98,7 +98,7 @@ namespace Runtime.View
         private void PutCard(CardView cardToPlay, SquareView squareView)
         {
             _player.PlayCard(cardToPlay.Card, squareView.Square.Coordinate);
-            _handView.DropCard(_cardToPlay, true);
+            _handView.DropCard(_cardToPlay);
             squareView.PutCard(cardToPlay);
         }
     }
