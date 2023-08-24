@@ -8,7 +8,25 @@ namespace Tests.EditMode
     public class HandTests
     {
         [Test]
-        public void WhenHandPlayCardAndIsEmpty_DrawCard()
+        public void WhenHandStartEmpty_DrawFullHand()
+        {
+            Card card = new Card(new List<Trait>
+            {
+                new (Trait.TraitType.Good, 
+                    new TraitComparer(
+                        new Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.TraitComparerResult>()))
+            });
+            var deck = new Deck(new List<Card>
+            {
+                card
+            });
+            var sut = new Hand(1, deck, new List<Card>());
+            
+            Assert.AreEqual(1, sut.Cards.Count);
+        }
+        
+        [Test]
+        public void WhenHandPlayCardAndIsEmpty_DrawFullHand()
         {
             Card card = new Card(new List<Trait>
             {
