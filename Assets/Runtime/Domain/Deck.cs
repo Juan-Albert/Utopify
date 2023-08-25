@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using UnityEngine.Assertions;
+using Random = System.Random;
 
 namespace Runtime.Domain
 {
@@ -44,7 +46,7 @@ namespace Runtime.Domain
                 var shuffledDeck = Cards.Select(x => new { Number = random.Next(), Card = x })
                     .OrderBy(x => x.Number)
                     .Select(x => x.Card);
-                Cards = shuffledDeck as Stack<Card>;
+                Cards = new Stack<Card>(shuffledDeck);
             }
         }
     }
