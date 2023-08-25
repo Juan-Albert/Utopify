@@ -4,8 +4,8 @@ namespace Runtime.Domain
 {
     public class Connection : IEquatable<Connection>
     {
-        private Square FromSquare { get; }
-        private Square ToSquare { get; }
+        public Square FromSquare { get; }
+        public Square ToSquare { get; }
 
         public int Happiness { get; private set; }
 
