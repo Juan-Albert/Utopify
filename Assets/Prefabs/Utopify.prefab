@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6855923993855918751
+--- !u!1 &8806145542266879640
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6855923993855918750}
-  - component: {fileID: 6855923993855918749}
+  - component: {fileID: 8806145542266879646}
+  - component: {fileID: 8806145542266879647}
   m_Layer: 0
-  m_Name: Board
+  m_Name: Utopify
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6855923993855918750
+--- !u!4 &8806145542266879646
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6855923993855918751}
+  m_GameObject: {fileID: 8806145542266879640}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,16 +32,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6855923993855918749
+--- !u!114 &8806145542266879647
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6855923993855918751}
+  m_GameObject: {fileID: 8806145542266879640}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7835090e44654e1598023d11a49f9bec, type: 3}
+  m_Script: {fileID: 11500000, guid: 56c93b166ae44183a998270751bffc77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  squarePrefab: {fileID: 8743435765413885906, guid: 08a63c66aeffc8242b3bc4dbc55bb7d5, type: 3}
+  boardViewPrefab: {fileID: 6855923993855918749, guid: 7d0a714bfc177cd4a9e7cd61109ad936, type: 3}
+  playerViewPrefab: {fileID: 4269445238455423247, guid: 1902ae5766ad89e4da7a3ba55d98dd02, type: 3}
+  handViewPrefab: {fileID: 2184388995286313055, guid: 771b9f0244d66e5479ca41fe687791ee, type: 3}
+  cardViewPrefab: {fileID: 7152631323580979911, guid: 9edd03cd682888a419b4def6ed09be6d, type: 3}
