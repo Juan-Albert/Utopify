@@ -9,6 +9,7 @@ namespace Runtime.View
         private bool _cardGrabbed;
         private PlayerInput _playerInput;
         private HandView _handView;
+        private BoardView _boardView;
         private CardView _cardToPlay;
         private Player _player;
 
@@ -31,10 +32,11 @@ namespace Runtime.View
             _playerInput.OnClickUp -= CheckCardDrop;
         }
 
-        public void Setup(Player player, HandView handView)
+        public void Setup(Player player, HandView handView, BoardView boardView)
         {
             _player = player;
             _handView = handView;
+            _boardView = boardView;
 
             _playerInput.EnableInput(true);
         }
@@ -105,6 +107,7 @@ namespace Runtime.View
             _player.PlayCard(cardToPlay.Card, squareView.Square.Coordinate);
             _handView.DropCard(_cardToPlay);
             squareView.PutCard(cardToPlay);
+            _boardView.UpdateConnections();
         }
     }
 }

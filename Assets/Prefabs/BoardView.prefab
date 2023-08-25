@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   squareViewPrefab: {fileID: 8743435765413885906, guid: 08a63c66aeffc8242b3bc4dbc55bb7d5, type: 3}
+  connectionViewPrefab: {fileID: 4741115605197247782, guid: fc7c63423380ffb47ac11b6dcde400f9, type: 3}

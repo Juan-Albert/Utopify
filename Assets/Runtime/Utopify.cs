@@ -62,12 +62,13 @@ namespace Runtime
             var hand = new Hand(2, deck, new List<Card>());
             var player = new Player(hand, board);
 
-            Instantiate(boardViewPrefab, Vector3.zero, Quaternion.identity).Setup(board);
+            var boardView = Instantiate(boardViewPrefab, Vector3.zero, Quaternion.identity);
+            boardView.Setup(board);
             
             var handViewInGame = Instantiate(handViewPrefab, new Vector3(0,-4,0), Quaternion.identity);
             handViewInGame.Setup(hand, cardViewPrefab);
             
-            Instantiate(playerViewPrefab,  Vector3.zero, Quaternion.identity).Setup(player, handViewInGame);
+            Instantiate(playerViewPrefab,  Vector3.zero, Quaternion.identity).Setup(player, handViewInGame, boardView);
         }
 
         private Board BuildBoard()

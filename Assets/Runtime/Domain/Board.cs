@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.Assertions;
 
@@ -39,6 +40,11 @@ namespace Runtime.Domain
         public List<Square> GetSquares()
         {
             return _boardSquares.Squares;
+        }
+
+        public List<Connection> GetConnections()
+        {
+            return _boardConnections.Connections;
         }
 
         public int GetBoardHappiness()
