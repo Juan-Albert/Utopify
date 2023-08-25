@@ -10,18 +10,20 @@ namespace Runtime.View
         private CardView _cardViewPrefab;
         private Hand _hand;
 
-        private List<CardView> Cards { get; }
-        
+        private List<CardView> Cards { get; set; }
+
         public void Setup(Hand hand, CardView cardPrefab)
         {
             _hand = hand;
             _cardViewPrefab = cardPrefab;
+            Cards = new List<CardView>();
+            DrawCards();
         }
         
         public void ReturnCard(CardView cardToPlay)
         {
             var pos = Cards.IndexOf(cardToPlay) - Cards.Count / 2; 
-            cardToPlay.transform.position = new Vector3(pos, 0, 0);
+            cardToPlay.transform.position = transform.position + new Vector3(pos, 0, 0);
         }
 
         public void DropCard(CardView cardToPlay)
@@ -35,7 +37,7 @@ namespace Runtime.View
             foreach (var cardView in Cards)
             {
                 var pos = Cards.IndexOf(cardView) - Cards.Count / 2; 
-                cardView.transform.position = new Vector3(pos, 0, 0);
+                cardView.transform.position = transform.position + new Vector3(pos, 0, 0);
             }
         }
 

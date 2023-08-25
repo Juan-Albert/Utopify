@@ -29,9 +29,10 @@ namespace Runtime.View
             foreach (var square in _board.GetSquares())
             {
                 var squareView = Instantiate(squareViewPrefab, 
-                    new Vector3(square.Coordinate.Row + square.Coordinate.Row * 0.1f, 
-                        square.Coordinate.Column + square.Coordinate.Column * 0.1f, 0), Quaternion.identity);
-                
+                    new Vector3(square.Coordinate.Row + square.Coordinate.Row * 0.4f, 
+                        square.Coordinate.Column + square.Coordinate.Column * 0.2f, 0), Quaternion.identity);
+
+                squareView.transform.parent = transform;
                 squareView.Setup(square);
                 _squareViews.Add(squareView);
             }

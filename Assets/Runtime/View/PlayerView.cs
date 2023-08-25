@@ -1,4 +1,5 @@
-﻿using Runtime.Domain;
+﻿using System;
+using Runtime.Domain;
 using UnityEngine;
 
 namespace Runtime.View
@@ -10,7 +11,12 @@ namespace Runtime.View
         private HandView _handView;
         private CardView _cardToPlay;
         private Player _player;
-        
+
+        private void Awake()
+        {
+            _playerInput = gameObject.AddComponent<PlayerInput>();
+        }
+
         private void OnEnable()
         {
             _playerInput.OnClickDown += CheckCardGrab;
@@ -30,7 +36,6 @@ namespace Runtime.View
             _player = player;
             _handView = handView;
 
-            _playerInput = gameObject.AddComponent<PlayerInput>();
             _playerInput.EnableInput(true);
         }
 
@@ -39,7 +44,7 @@ namespace Runtime.View
             Vector3 cameraPos = Camera.main.transform.position;
             mousePos.z = Camera.main.nearClipPlane;
             if (Physics.Raycast(cameraPos, Camera.main.ScreenToWorldPoint(mousePos) - cameraPos, out RaycastHit cardHit,
-                    Mathf.Infinity, LayerMask.GetMask("Interactable")))
+                    Mathf.Infinity, LayerMask.GetMask("Card")))
             {
                 _cardToPlay = cardHit.collider.GetComponent<CardView>();
                 _cardGrabbed = true;
@@ -73,7 +78,7 @@ namespace Runtime.View
             mousePos.z = Camera.main.nearClipPlane;
 
             if (Physics.Raycast(cameraPos, Camera.main.ScreenToWorldPoint(mousePos) - cameraPos, out RaycastHit hit,
-                    Mathf.Infinity, LayerMask.GetMask("Slot")))
+                    Mathf.Infinity, LayerMask.GetMask("Square")))
             {
                 SquareView currentSquare = hit.collider.GetComponent<SquareView>();
 

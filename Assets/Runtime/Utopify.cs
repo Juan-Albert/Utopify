@@ -5,6 +5,7 @@ using Runtime.Scriptable;
 using Runtime.View;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Runtime
@@ -12,9 +13,13 @@ namespace Runtime
     public class Utopify : MonoBehaviour
     {
         [SerializeField]
-        private BoardView boardView;
+        private BoardView boardViewPrefab;
         [SerializeField]
-        private CardView cardView;
+        private PlayerView playerViewPrefab;
+        [SerializeField]
+        private HandView handViewPrefab;
+        [SerializeField]
+        private CardView cardViewPrefab;
         
         private void Awake()
         {
@@ -25,7 +30,7 @@ namespace Runtime
         {
             var board = BuildBoard();
             
-            Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.TraitComparerResult> traitComparisons = new Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.TraitComparerResult>
+            var traitComparisons = new Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.TraitComparerResult>
             {
                 { (Trait.TraitType.Good, Trait.TraitType.Good), TraitComparer.TraitComparerResult.Positive },
                 { (Trait.TraitType.Good, Trait.TraitType.Evil), TraitComparer.TraitComparerResult.Negative },
@@ -38,30 +43,31 @@ namespace Runtime
                 { (Trait.TraitType.Happy, Trait.TraitType.Sad), TraitComparer.TraitComparerResult.Negative },
                 { (Trait.TraitType.Sad, Trait.TraitType.Sad), TraitComparer.TraitComparerResult.Positive }
             };
-            TraitComparer traitComparer = new TraitComparer(traitComparisons);
+            var traitComparer = new TraitComparer(traitComparisons);
             
-            List<Trait> traits = new List<Trait>();
+            var traits = new List<Trait>();
             traits.Add(new Trait(Trait.TraitType.Good, traitComparer));
             traits.Add(new Trait(Trait.TraitType.Evil, traitComparer));
             traits.Add(new Trait(Trait.TraitType.Happy, traitComparer));
             traits.Add(new Trait(Trait.TraitType.Sad, traitComparer));
-            
-            List<Card> cards = new List<Card>();
+
+            var cards = new List<Card>();
             for (int i = 0; i < 5; i++)
             {
-                List<Trait> cardTrait = new List<Trait>();
-                cardTrait.Add(traits[Random.Range(0, traits.Count)]);
+                var cardTrait = new List<Trait> { traits[Random.Range(0, traits.Count)] };
                 cards.Add(new Card(cardTrait));
             }
 
-            var player = new Player(new Hand(1, new Deck(cards), new List<Card>()), board);
+            var deck = new Deck(cards);
+            var hand = new Hand(2, deck, new List<Card>());
+            var player = new Player(hand, board);
 
-            Instantiate(boardView, Vector3.zero, Quaternion.identity).Setup(board);
-
-            foreach (Card card in cards)
-            {
-                Instantiate(cardView, Vector3.zero, Quaternion.identity).Setup(card);
-            }
+            Instantiate(boardViewPrefab, Vector3.zero, Quaternion.identity).Setup(board);
+            
+            var handViewInGame = Instantiate(handViewPrefab, new Vector3(0,-4,0), Quaternion.identity);
+            handViewInGame.Setup(hand, cardViewPrefab);
+            
+            Instantiate(playerViewPrefab,  Vector3.zero, Quaternion.identity).Setup(player, handViewInGame);
         }
 
         private Board BuildBoard()
@@ -69,7 +75,7 @@ namespace Runtime
             var columns = 5;
             var rows = 5;
 
-            List<Square> squares = new List<Square>();
+            var squares = new List<Square>();
             for (int i = - columns/2; i <= columns/2; i++)
             {
                 for (int j = -rows/2; j <= rows/2; j++)
@@ -80,21 +86,21 @@ namespace Runtime
             }
             var boardSquares = new BoardSquares(squares);
 
-            List<Connection> connections = new List<Connection>();
-            for (int i = 0; i < boardSquares.Squares.Count; i++)
+            var connections = new List<Connection>();
+            foreach (var square in boardSquares.Squares)
             {
-                CheckForValidConnectionCreation(boardSquares.Squares[i],
-                    new Coordinate(boardSquares.Squares[i].Coordinate.Row + 1,
-                        boardSquares.Squares[i].Coordinate.Column));
-                CheckForValidConnectionCreation(boardSquares.Squares[i],
-                    new Coordinate(boardSquares.Squares[i].Coordinate.Row - 1,
-                        boardSquares.Squares[i].Coordinate.Column));
-                CheckForValidConnectionCreation(boardSquares.Squares[i],
-                    new Coordinate(boardSquares.Squares[i].Coordinate.Row,
-                        boardSquares.Squares[i].Coordinate.Column + 1));
-                CheckForValidConnectionCreation(boardSquares.Squares[i],
-                    new Coordinate(boardSquares.Squares[i].Coordinate.Row,
-                        boardSquares.Squares[i].Coordinate.Column - 1));
+                CheckForValidConnectionCreation(square,
+                    new Coordinate(square.Coordinate.Row + 1,
+                        square.Coordinate.Column));
+                CheckForValidConnectionCreation(square,
+                    new Coordinate(square.Coordinate.Row - 1,
+                        square.Coordinate.Column));
+                CheckForValidConnectionCreation(square,
+                    new Coordinate(square.Coordinate.Row,
+                        square.Coordinate.Column + 1));
+                CheckForValidConnectionCreation(square,
+                    new Coordinate(square.Coordinate.Row,
+                        square.Coordinate.Column - 1));
             }
             var boardConnections = new BoardConnections(connections, boardSquares);
             
