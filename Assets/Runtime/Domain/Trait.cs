@@ -12,7 +12,7 @@ namespace Runtime.Domain
             Sad
         }
 
-        private TraitType Type { get; }
+        public TraitType Type { get; }
 
         private readonly TraitComparer _traitComparer;
     

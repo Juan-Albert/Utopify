@@ -7,7 +7,7 @@ namespace Runtime.Domain
 {
     public class Card
     {
-        private List<Trait> Traits { get; }
+        public List<Trait> Traits { get; }
 
         public Card(List<Trait> traits)
         {
