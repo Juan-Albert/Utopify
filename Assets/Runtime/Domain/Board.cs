@@ -5,18 +5,17 @@ using UnityEngine.Assertions;
 
 namespace Runtime.Domain
 {
-    public class Board
+    public partial class Board
     {
-        private readonly BoardSquares _boardSquares;
-
-        private BoardConnections _boardConnections;
+        private readonly Squares squares;
+        private readonly Connections connections;
 
         public int Rows
         {
             get
             {
-                var larger = _boardSquares.Squares.Max(x => x.Coordinate.Row);
-                var smaller = _boardSquares.Squares.Min(x => x.Coordinate.Row);
+                var larger = squares.REFACTORING.Max(x => x.Coordinate.Row);
+                var smaller = squares.REFACTORING.Min(x => x.Coordinate.Row);
                 return larger - smaller;
             }
         }
@@ -25,38 +24,38 @@ namespace Runtime.Domain
         {
             get
             {
-                var larger = _boardSquares.Squares.Max(x => x.Coordinate.Column);
-                var smaller = _boardSquares.Squares.Min(x => x.Coordinate.Column);
+                var larger = squares.REFACTORING.Max(x => x.Coordinate.Column);
+                var smaller = squares.REFACTORING.Min(x => x.Coordinate.Column);
                 return larger - smaller;
             }
         }
 
-        public Board(BoardSquares boardSquares, BoardConnections boardConnections)
+        public Board(Squares squares, Connections connections)
         {
-            _boardSquares = boardSquares;
-            _boardConnections = boardConnections;
+            this.squares = squares;
+            this.connections = connections;
         }
 
         public List<Square> GetSquares()
         {
-            return _boardSquares.Squares;
+            return squares.REFACTORING;
         }
 
         public List<Connection> GetConnections()
         {
-            return _boardConnections.Connections;
+            return connections.refactoring;
         }
 
         public int GetBoardHappiness()
         {
-            return _boardConnections.BoardHappiness;
+            return connections.BoardHappiness;
         }
 
         public void PlayCard(Card playedCard, Coordinate coordinate)
         {
-            Assert.IsTrue(_boardSquares.SquareExist(coordinate));
-            _boardSquares.PlayCard(playedCard, coordinate);
-            _boardConnections.CardPlayedAt(coordinate);
+            Assert.IsTrue(squares.SquareExist(coordinate));
+            squares.PlayCard(playedCard, coordinate);
+            connections.CardPlayedAt(coordinate);
         }
     }
 }

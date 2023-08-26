@@ -84,10 +84,10 @@ namespace Runtime
                     squares.Add(square);
                 }
             }
-            var boardSquares = new BoardSquares(squares);
+            var boardSquares = new Board.Squares(squares);
 
             var connections = new List<Connection>();
-            foreach (var square in boardSquares.Squares)
+            foreach (var square in boardSquares.REFACTORING)
             {
                 CheckForValidConnectionCreation(square,
                     new Coordinate(square.Coordinate.Row + 1,
@@ -102,14 +102,14 @@ namespace Runtime
                     new Coordinate(square.Coordinate.Row,
                         square.Coordinate.Column - 1));
             }
-            var boardConnections = new BoardConnections(connections, boardSquares);
+            var boardConnections = new Board.Connections(connections, boardSquares);
             
             return new Board(boardSquares, boardConnections);
 
             void CheckForValidConnectionCreation(Square fromSquare, Coordinate toCoordinate)
             {
                 if (boardSquares.SquareExist(toCoordinate) &&
-                    !BoardConnections.ConnectionExist(connections, fromSquare.Coordinate,toCoordinate))
+                    !Board.Connections.ConnectionExist(connections, fromSquare.Coordinate,toCoordinate))
                 {
                     var connection = new Connection(fromSquare, boardSquares.GetSquare(toCoordinate));
                     connections.Add(connection);

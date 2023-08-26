@@ -12,11 +12,11 @@ namespace Tests.EditMode
         public void WhenCardPlayed_SquareContainCard()
         {
             var coordinate = new Coordinate(0, 0);
-            var boardSquares = new BoardSquares(new List<Square>()
+            var boardSquares = new Board.Squares(new List<Square>()
             {
                 new (coordinate)
             });
-            var boardConnections = new BoardConnections(new List<Connection>(), boardSquares);
+            var boardConnections = new Board.Connections(new List<Connection>(), boardSquares);
             var sut = new Board(boardSquares, boardConnections);
             var card = new Card(new List<Trait>
             {
@@ -34,11 +34,11 @@ namespace Tests.EditMode
         public void WhenCardPlayed_NeighbourSquaresCreated()
         {
             var coordinate = new Coordinate(0, 0);
-            var boardSquares = new BoardSquares(new List<Square>()
+            var boardSquares = new Board.Squares(new List<Square>()
             {
                 new (coordinate)
             });
-            var boardConnections = new BoardConnections(new List<Connection>(), boardSquares);
+            var boardConnections = new Board.Connections(new List<Connection>(), boardSquares);
             var sut = new Board(boardSquares, boardConnections);
             var card = new Card(new List<Trait>{
                 new (Trait.Name.Good,
@@ -58,11 +58,11 @@ namespace Tests.EditMode
         public void WhenCardPlayed_NeighboursAreConnected()
         {
             var coordinate = new Coordinate(0, 0);
-            var boardSquares = new BoardSquares(new List<Square>()
+            var boardSquares = new Board.Squares(new List<Square>()
             {
                 new (coordinate)
             });
-            var boardConnections = new BoardConnections(new List<Connection>(), boardSquares);
+            var boardConnections = new Board.Connections(new List<Connection>(), boardSquares);
             var sut = new Board(boardSquares, boardConnections);
             var card = new Card(new List<Trait>{
                 new (Trait.Name.Good,
@@ -83,12 +83,12 @@ namespace Tests.EditMode
         {
             var fromCoordinate = new Coordinate(0, 0);
             var toCoordinate = new Coordinate(1, 0);
-            var boardSquares = new BoardSquares(new List<Square>()
+            var boardSquares = new Board.Squares(new List<Square>()
             {
                 new (fromCoordinate),
                 new (toCoordinate)
             });
-            var boardConnections = new BoardConnections(new List<Connection>(), boardSquares);
+            var boardConnections = new Board.Connections(new List<Connection>(), boardSquares);
             var sut = new Board(boardSquares, boardConnections);
             var traitComparer = new TraitComparer(
                 new Dictionary<(Trait.Name, Trait.Name), TraitComparer.Connection>
@@ -112,11 +112,11 @@ namespace Tests.EditMode
         public void WhenCalculateBoardHappiness_ReturnCorrectValue()
         {
             var coordinate = new Coordinate(0, 0);
-            var boardSquares = new BoardSquares(new List<Square>()
+            var boardSquares = new Board.Squares(new List<Square>()
             {
                 new (coordinate)
             });
-            var boardConnections = new BoardConnections(new List<Connection>(), boardSquares);
+            var boardConnections = new Board.Connections(new List<Connection>(), boardSquares);
             var sut = new Board(boardSquares, boardConnections);
             var card = new Card(new List<Trait>{
                 new (Trait.Name.Good,
