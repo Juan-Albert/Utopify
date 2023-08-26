@@ -45,18 +45,18 @@ namespace Runtime.Domain
 
             private void CheckSurroundingsForNewConnections(Coordinate coordinate)
             {
-                CreateConnectionIfNoExist(coordinate, new Coordinate(coordinate.Row + 1, coordinate.Column));
-                CreateConnectionIfNoExist(coordinate, new Coordinate(coordinate.Row - 1, coordinate.Column));
-                CreateConnectionIfNoExist(coordinate, new Coordinate(coordinate.Row, coordinate.Column + 1));
-                CreateConnectionIfNoExist(coordinate, new Coordinate(coordinate.Row, coordinate.Column - 1));
+                foreach(var neighbour in coordinate.Neighbours())
+                {
+                    CreateConnectionIfNoExist(coordinate, neighbour);
+                }
             }
 
             private void UpdateConnectionsAt(Coordinate coordinate)
             {
-                GetConnection(coordinate, new Coordinate(coordinate.Row + 1, coordinate.Column)).UpdateHappiness();
-                GetConnection(coordinate, new Coordinate(coordinate.Row - 1, coordinate.Column)).UpdateHappiness();
-                GetConnection(coordinate, new Coordinate(coordinate.Row, coordinate.Column + 1)).UpdateHappiness();
-                GetConnection(coordinate, new Coordinate(coordinate.Row, coordinate.Column - 1)).UpdateHappiness();
+                foreach(var neighbour in coordinate.Neighbours())
+                {
+                    GetConnection(coordinate, neighbour).UpdateHappiness();
+                }
             }
 
             private void CreateConnectionIfNoExist(Coordinate from, Coordinate to)

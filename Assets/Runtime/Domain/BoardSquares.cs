@@ -36,10 +36,10 @@ namespace Runtime.Domain
 
             private void CheckSurroundingsForNewSquares(Coordinate coordinate)
             {
-                CreateSquareIfNoExist(new Coordinate(coordinate.Row + 1, coordinate.Column));
-                CreateSquareIfNoExist(new Coordinate(coordinate.Row - 1, coordinate.Column));
-                CreateSquareIfNoExist(new Coordinate(coordinate.Row, coordinate.Column + 1));
-                CreateSquareIfNoExist(new Coordinate(coordinate.Row, coordinate.Column - 1));
+                foreach(var neighbour in coordinate.Neighbours())
+                {
+                    CreateSquareIfNoExist(neighbour);
+                }
             }
 
             private void CreateSquareIfNoExist(Coordinate coordinate)
