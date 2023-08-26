@@ -75,5 +75,14 @@ namespace Tests.EditMode
             goodTrait.CompareTo(new("Evil")).Should().Be(Relation.Enemy);
             goodTrait.CompareTo(new("Neutral")).Should().Be(Relation.Neutral);
         }
+        
+        [Test]
+        public void Relationship_IsNotNeccesarily_Commutative()
+        {
+            var specialTrait = new NewTrait("1", new []{"2"}, new string[]{});
+            var notCommutativeTrait = new NewTrait("2");
+
+            specialTrait.CompareTo(notCommutativeTrait).Should().NotBe(notCommutativeTrait.CompareTo(specialTrait));
+        }
     }
 }
