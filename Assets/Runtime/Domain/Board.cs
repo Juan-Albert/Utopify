@@ -8,7 +8,7 @@ namespace Runtime.Domain
     public partial class Board
     {
         public Squares AllSquares { get; }
-        private readonly Connections connections;
+        public Connections AllConnections { get; }
 
         public int Rows
         {
@@ -33,24 +33,20 @@ namespace Runtime.Domain
         public Board(Squares AllSquares, Connections connections)
         {
             this.AllSquares = AllSquares;
-            this.connections = connections;
+            this.AllConnections = connections;
         }
 
-        public List<Connection> GetConnections()
-        {
-            return connections.refactoring;
-        }
 
         public int GetBoardHappiness()
         {
-            return connections.BoardHappiness;
+            return AllConnections.BoardHappiness;
         }
 
         public void PlayCard(Card playedCard, Coordinate coordinate)
         {
             Assert.IsTrue(AllSquares.SquareExist(coordinate));
             AllSquares.PlayCard(playedCard, coordinate);
-            connections.CardPlayedAt(coordinate);
+            AllConnections.CardPlayedAt(coordinate);
         }
     }
 }

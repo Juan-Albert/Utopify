@@ -7,22 +7,22 @@ namespace Runtime.Domain
 {
     public partial class Board
     {
-        public class Connections
+        public class Connections : IEnumerable<Connection>
         {
             private readonly Squares squares;
-            public List<Connection> refactoring { get; }
+            List<Connection> _connections { get; }
 
-            public int BoardHappiness => refactoring.Sum(connection => connection.Happiness);
+            public int BoardHappiness => _connections.Sum(connection => connection.Happiness);
 
             public Connections(List<Connection> connections, Squares squares)
             {
-                refactoring = connections;
+                _connections = connections;
                 this.squares = squares;
             }
 
             public bool ConnectionExist(Coordinate from, Coordinate to)
             {
-                return ConnectionExist(refactoring, from, to);
+                return ConnectionExist(_connections, from, to);
             }
 
             public static bool ConnectionExist(List<Connection> connections, Coordinate from, Coordinate to)
@@ -32,7 +32,7 @@ namespace Runtime.Domain
 
             public Connection GetConnection(Coordinate from, Coordinate to)
             {
-                var connection = refactoring.Find(x => x.Equals(from, to));
+                var connection = _connections.Find(x => x.Equals(from, to));
                 Assert.IsNotNull(connection);
                 return connection;
             }
@@ -62,7 +62,17 @@ namespace Runtime.Domain
             private void CreateConnectionIfNoExist(Coordinate from, Coordinate to)
             {
                 if(!ConnectionExist(from, to))
-                    refactoring.Add(new Connection(squares.GetSquare(from), squares.GetSquare(to)));
+                    _connections.Add(new Connection(squares.GetSquare(from), squares.GetSquare(to)));
+            }
+
+            public IEnumerator<Connection> GetEnumerator()
+            {
+                return _connections.GetEnumerator();
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
             }
         }
     }

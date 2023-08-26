@@ -42,7 +42,7 @@ namespace Runtime.View
                 _squareViews.Add(squareView);
             }
 
-            foreach (var connection in _board.GetConnections())
+            foreach (var connection in _board.AllConnections)
             {
                 var rowMiddlePoint =
                     (float)(connection.FromSquare.Coordinate.Row + connection.ToSquare.Coordinate.Row) / 2;
