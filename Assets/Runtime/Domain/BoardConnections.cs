@@ -40,8 +40,6 @@ namespace Runtime.Domain
             {
                 CheckSurroundingsForNewConnections(coordinate);
                 UpdateConnectionsAt(coordinate);
-                
-                
             }
 
             private void CheckSurroundingsForNewConnections(Coordinate coordinate)

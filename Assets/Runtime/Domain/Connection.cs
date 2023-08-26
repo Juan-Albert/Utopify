@@ -7,6 +7,7 @@ namespace Runtime.Domain
         public Square FromSquare { get; }
         public Square ToSquare { get; }
 
+        //TODO autocalculate happiness on method & refactor to erase connection class
         public int Happiness { get; private set; }
 
         public Connection(Square fromSquare, Square toSquare)
