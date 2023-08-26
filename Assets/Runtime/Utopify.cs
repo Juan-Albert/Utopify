@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Runtime.Domain;
-using Runtime.Scriptable;
 using Runtime.View;
 using UnityEngine;
 using UnityEngine.Assertions;
