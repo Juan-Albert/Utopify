@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace Runtime.Domain
+﻿namespace Runtime.Domain
 {
     public class Trait 
     {
