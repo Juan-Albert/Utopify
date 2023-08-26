@@ -5,21 +5,21 @@ namespace Runtime.Domain
 {
     public class TraitComparer
     {
-        public enum TraitComparerResult
+        public enum Result
         {
             Positive,
             Negative,
             Neutral
         }
 
-        private readonly Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparerResult> _comparisons;
+        private readonly Dictionary<(Trait.TraitType, Trait.TraitType), Result> _comparisons;
             
-        public TraitComparer(Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparerResult> comparisons)
+        public TraitComparer(Dictionary<(Trait.TraitType, Trait.TraitType), Result> comparisons)
         {
             _comparisons = comparisons;
         }
 
-        public TraitComparerResult Compare(Trait.TraitType firstTrait, Trait.TraitType secondTrait)
+        public Result Compare(Trait.TraitType firstTrait, Trait.TraitType secondTrait)
         {
             Assert.IsTrue(_comparisons.ContainsKey((firstTrait, secondTrait)) ||
                           _comparisons.ContainsKey((secondTrait, firstTrait)));

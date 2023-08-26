@@ -22,7 +22,7 @@ namespace Runtime.Domain
             _traitComparer = traitComparer;
         }
 
-        public TraitComparer.TraitComparerResult Compare(Trait otherTrait)
+        public TraitComparer.Result Compare(Trait otherTrait)
         {
             return _traitComparer.Compare(Type, otherTrait.Type);
         }

@@ -11,11 +11,11 @@ namespace Tests.EditMode
         public void WhenCompareTraits_ReturnCorrectHappiness()
         {
             var traitComparer = new TraitComparer(
-                new Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.TraitComparerResult>
+                new()
                 {
-                    { (Trait.TraitType.Good, Trait.TraitType.Good), TraitComparer.TraitComparerResult.Positive },
-                    { (Trait.TraitType.Good, Trait.TraitType.Sad), TraitComparer.TraitComparerResult.Positive },
-                    { (Trait.TraitType.Good, Trait.TraitType.Evil), TraitComparer.TraitComparerResult.Negative }
+                    { (Trait.TraitType.Good, Trait.TraitType.Good), TraitComparer.Result.Positive },
+                    { (Trait.TraitType.Good, Trait.TraitType.Sad), TraitComparer.Result.Positive },
+                    { (Trait.TraitType.Good, Trait.TraitType.Evil), TraitComparer.Result.Negative }
                 });
             var goodTrait = new Trait(Trait.TraitType.Good, traitComparer);
             var sadTrait = new Trait(Trait.TraitType.Sad, traitComparer);

@@ -30,18 +30,18 @@ namespace Runtime
         {
             var board = BuildBoard();
             
-            var traitComparisons = new Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.TraitComparerResult>
+            var traitComparisons = new Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.Result>
             {
-                { (Trait.TraitType.Good, Trait.TraitType.Good), TraitComparer.TraitComparerResult.Positive },
-                { (Trait.TraitType.Good, Trait.TraitType.Evil), TraitComparer.TraitComparerResult.Negative },
-                { (Trait.TraitType.Good, Trait.TraitType.Happy), TraitComparer.TraitComparerResult.Neutral },
-                { (Trait.TraitType.Good, Trait.TraitType.Sad), TraitComparer.TraitComparerResult.Neutral },
-                { (Trait.TraitType.Evil, Trait.TraitType.Evil), TraitComparer.TraitComparerResult.Positive },
-                { (Trait.TraitType.Evil, Trait.TraitType.Happy), TraitComparer.TraitComparerResult.Negative },
-                { (Trait.TraitType.Evil, Trait.TraitType.Sad), TraitComparer.TraitComparerResult.Negative },
-                { (Trait.TraitType.Happy, Trait.TraitType.Happy), TraitComparer.TraitComparerResult.Positive },
-                { (Trait.TraitType.Happy, Trait.TraitType.Sad), TraitComparer.TraitComparerResult.Negative },
-                { (Trait.TraitType.Sad, Trait.TraitType.Sad), TraitComparer.TraitComparerResult.Positive }
+                { (Trait.TraitType.Good, Trait.TraitType.Good), TraitComparer.Result.Positive },
+                { (Trait.TraitType.Good, Trait.TraitType.Evil), TraitComparer.Result.Negative },
+                { (Trait.TraitType.Good, Trait.TraitType.Happy), TraitComparer.Result.Neutral },
+                { (Trait.TraitType.Good, Trait.TraitType.Sad), TraitComparer.Result.Neutral },
+                { (Trait.TraitType.Evil, Trait.TraitType.Evil), TraitComparer.Result.Positive },
+                { (Trait.TraitType.Evil, Trait.TraitType.Happy), TraitComparer.Result.Negative },
+                { (Trait.TraitType.Evil, Trait.TraitType.Sad), TraitComparer.Result.Negative },
+                { (Trait.TraitType.Happy, Trait.TraitType.Happy), TraitComparer.Result.Positive },
+                { (Trait.TraitType.Happy, Trait.TraitType.Sad), TraitComparer.Result.Negative },
+                { (Trait.TraitType.Sad, Trait.TraitType.Sad), TraitComparer.Result.Positive }
             };
             var traitComparer = new TraitComparer(traitComparisons);
             

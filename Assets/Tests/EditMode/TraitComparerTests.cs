@@ -9,25 +9,25 @@ namespace Tests.EditMode
         [Test]
         public void WhenCompareTraits_ReturnCorrectResult()
         {
-            Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.TraitComparerResult> traitComparisons =
-                new Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.TraitComparerResult>()
+            Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.Result> traitComparisons =
+                new Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.Result>()
                 {
-                    { (Trait.TraitType.Good, Trait.TraitType.Good), TraitComparer.TraitComparerResult.Positive }
+                    { (Trait.TraitType.Good, Trait.TraitType.Good), TraitComparer.Result.Positive }
                 };
             var sut = new TraitComparer(traitComparisons);
 
             var result = sut.Compare(Trait.TraitType.Good, Trait.TraitType.Good);
         
-            Assert.AreEqual(result, TraitComparer.TraitComparerResult.Positive);
+            Assert.AreEqual(result, TraitComparer.Result.Positive);
         }
 
         [Test]
         public void WhenTraitOrderIsInverted_ReturnSameResult()
         {
-            Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.TraitComparerResult> traitComparisons =
-                new Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.TraitComparerResult>()
+            Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.Result> traitComparisons =
+                new Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.Result>()
                 {
-                    { (Trait.TraitType.Good, Trait.TraitType.Evil), TraitComparer.TraitComparerResult.Negative }
+                    { (Trait.TraitType.Good, Trait.TraitType.Evil), TraitComparer.Result.Negative }
                 };
             var sut = new TraitComparer(traitComparisons);
 
