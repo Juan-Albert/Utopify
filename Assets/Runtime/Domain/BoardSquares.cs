@@ -22,10 +22,8 @@ namespace Runtime.Domain
 
             public Square GetSquare(Coordinate coord)
             {
-                var square = _squares.Find(x => x.Coordinate.Equals(coord));
-                Assert.IsNotNull(square);
-
-                return square;
+                Assert.IsTrue(SquareExist(coord));
+                return _squares.Find(x => x.Coordinate.Equals(coord));
             }
 
             public void PlayCard(Card playedCard, Coordinate coordinate)

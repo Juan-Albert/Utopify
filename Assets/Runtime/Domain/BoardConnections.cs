@@ -32,15 +32,16 @@ namespace Runtime.Domain
 
             public Connection GetConnection(Coordinate from, Coordinate to)
             {
-                var connection = _connections.Find(x => x.Equals(from, to));
-                Assert.IsNotNull(connection);
-                return connection;
+                Assert.IsTrue(ConnectionExist(from, to));
+                return _connections.Find(x => x.Equals(from, to));
             }
 
             public void CardPlayedAt(Coordinate coordinate)
             {
                 CheckSurroundingsForNewConnections(coordinate);
                 UpdateConnectionsAt(coordinate);
+                
+                
             }
 
             private void CheckSurroundingsForNewConnections(Coordinate coordinate)
