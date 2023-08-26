@@ -29,18 +29,18 @@ namespace Runtime
         {
             var board = BuildBoard();
             
-            var traitComparisons = new Dictionary<(Trait.Name, Trait.Name), TraitComparer.Result>
+            var traitComparisons = new Dictionary<(Trait.Name, Trait.Name), TraitComparer.Connection>
             {
-                { (Trait.Name.Good, Trait.Name.Good), TraitComparer.Result.Positive },
-                { (Trait.Name.Good, Trait.Name.Evil), TraitComparer.Result.Negative },
-                { (Trait.Name.Good, Trait.Name.Happy), TraitComparer.Result.Neutral },
-                { (Trait.Name.Good, Trait.Name.Sad), TraitComparer.Result.Neutral },
-                { (Trait.Name.Evil, Trait.Name.Evil), TraitComparer.Result.Positive },
-                { (Trait.Name.Evil, Trait.Name.Happy), TraitComparer.Result.Negative },
-                { (Trait.Name.Evil, Trait.Name.Sad), TraitComparer.Result.Negative },
-                { (Trait.Name.Happy, Trait.Name.Happy), TraitComparer.Result.Positive },
-                { (Trait.Name.Happy, Trait.Name.Sad), TraitComparer.Result.Negative },
-                { (Trait.Name.Sad, Trait.Name.Sad), TraitComparer.Result.Positive }
+                { (Trait.Name.Good, Trait.Name.Good), TraitComparer.Connection.Positive },
+                { (Trait.Name.Good, Trait.Name.Evil), TraitComparer.Connection.Negative },
+                { (Trait.Name.Good, Trait.Name.Happy), TraitComparer.Connection.Neutral },
+                { (Trait.Name.Good, Trait.Name.Sad), TraitComparer.Connection.Neutral },
+                { (Trait.Name.Evil, Trait.Name.Evil), TraitComparer.Connection.Positive },
+                { (Trait.Name.Evil, Trait.Name.Happy), TraitComparer.Connection.Negative },
+                { (Trait.Name.Evil, Trait.Name.Sad), TraitComparer.Connection.Negative },
+                { (Trait.Name.Happy, Trait.Name.Happy), TraitComparer.Connection.Positive },
+                { (Trait.Name.Happy, Trait.Name.Sad), TraitComparer.Connection.Negative },
+                { (Trait.Name.Sad, Trait.Name.Sad), TraitComparer.Connection.Positive }
             };
             var traitComparer = new TraitComparer(traitComparisons);
             

@@ -13,9 +13,9 @@ namespace Tests.EditMode
             var traitComparer = new TraitComparer(
                 new()
                 {
-                    { (Trait.Name.Good, Trait.Name.Good), TraitComparer.Result.Positive },
-                    { (Trait.Name.Good, Trait.Name.Sad), TraitComparer.Result.Positive },
-                    { (Trait.Name.Good, Trait.Name.Evil), TraitComparer.Result.Negative }
+                    { (Trait.Name.Good, Trait.Name.Good), TraitComparer.Connection.Positive },
+                    { (Trait.Name.Good, Trait.Name.Sad), TraitComparer.Connection.Positive },
+                    { (Trait.Name.Good, Trait.Name.Evil), TraitComparer.Connection.Negative }
                 });
             var goodTrait = new Trait(Trait.Name.Good, traitComparer);
             var sadTrait = new Trait(Trait.Name.Sad, traitComparer);

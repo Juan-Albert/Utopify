@@ -14,7 +14,7 @@ namespace Tests.EditMode
             {
                 new (Trait.Name.Good, 
                     new TraitComparer(
-                        new Dictionary<(Trait.Name, Trait.Name), TraitComparer.Result>()))
+                        new Dictionary<(Trait.Name, Trait.Name), TraitComparer.Connection>()))
             });
             var sut = new Deck(new List<Card>());
             
@@ -30,7 +30,7 @@ namespace Tests.EditMode
             {
                 new (Trait.Name.Good, 
                     new TraitComparer(
-                        new Dictionary<(Trait.Name, Trait.Name), TraitComparer.Result>()))
+                        new Dictionary<(Trait.Name, Trait.Name), TraitComparer.Connection>()))
             });
             var sut = new Deck(new List<Card>
             {

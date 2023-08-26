@@ -26,10 +26,10 @@ namespace Runtime.Domain
 
                     switch (comparison)
                     {
-                        case TraitComparer.Result.Positive:
+                        case TraitComparer.Connection.Positive:
                             happiness += 2;
                             break;
-                        case TraitComparer.Result.Negative:
+                        case TraitComparer.Connection.Negative:
                             happiness -= 2;
                             break;
                     }
