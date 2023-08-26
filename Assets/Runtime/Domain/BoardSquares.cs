@@ -1,27 +1,28 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.Assertions;
 
 namespace Runtime.Domain
 {
     public partial class Board
     {
-        public class Squares
+        public class Squares : IEnumerable<Square>
         {
-            public List<Square> REFACTORING { get; }
+            List<Square> _squares { get; }
 
             public Squares(List<Square> squares)
             {
-                REFACTORING = squares;
+                _squares = squares;
             }
 
             public bool SquareExist(Coordinate coord)
             {
-                return REFACTORING.Exists(x => x.Coordinate.Equals(coord));
+                return _squares.Exists(x => x.Coordinate.Equals(coord));
             }
 
             public Square GetSquare(Coordinate coord)
             {
-                var square = REFACTORING.Find(x => x.Coordinate.Equals(coord));
+                var square = _squares.Find(x => x.Coordinate.Equals(coord));
                 Assert.IsNotNull(square);
 
                 return square;
@@ -44,7 +45,17 @@ namespace Runtime.Domain
             private void CreateSquareIfNoExist(Coordinate coordinate)
             {
                 if(!SquareExist(coordinate))
-                    REFACTORING.Add(new Square(coordinate));
+                    _squares.Add(new Square(coordinate));
+            }
+            
+            public IEnumerator<Square> GetEnumerator()
+            {
+                return _squares.GetEnumerator();
+            }
+            
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
             }
         }
     }

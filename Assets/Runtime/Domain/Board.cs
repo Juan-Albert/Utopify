@@ -7,15 +7,15 @@ namespace Runtime.Domain
 {
     public partial class Board
     {
-        private readonly Squares squares;
+        public Squares AllSquares { get; }
         private readonly Connections connections;
 
         public int Rows
         {
             get
             {
-                var larger = squares.REFACTORING.Max(x => x.Coordinate.Row);
-                var smaller = squares.REFACTORING.Min(x => x.Coordinate.Row);
+                var larger = AllSquares.Max(x => x.Coordinate.Row);
+                var smaller = AllSquares.Min(x => x.Coordinate.Row);
                 return larger - smaller;
             }
         }
@@ -24,21 +24,16 @@ namespace Runtime.Domain
         {
             get
             {
-                var larger = squares.REFACTORING.Max(x => x.Coordinate.Column);
-                var smaller = squares.REFACTORING.Min(x => x.Coordinate.Column);
+                var larger = AllSquares.Max(x => x.Coordinate.Column);
+                var smaller = AllSquares.Min(x => x.Coordinate.Column);
                 return larger - smaller;
             }
         }
 
-        public Board(Squares squares, Connections connections)
+        public Board(Squares AllSquares, Connections connections)
         {
-            this.squares = squares;
+            this.AllSquares = AllSquares;
             this.connections = connections;
-        }
-
-        public List<Square> GetSquares()
-        {
-            return squares.REFACTORING;
         }
 
         public List<Connection> GetConnections()
@@ -53,8 +48,8 @@ namespace Runtime.Domain
 
         public void PlayCard(Card playedCard, Coordinate coordinate)
         {
-            Assert.IsTrue(squares.SquareExist(coordinate));
-            squares.PlayCard(playedCard, coordinate);
+            Assert.IsTrue(AllSquares.SquareExist(coordinate));
+            AllSquares.PlayCard(playedCard, coordinate);
             connections.CardPlayedAt(coordinate);
         }
     }

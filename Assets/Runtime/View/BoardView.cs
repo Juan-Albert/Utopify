@@ -31,7 +31,7 @@ namespace Runtime.View
 
         private void BuildBoard()
         {
-            foreach (var square in _board.GetSquares())
+            foreach (var square in _board.AllSquares)
             {
                 var squareView = Instantiate(squareViewPrefab, 
                     new Vector3(square.Coordinate.Row + square.Coordinate.Row * 0.4f, 

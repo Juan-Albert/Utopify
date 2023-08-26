@@ -87,7 +87,7 @@ namespace Runtime
             var boardSquares = new Board.Squares(squares);
 
             var connections = new List<Connection>();
-            foreach (var square in boardSquares.REFACTORING)
+            foreach (var square in boardSquares)
             {
                 CheckForValidConnectionCreation(square,
                     new Coordinate(square.Coordinate.Row + 1,
