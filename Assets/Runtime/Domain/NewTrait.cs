@@ -30,5 +30,15 @@ namespace Runtime.Domain
                 throw new NotSupportedException("Tiene que estar en los amigos metido");
             return Relation.Neutral;
         }
+        
+        public override bool Equals(object obj) => obj is NewTrait other && Equals(other);
+        public bool Equals(NewTrait other) => id == other.id;
+        public override int GetHashCode() => id.GetHashCode();
+        public static bool operator ==(NewTrait left, NewTrait right) => left.Equals(right);
+        public static bool operator !=(NewTrait left, NewTrait right) => !left.Equals(right);
+        public static bool operator <(NewTrait left, NewTrait right) => left.CompareTo(right) < 0;
+        public static bool operator >(NewTrait left, NewTrait right) => left.CompareTo(right) > 0;
+        public static bool operator <=(NewTrait left, NewTrait right) => left.CompareTo(right) <= 0;
+        public static bool operator >=(NewTrait left, NewTrait right) => left.CompareTo(right) >= 0;
     }
 }
