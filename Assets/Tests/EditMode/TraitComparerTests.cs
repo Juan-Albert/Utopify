@@ -9,14 +9,14 @@ namespace Tests.EditMode
         [Test]
         public void WhenCompareTraits_ReturnCorrectResult()
         {
-            Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.Result> traitComparisons =
-                new Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.Result>()
+            Dictionary<(Trait.Name, Trait.Name), TraitComparer.Result> traitComparisons =
+                new Dictionary<(Trait.Name, Trait.Name), TraitComparer.Result>()
                 {
-                    { (Trait.TraitType.Good, Trait.TraitType.Good), TraitComparer.Result.Positive }
+                    { (Trait.Name.Good, Trait.Name.Good), TraitComparer.Result.Positive }
                 };
             var sut = new TraitComparer(traitComparisons);
 
-            var result = sut.Compare(Trait.TraitType.Good, Trait.TraitType.Good);
+            var result = sut.Compare(Trait.Name.Good, Trait.Name.Good);
         
             Assert.AreEqual(result, TraitComparer.Result.Positive);
         }
@@ -24,15 +24,15 @@ namespace Tests.EditMode
         [Test]
         public void WhenTraitOrderIsInverted_ReturnSameResult()
         {
-            Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.Result> traitComparisons =
-                new Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.Result>()
+            Dictionary<(Trait.Name, Trait.Name), TraitComparer.Result> traitComparisons =
+                new Dictionary<(Trait.Name, Trait.Name), TraitComparer.Result>()
                 {
-                    { (Trait.TraitType.Good, Trait.TraitType.Evil), TraitComparer.Result.Negative }
+                    { (Trait.Name.Good, Trait.Name.Evil), TraitComparer.Result.Negative }
                 };
             var sut = new TraitComparer(traitComparisons);
 
-            var result = sut.Compare(Trait.TraitType.Good, Trait.TraitType.Evil);
-            var invertedResult = sut.Compare(Trait.TraitType.Evil, Trait.TraitType.Good);
+            var result = sut.Compare(Trait.Name.Good, Trait.Name.Evil);
+            var invertedResult = sut.Compare(Trait.Name.Evil, Trait.Name.Good);
         
             Assert.AreEqual(result, invertedResult);
         }

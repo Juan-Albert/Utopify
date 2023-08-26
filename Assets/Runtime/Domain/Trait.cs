@@ -4,7 +4,7 @@ namespace Runtime.Domain
 {
     public class Trait 
     {
-        public enum TraitType
+        public enum Name
         {
             Good,
             Evil,
@@ -12,13 +12,13 @@ namespace Runtime.Domain
             Sad
         }
 
-        public TraitType Type { get; }
+        public Name Type { get; }
 
         private readonly TraitComparer _traitComparer;
     
-        public Trait(TraitType traitType, TraitComparer traitComparer)
+        public Trait(Name name, TraitComparer traitComparer)
         {
-            Type = traitType;
+            Type = name;
             _traitComparer = traitComparer;
         }
 

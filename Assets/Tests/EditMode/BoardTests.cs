@@ -20,9 +20,9 @@ namespace Tests.EditMode
             var sut = new Board(boardSquares, boardConnections);
             var card = new Card(new List<Trait>
             {
-                new (Trait.TraitType.Good,
+                new (Trait.Name.Good,
                     new TraitComparer(
-                        new Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.Result>()))
+                        new Dictionary<(Trait.Name, Trait.Name), TraitComparer.Result>()))
             });
             
             sut.PlayCard(card, coordinate);
@@ -41,9 +41,9 @@ namespace Tests.EditMode
             var boardConnections = new BoardConnections(new List<Connection>(), boardSquares);
             var sut = new Board(boardSquares, boardConnections);
             var card = new Card(new List<Trait>{
-                new (Trait.TraitType.Good,
+                new (Trait.Name.Good,
                     new TraitComparer(
-                        new Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.Result>()))
+                        new Dictionary<(Trait.Name, Trait.Name), TraitComparer.Result>()))
             });
             
             sut.PlayCard(card, coordinate);
@@ -65,9 +65,9 @@ namespace Tests.EditMode
             var boardConnections = new BoardConnections(new List<Connection>(), boardSquares);
             var sut = new Board(boardSquares, boardConnections);
             var card = new Card(new List<Trait>{
-                new (Trait.TraitType.Good,
+                new (Trait.Name.Good,
                     new TraitComparer(
-                        new Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.Result>()))
+                        new Dictionary<(Trait.Name, Trait.Name), TraitComparer.Result>()))
             });
             
             sut.PlayCard(card, coordinate);
@@ -91,11 +91,11 @@ namespace Tests.EditMode
             var boardConnections = new BoardConnections(new List<Connection>(), boardSquares);
             var sut = new Board(boardSquares, boardConnections);
             var traitComparer = new TraitComparer(
-                new Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.Result>
+                new Dictionary<(Trait.Name, Trait.Name), TraitComparer.Result>
                 {
-                    { (Trait.TraitType.Good, Trait.TraitType.Good), TraitComparer.Result.Positive }
+                    { (Trait.Name.Good, Trait.Name.Good), TraitComparer.Result.Positive }
                 });
-            var trait = new Trait(Trait.TraitType.Good, traitComparer);
+            var trait = new Trait(Trait.Name.Good, traitComparer);
             var card = new Card(new List<Trait>
             {
                 trait
@@ -119,11 +119,11 @@ namespace Tests.EditMode
             var boardConnections = new BoardConnections(new List<Connection>(), boardSquares);
             var sut = new Board(boardSquares, boardConnections);
             var card = new Card(new List<Trait>{
-                new (Trait.TraitType.Good,
+                new (Trait.Name.Good,
                     new TraitComparer(
-                        new Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.Result>
+                        new Dictionary<(Trait.Name, Trait.Name), TraitComparer.Result>
                         {
-                            { (Trait.TraitType.Good, Trait.TraitType.Good), TraitComparer.Result.Positive }
+                            { (Trait.Name.Good, Trait.Name.Good), TraitComparer.Result.Positive }
                         }))
             });
             

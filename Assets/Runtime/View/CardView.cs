@@ -15,16 +15,16 @@ namespace Runtime.View
             Card = card;
             switch (card.Traits[0].Type)
             {
-                case Trait.TraitType.Good:
+                case Trait.Name.Good:
                     _meshRenderer.material.color = Color.green;
                     break;
-                case Trait.TraitType.Evil:
+                case Trait.Name.Evil:
                     _meshRenderer.material.color = Color.red;
                     break;
-                case Trait.TraitType.Happy:
+                case Trait.Name.Happy:
                     _meshRenderer.material.color = Color.yellow;
                     break;
-                case Trait.TraitType.Sad:
+                case Trait.Name.Sad:
                     _meshRenderer.material.color = Color.blue;
                     break;
             }

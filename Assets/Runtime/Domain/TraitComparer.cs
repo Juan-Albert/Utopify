@@ -12,14 +12,14 @@ namespace Runtime.Domain
             Neutral
         }
 
-        private readonly Dictionary<(Trait.TraitType, Trait.TraitType), Result> _comparisons;
+        private readonly Dictionary<(Trait.Name, Trait.Name), Result> _comparisons;
             
-        public TraitComparer(Dictionary<(Trait.TraitType, Trait.TraitType), Result> comparisons)
+        public TraitComparer(Dictionary<(Trait.Name, Trait.Name), Result> comparisons)
         {
             _comparisons = comparisons;
         }
 
-        public Result Compare(Trait.TraitType firstTrait, Trait.TraitType secondTrait)
+        public Result Compare(Trait.Name firstTrait, Trait.Name secondTrait)
         {
             Assert.IsTrue(_comparisons.ContainsKey((firstTrait, secondTrait)) ||
                           _comparisons.ContainsKey((secondTrait, firstTrait)));

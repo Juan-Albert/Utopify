@@ -13,13 +13,13 @@ namespace Tests.EditMode
             var traitComparer = new TraitComparer(
                 new()
                 {
-                    { (Trait.TraitType.Good, Trait.TraitType.Good), TraitComparer.Result.Positive },
-                    { (Trait.TraitType.Good, Trait.TraitType.Sad), TraitComparer.Result.Positive },
-                    { (Trait.TraitType.Good, Trait.TraitType.Evil), TraitComparer.Result.Negative }
+                    { (Trait.Name.Good, Trait.Name.Good), TraitComparer.Result.Positive },
+                    { (Trait.Name.Good, Trait.Name.Sad), TraitComparer.Result.Positive },
+                    { (Trait.Name.Good, Trait.Name.Evil), TraitComparer.Result.Negative }
                 });
-            var goodTrait = new Trait(Trait.TraitType.Good, traitComparer);
-            var sadTrait = new Trait(Trait.TraitType.Sad, traitComparer);
-            var evilTrait = new Trait(Trait.TraitType.Evil, traitComparer);
+            var goodTrait = new Trait(Trait.Name.Good, traitComparer);
+            var sadTrait = new Trait(Trait.Name.Sad, traitComparer);
+            var evilTrait = new Trait(Trait.Name.Evil, traitComparer);
             var sut1 = new Card(new List<Trait>
             {
                 goodTrait

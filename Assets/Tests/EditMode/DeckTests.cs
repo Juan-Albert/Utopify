@@ -12,9 +12,9 @@ namespace Tests.EditMode
         {
             Card card = new Card(new List<Trait>
             {
-                new (Trait.TraitType.Good, 
+                new (Trait.Name.Good, 
                     new TraitComparer(
-                        new Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.Result>()))
+                        new Dictionary<(Trait.Name, Trait.Name), TraitComparer.Result>()))
             });
             var sut = new Deck(new List<Card>());
             
@@ -28,9 +28,9 @@ namespace Tests.EditMode
         {
             Card card = new Card(new List<Trait>
             {
-                new (Trait.TraitType.Good, 
+                new (Trait.Name.Good, 
                     new TraitComparer(
-                        new Dictionary<(Trait.TraitType, Trait.TraitType), TraitComparer.Result>()))
+                        new Dictionary<(Trait.Name, Trait.Name), TraitComparer.Result>()))
             });
             var sut = new Deck(new List<Card>
             {
