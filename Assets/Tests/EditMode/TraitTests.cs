@@ -1,10 +1,7 @@
-﻿using System;
-using FluentAssertions;
-using FluentAssertions.Execution;
+﻿using FluentAssertions;
 using NUnit.Framework;
 using Runtime.Domain;
 using static Runtime.Domain.NewTrait;
-using static Runtime.Domain.NewTrait.Relation;
 using static Runtime.Domain.Trait.Name;
 using static Runtime.Domain.TraitComparer.Connection;
 
@@ -73,13 +70,10 @@ namespace Tests.EditMode
         public void Relationship()
         {
             var goodTrait = new NewTrait("Good", new []{"Good"}, new []{"Evil"});
-            var evilTrait = new NewTrait("Evil", new []{"Evil"}, new []{"Good"});
-            var neutralTrait = new NewTrait("Neutral", new string[]{}, new string[]{}); 
-
-            using var _ = new AssertionScope();
-            goodTrait.CompareTo(goodTrait).Should().Be(Friend);
-            goodTrait.CompareTo(evilTrait).Should().Be(Enemy);
-            goodTrait.CompareTo(neutralTrait).Should().Be(Relation.Neutral);
+            
+            goodTrait.CompareTo(goodTrait).Should().Be(Relation.Friend);
+            goodTrait.CompareTo(new("Evil")).Should().Be(Relation.Enemy);
+            goodTrait.CompareTo(new("Neutral")).Should().Be(Relation.Neutral);
         }
     }
 }

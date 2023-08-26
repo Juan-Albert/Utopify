@@ -10,6 +10,8 @@ namespace Runtime.Domain
         readonly string[] friends;
         readonly string[] enemies;
 
+        public NewTrait(string id) : this(id, Array.Empty<string>(), Array.Empty<string>()) { }
+        
         public NewTrait(string id, IEnumerable<string> friends, IEnumerable<string> enemies)
         {
             this.id = id;
