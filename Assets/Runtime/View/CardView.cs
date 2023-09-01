@@ -13,18 +13,18 @@ namespace Runtime.View
         public void Setup(Card card)
         {
             Card = card;
-            switch (card.Traits[0].Type)
+            switch (card.Traits[0].ID)
             {
-                case Trait.Name.Good:
+                case "Good":
                     _meshRenderer.material.color = Color.green;
                     break;
-                case Trait.Name.Evil:
+                case "Evil":
                     _meshRenderer.material.color = Color.red;
                     break;
-                case Trait.Name.Happy:
+                case "Happy":
                     _meshRenderer.material.color = Color.yellow;
                     break;
-                case Trait.Name.Sad:
+                case "Sad":
                     _meshRenderer.material.color = Color.blue;
                     break;
             }

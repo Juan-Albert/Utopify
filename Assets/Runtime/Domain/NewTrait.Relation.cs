@@ -2,7 +2,7 @@
 
 namespace Runtime.Domain
 {
-    public readonly partial struct NewTrait
+    public readonly partial struct Trait
     {
         internal readonly struct Relation
         {

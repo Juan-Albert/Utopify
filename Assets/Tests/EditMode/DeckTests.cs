@@ -10,12 +10,7 @@ namespace Tests.EditMode
         [Test]
         public void WhenCardAddedToDeck_ItIsIn()
         {
-            Card card = new Card(new List<Trait>
-            {
-                new (Trait.Name.Good, 
-                    new TraitComparer(
-                        new Dictionary<(Trait.Name, Trait.Name), TraitComparer.Connection>()))
-            });
+            var card = new Card(new List<Trait>{new ("Good")});
             var sut = new Deck(new List<Card>());
             
             sut.AddCard(card);
@@ -26,16 +21,8 @@ namespace Tests.EditMode
         [Test]
         public void WhenDrawCardFromDeck_ItIsNotIn()
         {
-            Card card = new Card(new List<Trait>
-            {
-                new (Trait.Name.Good, 
-                    new TraitComparer(
-                        new Dictionary<(Trait.Name, Trait.Name), TraitComparer.Connection>()))
-            });
-            var sut = new Deck(new List<Card>
-            {
-                card
-            });
+            var card = new Card(new List<Trait>{new ("Good")});
+            var sut = new Deck(new List<Card>{card});
             
             sut.DrawCard();
             

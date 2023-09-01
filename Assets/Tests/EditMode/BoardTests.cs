@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using Runtime.Domain;
 using UnityEngine;
@@ -18,12 +19,7 @@ namespace Tests.EditMode
             });
             var boardConnections = new BoardConnections(new List<Connection>(), boardSquares);
             var sut = new Board(boardSquares, boardConnections);
-            var card = new Card(new List<Trait>
-            {
-                new (Trait.Name.Good,
-                    new TraitComparer(
-                        new Dictionary<(Trait.Name, Trait.Name), TraitComparer.Connection>()))
-            });
+            var card = new Card(new List<Trait>{new ("Good")});
             
             sut.PlayCard(card, coordinate);
             
@@ -40,11 +36,7 @@ namespace Tests.EditMode
             });
             var boardConnections = new BoardConnections(new List<Connection>(), boardSquares);
             var sut = new Board(boardSquares, boardConnections);
-            var card = new Card(new List<Trait>{
-                new (Trait.Name.Good,
-                    new TraitComparer(
-                        new Dictionary<(Trait.Name, Trait.Name), TraitComparer.Connection>()))
-            });
+            var card = new Card(new List<Trait>{new ("Good")});
             
             sut.PlayCard(card, coordinate);
             
@@ -64,11 +56,7 @@ namespace Tests.EditMode
             });
             var boardConnections = new BoardConnections(new List<Connection>(), boardSquares);
             var sut = new Board(boardSquares, boardConnections);
-            var card = new Card(new List<Trait>{
-                new (Trait.Name.Good,
-                    new TraitComparer(
-                        new Dictionary<(Trait.Name, Trait.Name), TraitComparer.Connection>()))
-            });
+            var card = new Card(new List<Trait>{new ("Good")});
             
             sut.PlayCard(card, coordinate);
             
@@ -90,21 +78,12 @@ namespace Tests.EditMode
             });
             var boardConnections = new BoardConnections(new List<Connection>(), boardSquares);
             var sut = new Board(boardSquares, boardConnections);
-            var traitComparer = new TraitComparer(
-                new Dictionary<(Trait.Name, Trait.Name), TraitComparer.Connection>
-                {
-                    { (Trait.Name.Good, Trait.Name.Good), TraitComparer.Connection.Positive }
-                });
-            var trait = new Trait(Trait.Name.Good, traitComparer);
-            var card = new Card(new List<Trait>
-            {
-                trait
-            });
+            var card = new Card(new List<Trait>{new ("Good", new []{"Good"}, Array.Empty<string>())});
             
             sut.PlayCard(card, fromCoordinate);
             sut.PlayCard(card, toCoordinate);
             
-            Assert.AreEqual(boardConnections.GetConnection(fromCoordinate, toCoordinate).Happiness, 2);
+            Assert.AreEqual(boardConnections.GetConnection(fromCoordinate, toCoordinate).Happiness, 1);
             
         }
 
@@ -118,21 +97,14 @@ namespace Tests.EditMode
             });
             var boardConnections = new BoardConnections(new List<Connection>(), boardSquares);
             var sut = new Board(boardSquares, boardConnections);
-            var card = new Card(new List<Trait>{
-                new (Trait.Name.Good,
-                    new TraitComparer(
-                        new Dictionary<(Trait.Name, Trait.Name), TraitComparer.Connection>
-                        {
-                            { (Trait.Name.Good, Trait.Name.Good), TraitComparer.Connection.Positive }
-                        }))
-            });
+            var card = new Card(new List<Trait>{new ("Good", new []{"Good"}, Array.Empty<string>())});
             
             sut.PlayCard(card, coordinate);
             sut.PlayCard(card, new Coordinate(coordinate.Row + 1, coordinate.Column));
             sut.PlayCard(card, new Coordinate(coordinate.Row - 1, coordinate.Column));
             var result = sut.GetBoardHappiness();
             
-            Assert.AreEqual(4, result);
+            Assert.AreEqual(2, result);
         }
     }
 }

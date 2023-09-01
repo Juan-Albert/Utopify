@@ -10,20 +10,10 @@ namespace Tests.EditMode
         [Test]
         public void WhenCompareTraits_ReturnCorrectHappiness()
         {
-            var traitComparer = new TraitComparer(
-                new()
-                {
-                    { (Trait.Name.Good, Trait.Name.Good), TraitComparer.Connection.Positive },
-                    { (Trait.Name.Good, Trait.Name.Sad), TraitComparer.Connection.Positive },
-                    { (Trait.Name.Good, Trait.Name.Evil), TraitComparer.Connection.Negative }
-                });
-            var goodTrait = new Trait(Trait.Name.Good, traitComparer);
-            var sadTrait = new Trait(Trait.Name.Sad, traitComparer);
-            var evilTrait = new Trait(Trait.Name.Evil, traitComparer);
-            var sut1 = new Card(new List<Trait>
-            {
-                goodTrait
-            });
+            var goodTrait = new Trait("Good", new []{"Good", "Sad"}, new []{"Evil"});
+            var sadTrait = new Trait("Sad");
+            var evilTrait = new Trait("Evil");
+            var sut1 = new Card(new List<Trait>{goodTrait});
             var sut2 = new Card(new List<Trait>
             {
                 goodTrait,
@@ -33,7 +23,7 @@ namespace Tests.EditMode
 
             var result = sut1.CompareTraits(sut2);
             
-            Assert.AreEqual(2, result);
+            Assert.AreEqual(1, result);
         }
     }
 }

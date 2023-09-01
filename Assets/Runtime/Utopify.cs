@@ -29,26 +29,13 @@ namespace Runtime
         {
             var board = BuildBoard();
             
-            var traitComparisons = new Dictionary<(Trait.Name, Trait.Name), TraitComparer.Connection>
+            var traits = new List<Trait>
             {
-                { (Trait.Name.Good, Trait.Name.Good), TraitComparer.Connection.Positive },
-                { (Trait.Name.Good, Trait.Name.Evil), TraitComparer.Connection.Negative },
-                { (Trait.Name.Good, Trait.Name.Happy), TraitComparer.Connection.Neutral },
-                { (Trait.Name.Good, Trait.Name.Sad), TraitComparer.Connection.Neutral },
-                { (Trait.Name.Evil, Trait.Name.Evil), TraitComparer.Connection.Positive },
-                { (Trait.Name.Evil, Trait.Name.Happy), TraitComparer.Connection.Negative },
-                { (Trait.Name.Evil, Trait.Name.Sad), TraitComparer.Connection.Negative },
-                { (Trait.Name.Happy, Trait.Name.Happy), TraitComparer.Connection.Positive },
-                { (Trait.Name.Happy, Trait.Name.Sad), TraitComparer.Connection.Negative },
-                { (Trait.Name.Sad, Trait.Name.Sad), TraitComparer.Connection.Positive }
+                new ("Good", new[] { "Good" }, new[] { "Evil" }),
+                new ("Evil", new[] { "Evil" }, new[] { "Good", "Happy", "Sad" }),
+                new ("Happy", new []{ "Good", "Happy",}, new []{"Evil", "Sad"}),
+                new ("Sad", new []{ "Happy", "Good"}, new []{"Sad"})
             };
-            var traitComparer = new TraitComparer(traitComparisons);
-            
-            var traits = new List<Trait>();
-            traits.Add(new Trait(Trait.Name.Good, traitComparer));
-            traits.Add(new Trait(Trait.Name.Evil, traitComparer));
-            traits.Add(new Trait(Trait.Name.Happy, traitComparer));
-            traits.Add(new Trait(Trait.Name.Sad, traitComparer));
 
             var cards = new List<Card>();
             for (int i = 0; i < 5; i++)

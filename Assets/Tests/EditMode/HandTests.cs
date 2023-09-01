@@ -10,16 +10,8 @@ namespace Tests.EditMode
         [Test]
         public void WhenHandStartEmpty_DrawFullHand()
         {
-            Card card = new Card(new List<Trait>
-            {
-                new (Trait.Name.Good, 
-                    new TraitComparer(
-                        new Dictionary<(Trait.Name, Trait.Name), TraitComparer.Connection>()))
-            });
-            var deck = new Deck(new List<Card>
-            {
-                card
-            });
+            var card = new Card(new List<Trait>{new ("Good")});
+            var deck = new Deck(new List<Card>{card});
             var sut = new Hand(1, deck, new List<Card>());
             
             Assert.AreEqual(1, sut.Cards.Count);
@@ -28,20 +20,9 @@ namespace Tests.EditMode
         [Test]
         public void WhenHandPlayCardAndIsEmpty_DrawFullHand()
         {
-            Card card = new Card(new List<Trait>
-            {
-                new (Trait.Name.Good, 
-                    new TraitComparer(
-                        new Dictionary<(Trait.Name, Trait.Name), TraitComparer.Connection>()))
-            });
-            var deck = new Deck(new List<Card>
-            {
-                card
-            });
-            var sut = new Hand(1, deck, new List<Card>
-            {
-                card
-            });
+            var card = new Card(new List<Trait>{new ("Good")});
+            var deck = new Deck(new List<Card>{card});
+            var sut = new Hand(1, deck, new List<Card>{card});
 
             sut.PlayCard(card);
             
@@ -51,17 +32,9 @@ namespace Tests.EditMode
         [Test]
         public void WhenDeckIsEmpty_DoNotDrawCard()
         {
-            Card card = new Card(new List<Trait>
-            {
-                new (Trait.Name.Good, 
-                    new TraitComparer(
-                        new Dictionary<(Trait.Name, Trait.Name), TraitComparer.Connection>()))
-            });
+            var card = new Card(new List<Trait>{new ("Good")});
             var deck = new Deck(new List<Card>());
-            var sut = new Hand(1, deck, new List<Card>
-            {
-                card
-            });
+            var sut = new Hand(1, deck, new List<Card>{card});
 
             sut.PlayCard(card);
             

@@ -22,17 +22,7 @@ namespace Runtime.Domain
             {
                 foreach (var otherTrait in otherCard.Traits)
                 {
-                    var comparison = myTrait.Compare(otherTrait);
-
-                    switch (comparison)
-                    {
-                        case TraitComparer.Connection.Positive:
-                            happiness += 2;
-                            break;
-                        case TraitComparer.Connection.Negative:
-                            happiness -= 2;
-                            break;
-                    }
+                    happiness += myTrait.CompareTo(otherTrait);
                 }
             }
 
