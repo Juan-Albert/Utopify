@@ -5,62 +5,74 @@ using UnityEngine.Assertions;
 
 namespace Runtime.Domain
 {
-    public class BoardConnections
+    public partial class Board
     {
-        private readonly BoardSquares _boardSquares;
-
-        public int BoardHappiness => Connections.Sum(connection => connection.Happiness);
-        public List<Connection> Connections { get; }
-
-        public BoardConnections(List<Connection> connections, BoardSquares boardSquares)
+        public class Connections : IEnumerable<Connection>
         {
-            Connections = connections;
-            _boardSquares = boardSquares;
-        }
-        
-        public bool ConnectionExist(Coordinate from, Coordinate to)
-        {
-            return ConnectionExist(Connections, from, to);
-        }
+            private readonly Squares squares;
+            List<Connection> _connections { get; }
 
-        public static bool ConnectionExist(List<Connection> connections, Coordinate from, Coordinate to)
-        {
-            return connections.Exists(x => x.Equals(from, to));
-        }
+            public int BoardHappiness => _connections.Sum(connection => connection.Happiness);
 
-        public Connection GetConnection(Coordinate from, Coordinate to)
-        {
-            var connection = Connections.Find(x => x.Equals(from, to));
-            Assert.IsNotNull(connection);
-            return connection;
-        }
+            public Connections(List<Connection> connections, Squares squares)
+            {
+                _connections = connections;
+                this.squares = squares;
+            }
 
-        public void CardPlayedAt(Coordinate coordinate)
-        {
-            CheckSurroundingsForNewConnections(coordinate);
-            UpdateConnectionsAt(coordinate);
-        }
+            public bool ConnectionExist(Coordinate from, Coordinate to)
+            {
+                return ConnectionExist(_connections, from, to);
+            }
 
-        private void CheckSurroundingsForNewConnections(Coordinate coordinate)
-        {
-            CreateConnectionIfNoExist(coordinate, new Coordinate(coordinate.Row + 1, coordinate.Column));
-            CreateConnectionIfNoExist(coordinate, new Coordinate(coordinate.Row - 1, coordinate.Column));
-            CreateConnectionIfNoExist(coordinate, new Coordinate(coordinate.Row, coordinate.Column + 1));
-            CreateConnectionIfNoExist(coordinate, new Coordinate(coordinate.Row, coordinate.Column - 1));
-        }
+            public static bool ConnectionExist(List<Connection> connections, Coordinate from, Coordinate to)
+            {
+                return connections.Exists(x => x.Equals(from, to));
+            }
 
-        private void UpdateConnectionsAt(Coordinate coordinate)
-        {
-            GetConnection(coordinate, new Coordinate(coordinate.Row + 1, coordinate.Column)).UpdateHappiness();
-            GetConnection(coordinate, new Coordinate(coordinate.Row - 1, coordinate.Column)).UpdateHappiness();
-            GetConnection(coordinate, new Coordinate(coordinate.Row, coordinate.Column + 1)).UpdateHappiness();
-            GetConnection(coordinate, new Coordinate(coordinate.Row, coordinate.Column - 1)).UpdateHappiness();
-        }
+            public Connection GetConnection(Coordinate from, Coordinate to)
+            {
+                Assert.IsTrue(ConnectionExist(from, to));
+                return _connections.Find(x => x.Equals(from, to));
+            }
 
-        private void CreateConnectionIfNoExist(Coordinate from, Coordinate to)
-        {
-            if(!ConnectionExist(from, to))
-                Connections.Add(new Connection(_boardSquares.GetSquare(from), _boardSquares.GetSquare(to)));
+            public void CardPlayedAt(Coordinate coordinate)
+            {
+                CheckSurroundingsForNewConnections(coordinate);
+                UpdateConnectionsAt(coordinate);
+            }
+
+            private void CheckSurroundingsForNewConnections(Coordinate coordinate)
+            {
+                foreach(var neighbour in coordinate.Neighbours())
+                {
+                    CreateConnectionIfNoExist(coordinate, neighbour);
+                }
+            }
+
+            private void UpdateConnectionsAt(Coordinate coordinate)
+            {
+                foreach(var neighbour in coordinate.Neighbours())
+                {
+                    GetConnection(coordinate, neighbour).UpdateHappiness();
+                }
+            }
+
+            private void CreateConnectionIfNoExist(Coordinate from, Coordinate to)
+            {
+                if(!ConnectionExist(from, to))
+                    _connections.Add(new Connection(squares.GetSquare(from), squares.GetSquare(to)));
+            }
+
+            public IEnumerator<Connection> GetEnumerator()
+            {
+                return _connections.GetEnumerator();
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
+            }
         }
     }
 }

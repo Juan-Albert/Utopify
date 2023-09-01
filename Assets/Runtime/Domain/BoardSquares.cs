@@ -1,48 +1,60 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.Assertions;
 
 namespace Runtime.Domain
 {
-    public class BoardSquares
+    public partial class Board
     {
-        public List<Square> Squares { get; }
-
-        public BoardSquares(List<Square> squares)
+        public class Squares : IEnumerable<Square>
         {
-            Squares = squares;
-        }
-        
-        public bool SquareExist(Coordinate coord)
-        {
-            return Squares.Exists(x => x.Coordinate.Equals(coord));
-        }
+            List<Square> _squares { get; }
 
-        public Square GetSquare(Coordinate coord)
-        {
-            var square = Squares.Find(x => x.Coordinate.Equals(coord));
-            Assert.IsNotNull(square);
+            public Squares(List<Square> squares)
+            {
+                _squares = squares;
+            }
 
-            return square;
-        }
+            public bool SquareExist(Coordinate coord)
+            {
+                return _squares.Exists(x => x.Coordinate.Equals(coord));
+            }
 
-        public void PlayCard(Card playedCard, Coordinate coordinate)
-        {
-            GetSquare(coordinate).PlayCard(playedCard);
-            CheckSurroundingsForNewSquares(coordinate);
-        }
+            public Square GetSquare(Coordinate coord)
+            {
+                Assert.IsTrue(SquareExist(coord));
+                return _squares.Find(x => x.Coordinate.Equals(coord));
+            }
 
-        private void CheckSurroundingsForNewSquares(Coordinate coordinate)
-        {
-            CreateSquareIfNoExist(new Coordinate(coordinate.Row + 1, coordinate.Column));
-            CreateSquareIfNoExist(new Coordinate(coordinate.Row - 1, coordinate.Column));
-            CreateSquareIfNoExist(new Coordinate(coordinate.Row, coordinate.Column + 1));
-            CreateSquareIfNoExist(new Coordinate(coordinate.Row, coordinate.Column - 1));
-        }
+            public void PlayCard(Card playedCard, Coordinate coordinate)
+            {
+                GetSquare(coordinate).PlayCard(playedCard);
+                CheckSurroundingsForNewSquares(coordinate);
+            }
 
-        private void CreateSquareIfNoExist(Coordinate coordinate)
-        {
-            if(!SquareExist(coordinate))
-                Squares.Add(new Square(coordinate));
+            private void CheckSurroundingsForNewSquares(Coordinate coordinate)
+            {
+                foreach(var neighbour in coordinate.Neighbours())
+                {
+                    CreateSquareIfNoExist(neighbour);
+                }
+            }
+
+            private void CreateSquareIfNoExist(Coordinate coordinate)
+            {
+                if(!SquareExist(coordinate))
+                    _squares.Add(new Square(coordinate));
+            }
+            
+            public IEnumerator<Square> GetEnumerator()
+            {
+                return _squares.GetEnumerator();
+            }
+            
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
+            }
         }
     }
 }
