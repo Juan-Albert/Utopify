@@ -4,31 +4,27 @@ namespace Runtime.Domain
 {
     public class Connection : IEquatable<Connection>
     {
-        public Square FromSquare { get; }
-        public Square ToSquare { get; }
-
+        public Coordinate From { get; }
+        public Coordinate To { get; }
+        
         //TODO autocalculate happiness on method & refactor to erase connection class
-        public int Happiness { get; private set; }
-
-        public Connection(Square fromSquare, Square toSquare)
+        public Connection(Coordinate from, Coordinate to)
         {
-            FromSquare = fromSquare;
-            ToSquare = toSquare;
-
-            Happiness = 0;
+            From = from;
+            To = to;
         }
 
         public bool Equals(Coordinate from, Coordinate to)
         {
-            return (FromSquare.Coordinate.Equals(from)&& ToSquare.Coordinate.Equals(to))
-                || (FromSquare.Coordinate.Equals(to)&& ToSquare.Coordinate.Equals(from));
+            return (From.Equals(from)&& To.Equals(to))
+                || (From.Equals(to)&& To.Equals(from));
         }
 
         public bool Equals(Connection other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Equals(other.FromSquare.Coordinate, other.ToSquare.Coordinate);
+            return Equals(other.From, other.To);
         }
 
         public override bool Equals(object obj)
@@ -41,12 +37,7 @@ namespace Runtime.Domain
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(FromSquare.Coordinate.GetHashCode(), ToSquare.Coordinate.GetHashCode());
-        }
-
-        public void UpdateHappiness()
-        {
-            Happiness = FromSquare.Compare(ToSquare);
+            return HashCode.Combine(From.GetHashCode(), To.GetHashCode());
         }
     }
 }

@@ -39,14 +39,14 @@ namespace Runtime.Domain
 
         public int GetBoardHappiness()
         {
-            return AllConnections.BoardHappiness;
+            return AllConnections.Sum(connection => AllConnections.CalculateHappinessAt(connection));
         }
 
         public void PlayCard(Card playedCard, Coordinate coordinate)
         {
             Assert.IsTrue(AllSquares.SquareExist(coordinate));
             AllSquares.PlayCard(playedCard, coordinate);
-            AllConnections.CardPlayedAt(coordinate);
+            AllConnections.CheckSurroundingsForNewConnections(coordinate);
         }
     }
 }

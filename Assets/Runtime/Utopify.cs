@@ -98,7 +98,7 @@ namespace Runtime
                 if (boardSquares.SquareExist(toCoordinate) &&
                     !Board.Connections.ConnectionExist(connections, fromSquare.Coordinate,toCoordinate))
                 {
-                    var connection = new Connection(fromSquare, boardSquares.GetSquare(toCoordinate));
+                    var connection = new Connection(fromSquare.Coordinate, toCoordinate);
                     connections.Add(connection);
                 }
             }

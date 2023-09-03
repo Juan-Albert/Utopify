@@ -45,15 +45,15 @@ namespace Runtime.View
             foreach (var connection in _board.AllConnections)
             {
                 var rowMiddlePoint =
-                    (float)(connection.FromSquare.Coordinate.Row + connection.ToSquare.Coordinate.Row) / 2;
+                    (float)(connection.From.Row + connection.To.Row) / 2;
                 var columnMiddlePoint =
-                    (float)(connection.FromSquare.Coordinate.Column + connection.ToSquare.Coordinate.Column) / 2;
+                    (float)(connection.From.Column + connection.To.Column) / 2;
                 var connectionView = Instantiate(connectionViewPrefab,
                     new Vector3(rowMiddlePoint + rowMiddlePoint * 0.4f, 
                         columnMiddlePoint + columnMiddlePoint * 0.2f,
                         0), Quaternion.identity);
                 connectionView.transform.parent = transform;
-                connectionView.Setup(connection);
+                connectionView.Setup(connection, _board.AllConnections);
                 _connectionViews.Add(connectionView);
             }
             

@@ -67,27 +67,6 @@ namespace Tests.EditMode
         }
 
         [Test]
-        public void WhenCardPlaced_ConcernedConnectionsUpdateHappiness()
-        {
-            var fromCoordinate = new Coordinate(0, 0);
-            var toCoordinate = new Coordinate(1, 0);
-            var boardSquares = new Board.Squares(new List<Square>()
-            {
-                new (fromCoordinate),
-                new (toCoordinate)
-            });
-            var boardConnections = new Board.Connections(new List<Connection>(), boardSquares);
-            var sut = new Board(boardSquares, boardConnections);
-            var card = new Card(new List<Trait>{new ("Good", new []{"Good"}, Array.Empty<string>())});
-            
-            sut.PlayCard(card, fromCoordinate);
-            sut.PlayCard(card, toCoordinate);
-            
-            Assert.AreEqual(boardConnections.GetConnection(fromCoordinate, toCoordinate).Happiness, 1);
-            
-        }
-
-        [Test]
         public void WhenCalculateBoardHappiness_ReturnCorrectValue()
         {
             var coordinate = new Coordinate(0, 0);

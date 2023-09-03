@@ -9,15 +9,13 @@ namespace Runtime.Domain
     {
         public class Connections : IEnumerable<Connection>
         {
-            private readonly Squares squares;
+            private readonly Squares _squares;
             List<Connection> _connections { get; }
-
-            public int BoardHappiness => _connections.Sum(connection => connection.Happiness);
 
             public Connections(List<Connection> connections, Squares squares)
             {
                 _connections = connections;
-                this.squares = squares;
+                _squares = squares;
             }
 
             public bool ConnectionExist(Coordinate from, Coordinate to)
@@ -35,14 +33,18 @@ namespace Runtime.Domain
                 Assert.IsTrue(ConnectionExist(from, to));
                 return _connections.Find(x => x.Equals(from, to));
             }
-
-            public void CardPlayedAt(Coordinate coordinate)
+            
+            public int CalculateHappinessAt(Coordinate from, Coordinate to)
             {
-                CheckSurroundingsForNewConnections(coordinate);
-                UpdateConnectionsAt(coordinate);
+                return _squares.GetSquare(from).Compare(_squares.GetSquare(to));
             }
 
-            private void CheckSurroundingsForNewConnections(Coordinate coordinate)
+            public int CalculateHappinessAt(Connection connection)
+            {
+                return CalculateHappinessAt(connection.From, connection.To);
+            }
+
+            public void CheckSurroundingsForNewConnections(Coordinate coordinate)
             {
                 foreach(var neighbour in coordinate.Neighbours())
                 {
@@ -50,18 +52,10 @@ namespace Runtime.Domain
                 }
             }
 
-            private void UpdateConnectionsAt(Coordinate coordinate)
-            {
-                foreach(var neighbour in coordinate.Neighbours())
-                {
-                    GetConnection(coordinate, neighbour).UpdateHappiness();
-                }
-            }
-
             private void CreateConnectionIfNoExist(Coordinate from, Coordinate to)
             {
                 if(!ConnectionExist(from, to))
-                    _connections.Add(new Connection(squares.GetSquare(from), squares.GetSquare(to)));
+                    _connections.Add(new Connection(from, to));
             }
 
             public IEnumerator<Connection> GetEnumerator()

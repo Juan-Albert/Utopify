@@ -9,10 +9,10 @@ namespace Tests.EditMode
         [Test]
         public void InvertedConnections_AreEqual()
         {
-            var fromSquare = new Square(new Coordinate(0, 0));
-            var toSquare = new Square(new Coordinate(1, 0));
-            var sut1 = new Connection(fromSquare, toSquare);
-            var sut2 = new Connection(toSquare, fromSquare);
+            var from = new Coordinate(0, 0);
+            var to = new Coordinate(1, 0);
+            var sut1 = new Connection(from, to);
+            var sut2 = new Connection(to, from);
             
             Assert.AreEqual(sut1, sut2);
         }
