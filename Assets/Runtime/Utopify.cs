@@ -7,6 +7,8 @@ using UnityEngine.Assertions;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
+//TODO Milestones
+
 namespace Runtime
 {
     public class Utopify : MonoBehaviour
@@ -55,6 +57,7 @@ namespace Runtime
             handViewInGame.Setup(hand, cardViewPrefab);
             
             Instantiate(playerViewPrefab,  Vector3.zero, Quaternion.identity).Setup(player, handViewInGame, boardView);
+            
         }
 
         private Board BuildBoard()

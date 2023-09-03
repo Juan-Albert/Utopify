@@ -7,6 +7,7 @@ using Assert = UnityEngine.Assertions.Assert;
 
 namespace Tests.EditMode
 {
+    //TODO Hacer un Builder
     public class BoardTests
     {
         [Test]

@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Runtime.View
 {
+    //TODO llevarlo a dominio
     public class PlayerView : MonoBehaviour
     {
         private bool _cardGrabbed;
