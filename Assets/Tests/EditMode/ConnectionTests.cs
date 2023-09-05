@@ -1,6 +1,6 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Runtime.Domain;
-using Assert = UnityEngine.Assertions.Assert;
 
 namespace Tests.EditMode
 {
@@ -14,7 +14,7 @@ namespace Tests.EditMode
             var sut1 = new Connection(from, to);
             var sut2 = new Connection(to, from);
             
-            Assert.AreEqual(sut1, sut2);
+            sut1.Should().Be(sut2);
         }
     }
 }

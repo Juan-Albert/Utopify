@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using FluentAssertions;
 using NUnit.Framework;
 using Runtime.Domain;
-using Assert = UnityEngine.Assertions.Assert;
 
 namespace Tests.EditMode
 {
@@ -15,7 +15,7 @@ namespace Tests.EditMode
             
             sut.AddCard(card);
             
-            Assert.IsTrue(sut.Cards.Contains(card));
+            sut.Cards.Contains(card).Should().BeTrue();
         }
 
         [Test]
@@ -26,7 +26,7 @@ namespace Tests.EditMode
             
             sut.DrawCard();
             
-            Assert.IsFalse(sut.Cards.Contains(card));
+            sut.Cards.Contains(card).Should().BeFalse();
         }
     }
 }

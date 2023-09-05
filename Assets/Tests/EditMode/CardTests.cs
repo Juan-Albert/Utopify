@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using FluentAssertions;
 using NUnit.Framework;
 using Runtime.Domain;
-using Assert = UnityEngine.Assertions.Assert;
 
 namespace Tests.EditMode
 {
@@ -22,8 +22,8 @@ namespace Tests.EditMode
             });
 
             var result = sut1.CompareTraits(sut2);
-            
-            Assert.AreEqual(1, result);
+
+            result.Should().Be(1);
         }
     }
 }

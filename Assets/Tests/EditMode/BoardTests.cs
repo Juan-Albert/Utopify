@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using FluentAssertions;
 using NUnit.Framework;
 using Runtime.Domain;
-using UnityEngine;
-using UnityEngine.TestTools;
-using Assert = UnityEngine.Assertions.Assert;
 
 namespace Tests.EditMode
 {
@@ -30,7 +28,7 @@ namespace Tests.EditMode
             
             sut.PlayCard(card, coordinate);
             
-            Assert.IsTrue(boardSquares.GetSquare(coordinate).HasCard);
+            boardSquares.GetSquare(coordinate).HasCard.Should().BeTrue();
         }
 
         [Test]
@@ -40,10 +38,10 @@ namespace Tests.EditMode
             
             sut.PlayCard(card, coordinate);
             
-            Assert.IsTrue(boardSquares.SquareExist(new Coordinate(1,0)));
-            Assert.IsTrue(boardSquares.SquareExist(new Coordinate(-1,0)));
-            Assert.IsTrue(boardSquares.SquareExist(new Coordinate(0,1)));
-            Assert.IsTrue(boardSquares.SquareExist(new Coordinate(0,-1)));
+            foreach (var neighbour in coordinate.Neighbours())
+            {
+                boardSquares.SquareExist(neighbour).Should().BeTrue();
+            }
         }
 
         [Test]
@@ -53,10 +51,10 @@ namespace Tests.EditMode
             
             sut.PlayCard(card, coordinate);
             
-            Assert.IsTrue(boardConnections.ConnectionExist(coordinate, new Coordinate(1,0)));
-            Assert.IsTrue(boardConnections.ConnectionExist(coordinate, new Coordinate(-1,0)));
-            Assert.IsTrue(boardConnections.ConnectionExist(coordinate, new Coordinate(0,1)));
-            Assert.IsTrue(boardConnections.ConnectionExist(coordinate, new Coordinate(0,-1)));
+            foreach (var neighbour in coordinate.Neighbours())
+            {
+                boardConnections.ConnectionExist(coordinate, neighbour).Should().BeTrue();
+            }
         }
 
         [Test]
@@ -68,9 +66,8 @@ namespace Tests.EditMode
             sut.PlayCard(card, coordinate);
             sut.PlayCard(card, new Coordinate(coordinate.Row + 1, coordinate.Column));
             sut.PlayCard(card, new Coordinate(coordinate.Row - 1, coordinate.Column));
-            var result = sut.GetBoardHappiness();
             
-            Assert.AreEqual(2, result);
+            sut.GetBoardHappiness().Should().Be(2);
         }
     }
 }
