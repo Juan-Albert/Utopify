@@ -48,7 +48,13 @@ namespace Runtime
 
             var deck = new Deck(cards);
             var hand = new Hand(2, deck, new List<Card>());
-            var player = new Player(hand, board);
+            var player = new Player(hand, board, new List<Milestone>()
+            {
+                new (2, deck, cards),
+                new (5, deck, cards),
+                new (10, deck, cards)
+                
+            });
 
             var boardView = Instantiate(boardViewPrefab, Vector3.zero, Quaternion.identity);
             boardView.Setup(board);
