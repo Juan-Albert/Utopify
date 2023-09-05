@@ -5,7 +5,7 @@ using static Runtime.Domain.Trait;
 
 namespace Tests.EditMode
 {
-    public class NewTraitTests
+    public class TraitTests
     {
         [Test]
         public void Relationship()

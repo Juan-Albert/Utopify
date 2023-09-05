@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine.Assertions;
 
 namespace Runtime.Domain
 {
@@ -8,7 +9,6 @@ namespace Runtime.Domain
         private readonly List<Card> _cards;
 
         public bool Completed { get; private set; }
-
         public int Goal { get; }
 
         public Milestone(int goal, Deck deck, List<Card> cards)
@@ -21,6 +21,7 @@ namespace Runtime.Domain
 
         public void Complete()
         {
+            Assert.IsFalse(Completed);
             Completed = true;
             _deck.ShuffleDeck(_cards);
         }

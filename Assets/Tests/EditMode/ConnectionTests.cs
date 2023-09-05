@@ -7,7 +7,7 @@ namespace Tests.EditMode
     public class ConnectionTests
     {
         [Test]
-        public void InvertedConnections_AreEqual()
+        public void ConnectionsAre_Commutative()
         {
             var from = new Coordinate(0, 0);
             var to = new Coordinate(1, 0);

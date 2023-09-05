@@ -7,8 +7,6 @@ using UnityEngine.Assertions;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-//TODO Milestones
-
 namespace Runtime
 {
     public class Utopify : MonoBehaviour
