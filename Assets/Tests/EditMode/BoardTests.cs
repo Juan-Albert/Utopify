@@ -8,7 +8,10 @@ namespace Tests.EditMode
 {
     public class BoardTests
     {
-        private void Initialize(out Coordinate coordinate, out Board.Squares boardSquares, out Board.Connections boardConnections,
+        Coordinate coordinate;
+        
+        [SetUp]
+        private void Arrange( out Board.Squares boardSquares, out Board.Connections boardConnections,
             out Board sut, out Card card)
         {
             coordinate = new Coordinate(0, 0);
@@ -24,7 +27,7 @@ namespace Tests.EditMode
         [Test]
         public void WhenCardPlayed_SquareContainCard()
         {
-            Initialize(out var coordinate, out var boardSquares, out var boardConnections,out var sut, out var card);
+            Arrange(out var boardSquares, out var boardConnections,out var sut, out var card);
             
             sut.PlayCard(card, coordinate);
             
@@ -34,7 +37,7 @@ namespace Tests.EditMode
         [Test]
         public void WhenCardPlayed_NeighbourSquaresCreated()
         {
-            Initialize(out var coordinate, out var boardSquares, out var boardConnections,out var sut, out var card);
+            Arrange(out var boardSquares, out var boardConnections,out var sut, out var card);
             
             sut.PlayCard(card, coordinate);
             
@@ -47,7 +50,7 @@ namespace Tests.EditMode
         [Test]
         public void WhenCardPlayed_NeighboursAreConnected()
         {
-            Initialize(out var coordinate, out var boardSquares, out var boardConnections,out var sut, out var card);
+            Arrange(out var boardSquares, out var boardConnections,out var sut, out var card);
             
             sut.PlayCard(card, coordinate);
             
@@ -60,7 +63,7 @@ namespace Tests.EditMode
         [Test]
         public void WhenCalculateBoardHappiness_ReturnCorrectValue()
         {
-            Initialize(out var coordinate, out var boardSquares, out var boardConnections,out var sut, out var card);
+            Arrange(out var boardSquares, out var boardConnections,out var sut, out var card);
             card = new Card(new List<Trait>{new ("Good", new []{"Good"}, Array.Empty<string>())});
             
             sut.PlayCard(card, coordinate);

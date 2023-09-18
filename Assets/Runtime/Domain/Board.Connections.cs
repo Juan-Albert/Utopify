@@ -7,6 +7,7 @@ namespace Runtime.Domain
 {
     public partial class Board
     {
+        //todo borrar connections y calcular el mapa como conjunto de coordenadas
         public class Connections : IEnumerable<Connection>
         {
             private readonly Squares _squares;
