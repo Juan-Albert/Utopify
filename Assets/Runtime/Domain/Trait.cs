@@ -7,6 +7,7 @@ namespace Runtime.Domain
     {
         public enum Relationship
         {
+            Neutral,
             Friend,
             Enemy
         }
@@ -15,7 +16,7 @@ namespace Runtime.Domain
         string[] friendsIds;
         string[] enemiesIds;
 
-        public Trait(string id, IEnumerable<string> friends = null, IEnumerable<string> enemies = null)
+        public Trait(string id, IEnumerable<string> friends, IEnumerable<string> enemies)
         {
             this.id = id;
             friendsIds = friends?.ToArray();
@@ -24,11 +25,11 @@ namespace Runtime.Domain
 
         public Relationship RelationWith(Trait friend)
         {
-            if(friendsIds?.Contains(friend.id) ?? false)
+            if (friendsIds?.Contains(friend.id) ?? false)
                 return Relationship.Friend;
-            if(enemiesIds?.Contains(friend.id) ?? false)
+            if (enemiesIds?.Contains(friend.id) ?? false)
                 return Relationship.Enemy;
-            return Relationship.Friend;
+            return Relationship.Neutral;
         }
     }
 }
