@@ -36,5 +36,40 @@ namespace Tests.EditMode
                 .Happiness
                 .Should().Be(0);
         }
+        
+        [Test]
+        public void HappinessIsZero_WhenNoNeighbours()
+        {
+            Board.Empty
+                .PlaceAt((0, 0), Card.WithTraits(Some))
+                .PlaceAt((5465, 4224), Card.WithTraits(Some))
+                .Happiness
+                .Should().Be(0);
+        }
+
+        [Test]
+        public void Happiness_IsSumOfIndividualHappiness()
+        {
+            var card = Card.WithTraits(Some);
+            Board.Empty
+                .PlaceAt((0, 0), card)
+                .PlaceAt((1, 0), card)
+                .Happiness
+                .Should().Be(0);
+
+
+            Board.Empty
+                .PlaceAt((0, 0), Card.WithTraits(Some))
+                .PlaceAt((1, 0), Card.WithTraits(FriendOfSome))
+                .Happiness
+                .Should().Be(0);
+        }
+        
+        [Test]
+        public void NeighboursCoords()
+        {
+            (0, 0).IsNeighbourOf((0, 1)).Should().BeTrue();
+            (0, 0).IsNeighbourOf((0, 43)).Should().BeFalse();
+        }
     }
 }
