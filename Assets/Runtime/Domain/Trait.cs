@@ -13,11 +13,16 @@ namespace Runtime.Domain
         }
 
         readonly string id;
-        string[] friendsIds;
-        string[] enemiesIds;
+        readonly string[] friendsIds;
+        readonly string[] enemiesIds;
 
         public Trait(string id, IEnumerable<string> friends, IEnumerable<string> enemies)
         {
+            if(friends.Count() != friends.Distinct().Count())
+                throw new System.NotSupportedException();
+            if(enemies.Count() != enemies.Distinct().Count())
+                throw new System.NotSupportedException();
+            
             this.id = id;
             friendsIds = friends?.ToArray();
             enemiesIds = enemies?.ToArray();
