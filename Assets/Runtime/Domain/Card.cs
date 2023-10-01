@@ -8,7 +8,7 @@ namespace Runtime.Domain
     {
         readonly Trait[] traits;
 
-        public Card(IEnumerable<Trait> traits)
+        Card(IEnumerable<Trait> traits)
         {
             if(traits.Count() != traits.Distinct().Count())
                 throw new NotSupportedException();
@@ -17,6 +17,8 @@ namespace Runtime.Domain
 
             this.traits = traits.ToArray();
         }
+
+        public static Card WithTraits(params Trait[] traits) => new(traits);
 
         public int PreviewHappinessWith(Card other)
         {

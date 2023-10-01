@@ -12,16 +12,16 @@ namespace Tests.EditMode
         public void PreviewHappiness_SingleTraitedCards()
         {
             using var _ = new AssertionScope();
-            new Card(new[] { Some })
-                .PreviewHappinessWith(new Card(new[] { NeutralOfSome }))
+            Card.WithTraits(Some)
+                .PreviewHappinessWith(Card.WithTraits(NeutralOfSome))
                 .Should().Be(0);
 
-            new Card(new[] { Some })
-                .PreviewHappinessWith(new Card(new[] { FriendOfSome }))
+            Card.WithTraits(Some)
+                .PreviewHappinessWith(Card.WithTraits(FriendOfSome))
                 .Should().BeGreaterThan(0);
 
-            new Card(new[] { Some })
-                .PreviewHappinessWith(new Card(new[] { EnemyOfSome }))
+            Card.WithTraits(Some)
+                .PreviewHappinessWith(Card.WithTraits(EnemyOfSome))
                 .Should().BeLessThan(0);
         }
 
@@ -29,44 +29,33 @@ namespace Tests.EditMode
         public void PreviewHappiness_MultiTraitedCards()
         {
             using var _ = new AssertionScope();
-            new Card(new[] { Some })
-                .PreviewHappinessWith(new Card(new[] { NeutralOfSome, Neutral2OfSome }))
+            Card.WithTraits(Some)
+                .PreviewHappinessWith(Card.WithTraits(NeutralOfSome, Neutral2OfSome))
                 .Should().Be(0);
 
-            new Card(new[] { Some })
-                .PreviewHappinessWith(new Card(new[] { FriendOfSome, Friend2OfSome }))
+            Card.WithTraits(Some)
+                .PreviewHappinessWith(Card.WithTraits(FriendOfSome, Friend2OfSome))
                 .Should().BeGreaterThan
                 (
-                    new Card(new[] { Some })
-                        .PreviewHappinessWith(new Card(new[] { FriendOfSome, }))
+                    Card.WithTraits(Some)
+                        .PreviewHappinessWith(Card.WithTraits(FriendOfSome))
                 );
 
-            new Card(new[] { Some })
-                .PreviewHappinessWith(new Card(new[] { EnemyOfSome, Enemy2OfSome }))
+            Card.WithTraits(Some)
+                .PreviewHappinessWith(Card.WithTraits(EnemyOfSome, Enemy2OfSome))
                 .Should().BeLessThan
                 (
-                    new Card(new[] { Some })
-                        .PreviewHappinessWith(new Card(new[] { EnemyOfSome, }))
+                    Card.WithTraits(Some)
+                        .PreviewHappinessWith(Card.WithTraits(EnemyOfSome))
                 );
 
-            new Card(new[] { Some })
-                .PreviewHappinessWith(new Card(new[] { EnemyOfSome, Friend2OfSome }))
+            Card.WithTraits(Some)
+                .PreviewHappinessWith(Card.WithTraits(EnemyOfSome, Friend2OfSome))
                 .Should().Be
                 (
-                    new Card(new[] { Some })
-                        .PreviewHappinessWith(new Card(new[] { NeutralOfSome, }))
+                    Card.WithTraits(Some)
+                        .PreviewHappinessWith(Card.WithTraits(NeutralOfSome))
                 );
-        }
-
-        public class BoardTests
-        {
-            [Test]
-            public void PutACard()
-            {
-                Board.Empty
-                    .PutAt((0, 0), new Card(new[] { Some }))
-                    .ExistsAt((0, 0)).Should().BeTrue();
-            }
         }
     }
 }

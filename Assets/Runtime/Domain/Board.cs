@@ -10,9 +10,13 @@ namespace Runtime.Domain
         Board(IReadOnlyDictionary<(int,int), Card> tiles) => this.tiles = tiles;
 
         public static Board Empty => new(new Dictionary<(int, int), Card>());
+        public int Happiness { get; set; }
 
-        public Board PutAt((int, int) where, Card card)
+        public Board PlaceAt((int, int) where, Card card)
         {
+            if(ExistsAt(where))
+                throw new System.NotSupportedException();
+            
             var result = tiles.Concat(new[] { new KeyValuePair<(int, int), Card>(where, card) });
             return new Board(result.ToDictionary(kvp => kvp.Key, kvp => kvp.Value));
         }
