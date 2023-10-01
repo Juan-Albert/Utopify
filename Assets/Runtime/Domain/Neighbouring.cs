@@ -5,7 +5,7 @@ namespace Runtime.Domain
 {
     public static class Neighbouring
     {
-        public static bool IsNeighbourOf(this (int, int) coordinate, (int, int) other)
+        public static bool AreNeighbours(this (int, int) coordinate, (int, int) other)
         {
             return coordinate.NeighboursOf().Contains(other);
         }

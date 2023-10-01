@@ -25,5 +25,15 @@ namespace Runtime.Domain
         {
             return tiles.ContainsKey(coordinate);
         }
+
+        public int HappinessBetween((int, int) one, (int, int) other)
+        {
+            if (!ExistsAt(one) || !ExistsAt(other))
+                throw new System.NotSupportedException();
+            if(!one.AreNeighbours(other))
+                throw new System.NotSupportedException();
+            
+            return tiles[one].PreviewHappinessWith(tiles[other]);
+        }
     }
 }

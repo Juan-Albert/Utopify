@@ -68,8 +68,20 @@ namespace Tests.EditMode
         [Test]
         public void NeighboursCoords()
         {
-            (0, 0).IsNeighbourOf((0, 1)).Should().BeTrue();
-            (0, 0).IsNeighbourOf((0, 43)).Should().BeFalse();
+            (0, 0).AreNeighbours((0, 1)).Should().BeTrue();
+            (0, 0).AreNeighbours((0, 43)).Should().BeFalse();
+        }
+        
+        [Test]
+        public void Happiness_Between_TwoNeighbourTiles()
+        {
+            Board.Empty.PlaceAt((0, 0), Card.WithTraits(Some)).PlaceAt((0, 1), Card.WithTraits(Some))
+                .HappinessBetween((0, 0), (0, 1))
+                .Should().Be(0);
+            
+            Board.Empty.PlaceAt((0, 0), Card.WithTraits(Some)).PlaceAt((0, 1), Card.WithTraits(FriendOfSome))
+                .HappinessBetween((0, 0), (0, 1))
+                .Should().BeGreaterThan(0);
         }
     }
 }
