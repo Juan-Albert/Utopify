@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using NUnit.Framework;
 using FluentAssertions;
+using Runtime.Domain;
+using static Runtime.Domain.Trait;
 
 namespace Tests.EditMode
 {
@@ -25,32 +25,5 @@ namespace Tests.EditMode
             
             sut.RelationWith(enemy).Should().Be(Relationship.Enemy);
         }
-    }
-
-    public record Trait
-    {
-        readonly string id;
-        string[] friendsIds;
-        string[] enemiesIds;
-
-        public Trait(string id, IEnumerable<string> friends = null, IEnumerable<string> enemies = null)
-        {
-            this.id = id;
-            friendsIds = friends?.ToArray();
-            enemiesIds = enemies?.ToArray();
-        }
-
-        public Relationship RelationWith(Trait friend)
-        {
-            if (friendsIds?.Contains(friend.id) ?? false)
-                return Relationship.Friend;
-            if (enemiesIds?.Contains(friend.id) ?? false)
-                return Relationship.Enemy;
-            return Relationship.Friend;
-        }
-    }
-
-    public enum Relationship { Friend,
-        Enemy
     }
 }
