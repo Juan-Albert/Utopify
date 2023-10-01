@@ -20,23 +20,7 @@ namespace Runtime.Domain
 
         public int PreviewHappinessWith(Card other)
         {
-            return traits.Sum(t => WithJHGyhyh(t, other.traits));
-        }
-
-        static int WithJHGyhyh(Trait myTrait, IEnumerable<Trait> others)
-        {
-            return others.Select(other => KHGSAJHDFG(myTrait, other)).Sum();
-        }
-
-        static int KHGSAJHDFG(Trait myTrait, Trait otherTrait)
-        {
-            return myTrait.RelationWith(otherTrait) switch
-            {
-                Trait.Relationship.Friend => 1,
-                Trait.Relationship.Enemy => -1,
-                Trait.Relationship.Neutral => 0,
-                _ => throw new NotSupportedException()
-            };
+            return traits.Sum(t => other.traits.Sum(o => t.RelationWith(o).ToPreviewHappiness()));
         }
     }
 }
