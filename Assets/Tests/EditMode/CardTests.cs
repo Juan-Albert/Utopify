@@ -48,14 +48,25 @@ namespace Tests.EditMode
                     new Card(new[] { Some })
                         .PreviewHappinessWith(new Card(new[] { EnemyOfSome, }))
                 );
-            
-            new Card(new[]{Some})
-                .PreviewHappinessWith(new Card(new[] { EnemyOfSome, Friend2OfSome}))
+
+            new Card(new[] { Some })
+                .PreviewHappinessWith(new Card(new[] { EnemyOfSome, Friend2OfSome }))
                 .Should().Be
                 (
                     new Card(new[] { Some })
                         .PreviewHappinessWith(new Card(new[] { NeutralOfSome, }))
                 );
+        }
+
+        public class BoardTests
+        {
+            [Test]
+            public void PutACard()
+            {
+                Board.Empty
+                    .PutAt((0, 0), new Card(new[] { Some }))
+                    .ExistsAt((0, 0)).Should().BeTrue();
+            }
         }
     }
 }
