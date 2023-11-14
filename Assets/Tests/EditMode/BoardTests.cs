@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Collections.Generic;
+using FluentAssertions;
 using NUnit.Framework;
 using Runtime.Domain;
 using static Tests.EditMode.TestFixture;
@@ -32,11 +33,11 @@ namespace Tests.EditMode
         [Test]
         public void HappinessIsZero_WhenOneCardPlaced()
         {
-            Board.Empty.PlaceAt((0,0), Card.WithTraits(Some))
+            Board.Empty.PlaceAt((0, 0), Card.WithTraits(Some))
                 .Happiness
                 .Should().Be(0);
         }
-        
+
         [Test]
         public void HappinessIsZero_WhenNoNeighbours()
         {
@@ -74,21 +75,21 @@ namespace Tests.EditMode
                 .Should().Be(Card.WithTraits(FriendOfItself)
                     .PreviewHappinessWith(Card.WithTraits(FriendOfItself)) * 4);
         }
-        
+
         [Test]
         public void NeighboursCoords()
         {
             (0, 0).AreNeighbours((0, 1)).Should().BeTrue();
             (0, 0).AreNeighbours((0, 43)).Should().BeFalse();
         }
-        
+
         [Test]
         public void Happiness_Between_TwoNeighbourTiles()
         {
             Board.Empty.PlaceAt((0, 0), Card.WithTraits(Some)).PlaceAt((0, 1), Card.WithTraits(Some))
                 .HappinessBetween((0, 0), (0, 1))
                 .Should().Be(0);
-            
+
             Board.Empty.PlaceAt((0, 0), Card.WithTraits(Some)).PlaceAt((0, 1), Card.WithTraits(FriendOfSome))
                 .HappinessBetween((0, 0), (0, 1))
                 .Should().BeGreaterThan(0);
@@ -103,7 +104,7 @@ namespace Tests.EditMode
                 .PlaceAt((0, -1), Card.WithTraits(FriendOfSome))
                 .PlaceAt((1, 0), Card.WithTraits(FriendOfSome))
                 .PlaceAt((-1, 0), Card.WithTraits(FriendOfSome))
-                .HappinessOf((0,0))
+                .HappinessOf((0, 0))
                 .Should().Be(Card.WithTraits(Some)
                     .PreviewHappinessWith(Card.WithTraits(FriendOfSome)) * 4);
         }
@@ -115,7 +116,7 @@ namespace Tests.EditMode
                 .PlaceAt((0, 0), Card.WithTraits(Some))
                 .PlaceAt((0, 1), Card.WithTraits(FriendOfSome))
                 .PlaceAt((0, -1), Card.WithTraits(FriendOfSome))
-                .HappinessOf((0,0))
+                .HappinessOf((0, 0))
                 .Should().Be(Card.WithTraits(Some)
                     .PreviewHappinessWith(Card.WithTraits(FriendOfSome)) * 2);
         }
@@ -123,10 +124,7 @@ namespace Tests.EditMode
         [Test]
         public void ExcludeNeighbours()
         {
-            Board.Empty
-                .PlaceAt((0, 0), Card.WithTraits(Some))
-                .PlaceAt((0, 1), Card.WithTraits(FriendOfSome))
-                .ExcludeNeighbours().Should().HaveCount(1);
+            new List<(int, int)> { (0, 0), (0, 1) }.ExcludeNeighbours().Should().HaveCount(1);
         }
     }
 }
