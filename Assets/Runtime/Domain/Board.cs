@@ -10,7 +10,7 @@ namespace Runtime.Domain
         Board(IReadOnlyDictionary<(int, int), Card> tiles) => this.tiles = tiles;
 
         public static Board Empty => new(new Dictionary<(int, int), Card>());
-        public int Happiness { get; set; }
+        public int Happiness => tiles.Keys.Sum(HappinessOf);
 
         public Board PlaceAt((int, int) where, Card card)
         {

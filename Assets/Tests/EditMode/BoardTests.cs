@@ -62,7 +62,8 @@ namespace Tests.EditMode
                 .PlaceAt((0, 0), Card.WithTraits(Some))
                 .PlaceAt((1, 0), Card.WithTraits(FriendOfSome))
                 .Happiness
-                .Should().Be(0);
+                .Should().Be(Card.WithTraits(Some)
+                    .PreviewHappinessWith(Card.WithTraits(FriendOfSome)));
         }
         
         [Test]
