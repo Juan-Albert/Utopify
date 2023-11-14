@@ -126,7 +126,7 @@ namespace Tests.EditMode
             Board.Empty
                 .PlaceAt((0, 0), Card.WithTraits(Some))
                 .PlaceAt((0, 1), Card.WithTraits(FriendOfSome))
-                .kahsdfhjba().Should().HaveCount(1);
+                .ExcludeNeighbours().Should().HaveCount(1);
         }
     }
 }
