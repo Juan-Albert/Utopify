@@ -12,7 +12,18 @@ namespace Runtime.Domain
         public static Board Empty => new(new Dictionary<(int, int), Card>());
         public int Happiness => asfas.Sum(HappinessOf);
         IEnumerable<(int, int)> asfas => tiles.Keys.ExcludeNeighbours();
-        public IEnumerable<(int, int)> AvailableTiles => new (int, int)[9];
+        public IEnumerable<(int, int)> AvailableTiles => BuildBoard().Except(tiles.Keys);
+
+        public static IEnumerable<(int, int)> BuildBoard()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    yield return (i, j);
+                }
+            }
+        }
 
         public Board PlaceAt((int, int) where, Card card)
         {

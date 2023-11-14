@@ -133,5 +133,13 @@ namespace Tests.EditMode
             Board.Empty.AvailableTiles.Should().HaveCount(9);
         }
         
+        [Test]
+        public void ExcludeOccupiedTiles_FromAvailables()
+        {
+            Board.Empty
+                .PlaceAt((0, 0), Card.WithTraits(Some))
+                .AvailableTiles.Should().HaveCount(8);
+        }
+        
     }
 }
