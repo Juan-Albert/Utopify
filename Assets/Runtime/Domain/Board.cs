@@ -36,9 +36,16 @@ namespace Runtime.Domain
             return tiles[one].PreviewHappinessWith(tiles[other]);
         }
 
-        public object HappinessOf((int, int) valueTuple)
+        public int HappinessOf((int, int) origin)
         {
-            throw new System.NotImplementedException();
+            var result = 0;
+            
+            foreach (var asdfsa in origin.NeighboursOf())
+            {
+                result += HappinessBetween(origin, asdfsa);
+            }
+
+            return result;
         }
     }
 }

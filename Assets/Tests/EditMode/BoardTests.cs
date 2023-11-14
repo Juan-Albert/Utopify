@@ -88,11 +88,11 @@ namespace Tests.EditMode
         public void HappinessInATile_BasedInTheirNeighbours()
         {
             Board.Empty
-                .PlaceAt((0, 0), Card.WithTraits(FriendOfSome))
-                .PlaceAt((0, 1), Card.WithTraits(Some))
-                .PlaceAt((0, -1), Card.WithTraits(Some))
-                .PlaceAt((1, 0), Card.WithTraits(Some))
-                .PlaceAt((-1, 0), Card.WithTraits(Some))
+                .PlaceAt((0, 0), Card.WithTraits(Some))
+                .PlaceAt((0, 1), Card.WithTraits(FriendOfSome))
+                .PlaceAt((0, -1), Card.WithTraits(FriendOfSome))
+                .PlaceAt((1, 0), Card.WithTraits(FriendOfSome))
+                .PlaceAt((-1, 0), Card.WithTraits(FriendOfSome))
                 .HappinessOf((0,0))
                 .Should().Be(Card.WithTraits(Some)
                     .PreviewHappinessWith(Card.WithTraits(FriendOfSome)) * 4);
