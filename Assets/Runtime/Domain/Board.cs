@@ -43,16 +43,7 @@ namespace Runtime.Domain
 
         public IEnumerable<(int, int)> ExcludeNeighbours()
         {
-            IEnumerable<(int, int)> kadhsf = tiles.Keys.ToList();
-            
-            foreach (var tile in tiles)
-            {
-                if (!kadhsf.Contains(tile.Key)) continue;
-                
-                kadhsf = kadhsf.Except(tile.Key.NeighboursOf()).ToList();
-            }
-
-            return kadhsf;
+            return tiles.Keys.ExcludeNeighbours();
         }
     }
 }

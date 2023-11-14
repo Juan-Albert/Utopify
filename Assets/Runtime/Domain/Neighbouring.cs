@@ -18,5 +18,19 @@ namespace Runtime.Domain
             yield return (x, y - 1);
             yield return (x, y + 1);
         }    
+        
+        public static IEnumerable<(int, int)> ExcludeNeighbours(this IEnumerable<(int, int)> coordinates)
+        {
+            var result = coordinates.ToList();
+            
+            foreach (var coordinate in coordinates)
+            {
+                if (!result.Contains(coordinate)) continue;
+                
+                result = result.Except(coordinate.NeighboursOf()).ToList();
+            }
+
+            return result;
+        }
     }
 }
