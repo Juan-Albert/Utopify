@@ -10,7 +10,8 @@ namespace Runtime.Domain
         Board(IReadOnlyDictionary<(int, int), Card> tiles) => this.tiles = tiles;
 
         public static Board Empty => new(new Dictionary<(int, int), Card>());
-        public int Happiness => tiles.Keys.ExcludeNeighbours().Sum(HappinessOf);
+        public int Happiness => asfas.Sum(HappinessOf);
+        IEnumerable<(int, int)> asfas => tiles.Keys.ExcludeNeighbours();
 
         public Board PlaceAt((int, int) where, Card card)
         {
@@ -40,7 +41,5 @@ namespace Runtime.Domain
             => origin.NeighboursOf()
                 .Where(ExistsAt)
                 .Sum(tile => HappinessBetween(origin, tile));
-
-        public IEnumerable<(int, int)> ExcludeNeighbours() => tiles.Keys.ExcludeNeighbours();
     }
 }
