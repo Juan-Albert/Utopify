@@ -7,16 +7,16 @@ namespace Runtime.Domain
     {
         readonly IReadOnlyDictionary<(int, int), Card> tiles;
 
-        Board(IReadOnlyDictionary<(int,int), Card> tiles) => this.tiles = tiles;
+        Board(IReadOnlyDictionary<(int, int), Card> tiles) => this.tiles = tiles;
 
         public static Board Empty => new(new Dictionary<(int, int), Card>());
         public int Happiness { get; set; }
 
         public Board PlaceAt((int, int) where, Card card)
         {
-            if(ExistsAt(where))
+            if (ExistsAt(where))
                 throw new System.NotSupportedException();
-            
+
             var result = tiles.Concat(new[] { new KeyValuePair<(int, int), Card>(where, card) });
             return new Board(result.ToDictionary(kvp => kvp.Key, kvp => kvp.Value));
         }
@@ -30,22 +30,15 @@ namespace Runtime.Domain
         {
             if (!ExistsAt(one) || !ExistsAt(other))
                 throw new System.NotSupportedException("Ambos Tiles tienen que tener cartas");
-            if(!one.AreNeighbours(other))
+            if (!one.AreNeighbours(other))
                 throw new System.NotSupportedException("Ambas Tiles tienen que ser vecinas");
-            
+
             return tiles[one].PreviewHappinessWith(tiles[other]);
         }
 
         public int HappinessOf((int, int) origin)
-        {
-            var result = 0;
-            
-            foreach (var asdfsa in origin.NeighboursOf())
-            {
-                result += HappinessBetween(origin, asdfsa);
-            }
-
-            return result;
-        }
+            => origin.NeighboursOf()
+                .Where(ExistsAt)
+                .Sum(tile => HappinessBetween(origin, tile));
     }
 }
