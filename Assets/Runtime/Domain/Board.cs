@@ -29,9 +29,9 @@ namespace Runtime.Domain
         public int HappinessBetween((int, int) one, (int, int) other)
         {
             if (!ExistsAt(one) || !ExistsAt(other))
-                throw new System.NotSupportedException();
+                throw new System.NotSupportedException("Ambos Tiles tienen que tener cartas");
             if(!one.AreNeighbours(other))
-                throw new System.NotSupportedException();
+                throw new System.NotSupportedException("Ambas Tiles tienen que ser vecinas");
             
             return tiles[one].PreviewHappinessWith(tiles[other]);
         }

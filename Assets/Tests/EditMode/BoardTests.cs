@@ -97,5 +97,17 @@ namespace Tests.EditMode
                 .Should().Be(Card.WithTraits(Some)
                     .PreviewHappinessWith(Card.WithTraits(FriendOfSome)) * 4);
         }
+
+        [Test]
+        public void HappinessInATile_WithTwoNeighbours()
+        {
+            Board.Empty
+                .PlaceAt((0, 0), Card.WithTraits(Some))
+                .PlaceAt((0, 1), Card.WithTraits(FriendOfSome))
+                .PlaceAt((0, -1), Card.WithTraits(FriendOfSome))
+                .HappinessOf((0,0))
+                .Should().Be(Card.WithTraits(Some)
+                    .PreviewHappinessWith(Card.WithTraits(FriendOfSome)) * 2);
+        }
     }
 }
