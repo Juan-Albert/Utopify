@@ -35,5 +35,10 @@ namespace Runtime.Domain
             
             return tiles[one].PreviewHappinessWith(tiles[other]);
         }
+
+        public object HappinessOf((int, int) valueTuple)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

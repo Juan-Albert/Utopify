@@ -16,7 +16,7 @@ namespace Tests.EditMode
         }
 
         [Test]
-        public void RequestCardAtEmptyTile()
+        public void CardNotExist_AtEmptyTile()
         {
             Board.Empty
                 .ExistsAt((0, 0))
@@ -30,7 +30,7 @@ namespace Tests.EditMode
         }
 
         [Test]
-        public void HappinessIsZeroWhenOneCardPlaced()
+        public void HappinessIsZero_WhenOneCardPlaced()
         {
             Board.Empty.PlaceAt((0,0), Card.WithTraits(Some))
                 .Happiness
@@ -82,6 +82,20 @@ namespace Tests.EditMode
             Board.Empty.PlaceAt((0, 0), Card.WithTraits(Some)).PlaceAt((0, 1), Card.WithTraits(FriendOfSome))
                 .HappinessBetween((0, 0), (0, 1))
                 .Should().BeGreaterThan(0);
+        }
+
+        [Test]
+        public void HappinessInATile_BasedInTheirNeighbours()
+        {
+            Board.Empty
+                .PlaceAt((0, 0), Card.WithTraits(FriendOfSome))
+                .PlaceAt((0, 1), Card.WithTraits(Some))
+                .PlaceAt((0, -1), Card.WithTraits(Some))
+                .PlaceAt((1, 0), Card.WithTraits(Some))
+                .PlaceAt((-1, 0), Card.WithTraits(Some))
+                .HappinessOf((0,0))
+                .Should().Be(Card.WithTraits(Some)
+                    .PreviewHappinessWith(Card.WithTraits(FriendOfSome)) * 4);
         }
     }
 }
