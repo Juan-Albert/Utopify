@@ -12,6 +12,7 @@ namespace Runtime.Domain
         public static Board Empty => new(new Dictionary<(int, int), Card>());
         public int Happiness => asfas.Sum(HappinessOf);
         IEnumerable<(int, int)> asfas => tiles.Keys.ExcludeNeighbours();
+        public IEnumerable<(int, int)> AvailableTiles => new (int, int)[9];
 
         public Board PlaceAt((int, int) where, Card card)
         {

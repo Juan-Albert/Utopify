@@ -126,5 +126,12 @@ namespace Tests.EditMode
         {
             new List<(int, int)> { (0, 0), (0, 1) }.ExcludeNeighbours().Should().HaveCount(1);
         }
+
+        [Test]
+        public void AvailableTiles_AreNine_ByDefault()
+        {
+            Board.Empty.AvailableTiles.Should().HaveCount(9);
+        }
+        
     }
 }
