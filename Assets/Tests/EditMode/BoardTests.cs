@@ -119,5 +119,14 @@ namespace Tests.EditMode
                 .Should().Be(Card.WithTraits(Some)
                     .PreviewHappinessWith(Card.WithTraits(FriendOfSome)) * 2);
         }
+
+        [Test]
+        public void ExcludeNeighbours()
+        {
+            Board.Empty
+                .PlaceAt((0, 0), Card.WithTraits(Some))
+                .PlaceAt((0, 1), Card.WithTraits(FriendOfSome))
+                .kahsdfhjba().Should().HaveCount(1);
+        }
     }
 }

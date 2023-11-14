@@ -40,5 +40,16 @@ namespace Runtime.Domain
             => origin.NeighboursOf()
                 .Where(ExistsAt)
                 .Sum(tile => HappinessBetween(origin, tile));
+
+        public IEnumerable<(int, int)> kahsdfhjba()
+        {
+            IEnumerable<(int, int)> kadhsf = tiles.Keys.ToList();
+            foreach (var tile in tiles)
+            {
+                kadhsf = kadhsf.Except(tile.Key.NeighboursOf()).ToList();
+            }
+
+            return kadhsf;
+        }
     }
 }
