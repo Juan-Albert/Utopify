@@ -64,6 +64,15 @@ namespace Tests.EditMode
                 .Happiness
                 .Should().Be(Card.WithTraits(Some)
                     .PreviewHappinessWith(Card.WithTraits(FriendOfSome)));
+
+            Board.Empty
+                .PlaceAt((0, 0), Card.WithTraits(FriendOfItself))
+                .PlaceAt((1, 0), Card.WithTraits(FriendOfItself))
+                .PlaceAt((0, 1), Card.WithTraits(FriendOfItself))
+                .PlaceAt((1, 1), Card.WithTraits(FriendOfItself))
+                .Happiness
+                .Should().Be(Card.WithTraits(FriendOfItself)
+                    .PreviewHappinessWith(Card.WithTraits(FriendOfItself)) * 4);
         }
         
         [Test]
