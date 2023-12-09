@@ -149,8 +149,14 @@ namespace Tests.EditMode
                 .AvailableTiles.Should().Contain((-1,0))
                 .And.Contain((0,-1));
         }
-        
-        
+
+        [Test]
+        public void AvailableTiles_ContainsNoDuplication()
+        {
+            Board.Empty
+                .PlaceAt((0, 0), Card.WithTraits(Some))
+                .AvailableTiles.Should().OnlyHaveUniqueItems();
+        }
         
     }
 }
