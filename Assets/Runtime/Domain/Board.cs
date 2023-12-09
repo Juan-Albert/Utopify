@@ -11,10 +11,10 @@ namespace Runtime.Domain
 
         public static Board Empty => new(new Dictionary<(int, int), Card>());
         public int Happiness => IsolatedCards.Sum(HappinessOf);
-        IEnumerable<(int, int)> IsolatedCards => OccupiedTiles.ExcludeNeighbours();
+        IEnumerable<(int, int)> IsolatedCards => OccupiedTiles.WithoutNeighbours();
         private IEnumerable<(int, int)> OccupiedTiles => tilesWithCard.Keys;
         public IEnumerable<(int, int)> AvailableTiles => BuildBoard().Except(OccupiedTiles).Concat(NeighboursOfTiles).Distinct();
-        public IEnumerable<(int, int)> NeighboursOfTiles => tilesWithCard.SelectMany(x => x.Key.NeighboursOf());
+        public IEnumerable<(int, int)> NeighboursOfTiles => OccupiedTiles.SelectMany(Neighbouring.Neighbours);
 
         public static IEnumerable<(int, int)> BuildBoard()
         {
@@ -52,7 +52,7 @@ namespace Runtime.Domain
         }
 
         public int HappinessOf((int, int) origin)
-            => origin.NeighboursOf()
+            => origin.Neighbours()
                 .Where(ExistsAt)
                 .Sum(tile => HappinessBetween(origin, tile));
     }

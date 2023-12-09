@@ -124,7 +124,7 @@ namespace Tests.EditMode
         [Test]
         public void ExcludeNeighbours()
         {
-            new List<(int, int)> { (0, 0), (0, 1) }.ExcludeNeighbours().Should().HaveCount(1);
+            new List<(int, int)> { (0, 0), (0, 1) }.WithoutNeighbours().Should().HaveCount(1);
         }
 
         [Test]
