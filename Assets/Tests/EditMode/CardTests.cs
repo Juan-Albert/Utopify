@@ -64,6 +64,14 @@ namespace Tests.EditMode
             Card.WithTraits(Some)
                 .PreviewjbasjdfWith(Card.WithTraits(NeutralOfSome))
                 .Should().Be(Card.jbasjdf.Neutral);
+            
+            Card.WithTraits(Some)
+                .PreviewjbasjdfWith(Card.WithTraits(FriendOfSome))
+                .Should().Be(Card.jbasjdf.Positive);
+            
+            Card.WithTraits(Some)
+                .PreviewjbasjdfWith(Card.WithTraits(EnemyOfSome))
+                .Should().Be(Card.jbasjdf.Negative);
         }
     }
 }

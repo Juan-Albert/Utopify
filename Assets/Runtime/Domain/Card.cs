@@ -12,14 +12,14 @@ namespace Runtime.Domain
             Positive = 1,
             Negative = -1
         }
-        
+
         readonly Trait[] traits;
 
         Card(IEnumerable<Trait> traits)
         {
-            if(traits.Count() != traits.Distinct().Count())
+            if (traits.Count() != traits.Distinct().Count())
                 throw new NotSupportedException();
-            if(traits is null || !traits.Any())
+            if (traits is null || !traits.Any())
                 throw new NotSupportedException();
 
             this.traits = traits.ToArray();
@@ -32,9 +32,12 @@ namespace Runtime.Domain
             return traits.Sum(t => other.traits.Sum(o => t.RelationWith(o).ToPreviewHappiness()));
         }
 
-        public object PreviewjbasjdfWith(Card withTraits)
-        {
-            throw new NotImplementedException();
-        }
+        public jbasjdf PreviewjbasjdfWith(Card other)
+            => PreviewHappinessWith(other) switch
+            {
+                > 0 => jbasjdf.Positive,
+                < 0 => jbasjdf.Negative,
+                _ => jbasjdf.Neutral
+            };
     }
 }
