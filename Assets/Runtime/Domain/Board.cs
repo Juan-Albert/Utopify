@@ -29,7 +29,10 @@ namespace Runtime.Domain
 
         public Board PlaceAt((int, int) where, Card card)
         {
-            if (ExistsAt(where))
+            if(ExistsAt(where))
+                throw new System.NotSupportedException();
+
+            if (!AvailableTiles.Contains(where))
                 throw new System.NotSupportedException();
 
             var result = tilesWithCard.Concat(new[] { new KeyValuePair<(int, int), Card>(where, card) });
