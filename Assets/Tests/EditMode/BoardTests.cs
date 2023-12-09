@@ -157,6 +157,12 @@ namespace Tests.EditMode
                 .PlaceAt((0, 0), Card.WithTraits(Some))
                 .AvailableTiles.Should().OnlyHaveUniqueItems();
         }
-        
+
+        [Test]
+        public void IgnoreNeighbourTile_IfOccupied()
+        {
+            Board.Empty.PlaceAt((0, 0), Card.WithTraits(Some)).PlaceAt((0, 1), Card.WithTraits(Some)).AvailableTiles
+                .Should().NotContain((0, 0));
+        }
     }
 }
