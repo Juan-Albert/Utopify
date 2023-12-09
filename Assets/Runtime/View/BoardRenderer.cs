@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BoardRenderer : MonoBehaviour
 {
-    [SerializeField] GameObject emptyTile = null;
+    [SerializeField] ClickableTile emptyTile = null;
 
     Board board;
 
@@ -16,11 +16,16 @@ public class BoardRenderer : MonoBehaviour
 
     void Visualize()
     {
-        for (int i = 0; i < board.AvailableTiles.Count(); i++)
+        for (var i = 0; i < board.AvailableTiles.Count(); i++)
         {
-            Instantiate(emptyTile, transform).transform.position =
-                new Vector3(board.AvailableTiles.ElementAt(i).x + (board.AvailableTiles.ElementAt(i).x * 0.2f),
-                    board.AvailableTiles.ElementAt(i).y + (board.AvailableTiles.ElementAt(i).y * 0.2f), 0);
+            PlaceTile(board.AvailableTiles.ElementAt(i));
         }
+    }
+
+    void PlaceTile((int x, int y) where)
+    {
+        var tile = Instantiate(emptyTile, transform);
+        tile.transform.position = new Vector3(where.x + (where.x * 0.2f), where.y + (where.y * 0.2f), 0);
+        tile.Configure(board, where);
     }
 }
