@@ -5,15 +5,16 @@ namespace Runtime.Domain
 {
     public class Board
     {
-        readonly IReadOnlyDictionary<(int, int), Card> tiles;
+        readonly IReadOnlyDictionary<(int, int), Card> tilesWithCard;
 
-        Board(IReadOnlyDictionary<(int, int), Card> tiles) => this.tiles = tiles;
+        Board(IReadOnlyDictionary<(int, int), Card> tilesWithCard) => this.tilesWithCard = tilesWithCard;
 
         public static Board Empty => new(new Dictionary<(int, int), Card>());
         public int Happiness => IsolatedCards.Sum(HappinessOf);
-        IEnumerable<(int, int)> IsolatedCards => tiles.Keys.ExcludeNeighbours();
-        public IEnumerable<(int, int)> AvailableTiles => BuildBoard().Except(tiles.Keys).Concat(NeighboursOfTiles).Distinct();
-        public IEnumerable<(int, int)> NeighboursOfTiles => tiles.SelectMany(x => x.Key.NeighboursOf());
+        IEnumerable<(int, int)> IsolatedCards => OccupiedTiles.ExcludeNeighbours();
+        private IEnumerable<(int, int)> OccupiedTiles => tilesWithCard.Keys;
+        public IEnumerable<(int, int)> AvailableTiles => BuildBoard().Except(OccupiedTiles).Concat(NeighboursOfTiles).Distinct();
+        public IEnumerable<(int, int)> NeighboursOfTiles => tilesWithCard.SelectMany(x => x.Key.NeighboursOf());
 
         public static IEnumerable<(int, int)> BuildBoard()
         {
@@ -31,13 +32,13 @@ namespace Runtime.Domain
             if (ExistsAt(where))
                 throw new System.NotSupportedException();
 
-            var result = tiles.Concat(new[] { new KeyValuePair<(int, int), Card>(where, card) });
+            var result = tilesWithCard.Concat(new[] { new KeyValuePair<(int, int), Card>(where, card) });
             return new Board(result.ToDictionary(kvp => kvp.Key, kvp => kvp.Value));
         }
 
         public bool ExistsAt((int, int) coordinate)
         {
-            return tiles.ContainsKey(coordinate);
+            return tilesWithCard.ContainsKey(coordinate);
         }
 
         public int HappinessBetween((int, int) one, (int, int) other)
@@ -47,7 +48,7 @@ namespace Runtime.Domain
             if (!one.AreNeighbours(other))
                 throw new System.NotSupportedException("Ambas Tiles tienen que ser vecinas");
 
-            return tiles[one].PreviewHappinessWith(tiles[other]);
+            return tilesWithCard[one].PreviewHappinessWith(tilesWithCard[other]);
         }
 
         public int HappinessOf((int, int) origin)
