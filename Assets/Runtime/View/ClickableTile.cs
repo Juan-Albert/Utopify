@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ClickableTile : MonoBehaviour
 {
-    Board board;
+    BoardRenderer board;
     (int x, int y) whereIs;
 
     void OnMouseDown()
@@ -12,7 +12,7 @@ public class ClickableTile : MonoBehaviour
         board.PlaceAt(whereIs, Card.WithTraits(new Trait("random", Array.Empty<string>(), Array.Empty<string>())));
     }
 
-    public void Configure(Board board, (int x, int y) whereIs)
+    public void Configure(BoardRenderer board, (int x, int y) whereIs)
     {
         this.board = board;
         this.whereIs = whereIs;
