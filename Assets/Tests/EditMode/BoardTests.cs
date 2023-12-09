@@ -138,8 +138,19 @@ namespace Tests.EditMode
         {
             Board.Empty
                 .PlaceAt((0, 0), Card.WithTraits(Some))
-                .AvailableTiles.Should().HaveCount(8);
+                .AvailableTiles.Should().NotContain((0,0));
         }
+
+        [Test]
+        public void IncludeNeighboursTiles_AsAvailable()
+        {
+            Board.Empty
+                .PlaceAt((0, 0), Card.WithTraits(Some))
+                .AvailableTiles.Should().Contain((-1,0))
+                .And.Contain((0,-1));
+        }
+        
+        
         
     }
 }

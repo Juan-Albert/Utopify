@@ -10,9 +10,10 @@ namespace Runtime.Domain
         Board(IReadOnlyDictionary<(int, int), Card> tiles) => this.tiles = tiles;
 
         public static Board Empty => new(new Dictionary<(int, int), Card>());
-        public int Happiness => asfas.Sum(HappinessOf);
-        IEnumerable<(int, int)> asfas => tiles.Keys.ExcludeNeighbours();
-        public IEnumerable<(int, int)> AvailableTiles => BuildBoard().Except(tiles.Keys);
+        public int Happiness => IsolatedCards.Sum(HappinessOf);
+        IEnumerable<(int, int)> IsolatedCards => tiles.Keys.ExcludeNeighbours();
+        public IEnumerable<(int, int)> AvailableTiles => BuildBoard().Except(tiles.Keys).Concat(NeighboursOfTiles);
+        public IEnumerable<(int, int)> NeighboursOfTiles => tiles.SelectMany(x => x.Key.NeighboursOf());
 
         public static IEnumerable<(int, int)> BuildBoard()
         {
