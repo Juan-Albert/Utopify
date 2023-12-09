@@ -57,5 +57,13 @@ namespace Tests.EditMode
                         .PreviewHappinessWith(Card.WithTraits(NeutralOfSome))
                 );
         }
+
+        [Test]
+        public void PreviewRelationship()
+        {
+            Card.WithTraits(Some)
+                .PreviewjbasjdfWith(Card.WithTraits(NeutralOfSome))
+                .Should().Be(Card.jbasjdf.Neutral);
+        }
     }
 }
