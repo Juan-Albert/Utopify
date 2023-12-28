@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Runtime.Domain
@@ -13,9 +14,12 @@ namespace Runtime.Domain
         public int Happiness => IsolatedCards.Sum(HappinessOf);
         IEnumerable<(int, int)> IsolatedCards => OccupiedTiles.WithoutNeighbours();
         public IEnumerable<(int x, int y)> OccupiedTiles => tilesWithCard.Keys;
-        public IEnumerable<(int x, int y)> AvailableTiles => BuildBoard().Concat(NeighboursOfTiles).Except(OccupiedTiles).Distinct();
+
+        public IEnumerable<(int x, int y)> AvailableTiles =>
+            BuildBoard().Concat(NeighboursOfTiles).Except(OccupiedTiles).Distinct();
+
         public IEnumerable<(int, int)> NeighboursOfTiles => OccupiedTiles.SelectMany(Neighbouring.Neighbours);
-        // public IEnumerable<((int x, int y), (int x, int y))> Connections => OccupiedTiles.SelectMany(Neighbouring.Connections);
+        public IEnumerable<((int x, int y), (int x, int y))> Connections => Array.Empty<((int, int), (int, int))>();
 
         public static IEnumerable<(int, int)> BuildBoard()
         {
@@ -30,7 +34,7 @@ namespace Runtime.Domain
 
         public Board PlaceAt((int, int) where, Card card)
         {
-            if(ExistsAt(where))
+            if (ExistsAt(where))
                 throw new System.NotSupportedException();
             if (!AvailableTiles.Contains(where))
                 throw new System.NotSupportedException();

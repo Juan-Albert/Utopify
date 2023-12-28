@@ -185,5 +185,11 @@ namespace Tests.EditMode
             new[] { (0, 0), (0, 1), (1, 0) }.Connections().Should().HaveCount(2);
             new[] { (0, 0), (0, 1), (1, 0), (1, 1) }.Connections().Should().HaveCount(4);
         }
+
+        [Test]
+        public void EmptyBoard_HasNoConnections()
+        {
+            Board.Empty.Connections.Should().BeEmpty();
+        }
     }
 }
