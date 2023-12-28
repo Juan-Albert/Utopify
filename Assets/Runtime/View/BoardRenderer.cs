@@ -7,6 +7,7 @@ public class BoardRenderer : MonoBehaviour
 {
     [SerializeField] ClickableTile emptyTile = null;
     [SerializeField] GameObject cardPrefab = null;
+    [SerializeField] Connection connectionPrefab = null;
 
     Board board;
 
@@ -25,6 +26,21 @@ public class BoardRenderer : MonoBehaviour
         DeletePreviousBoard();
         GenerateBoardTiles();
         GenerateCards();
+        GenerateConnections();
+    }
+
+    void GenerateConnections()
+    {
+        for (var i = 0; i < board.Connections.Count(); i++)
+        {
+            PlaceConnection(board.Connections.ElementAt(i));
+        }
+    }
+
+    void PlaceConnection(((int x, int y), (int x, int y)) connection)
+    {
+        var tile = Instantiate(connectionPrefab, transform);
+        tile.Configure(connection);
     }
 
     void GenerateCards()
@@ -38,12 +54,13 @@ public class BoardRenderer : MonoBehaviour
     void PlaceCardAt((int x, int y) elementAt)
     {
         var card = Instantiate(cardPrefab, transform);
-        card.transform.position = new Vector3(elementAt.x + (elementAt.x * 0.2f), elementAt.y + (elementAt.y * 0.2f), 0);
+        card.transform.position =
+            new Vector3(elementAt.x + (elementAt.x * 0.2f), elementAt.y + (elementAt.y * 0.2f), 0);
     }
 
     void DeletePreviousBoard()
     {
-        foreach (Transform child in transform) 
+        foreach (Transform child in transform)
             Destroy(child.gameObject);
     }
 
@@ -61,6 +78,6 @@ public class BoardRenderer : MonoBehaviour
         tile.transform.position = new Vector3(where.x + (where.x * 0.2f), where.y + (where.y * 0.2f), 0);
         tile.Configure(this, where);
     }
-    
+
     public void PlaceAt((int, int) where, Card card) => board = board.PlaceAt(where, card);
-}   
+}

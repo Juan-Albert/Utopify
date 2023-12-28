@@ -154,6 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emptyTile: {fileID: 3388785144559851870, guid: 08a63c66aeffc8242b3bc4dbc55bb7d5, type: 3}
   cardPrefab: {fileID: 7152631323580979908, guid: 9edd03cd682888a419b4def6ed09be6d, type: 3}
+  connectionPrefab: {fileID: 4026914443342474248, guid: fc7c63423380ffb47ac11b6dcde400f9, type: 3}
 --- !u!4 &5428281
 Transform:
   m_ObjectHideFlags: 0
