@@ -29,7 +29,7 @@ namespace Runtime.Domain
 
         public int PreviewHappinessWith(Card other)
         {
-            return traits.Sum(t => other.traits.Sum(o => t.RelationWith(o).ToPreviewHappiness()));
+            return traits.Sum(t => other.traits.Sum(o => t.AffinityWith(o).ToPreviewHappiness()));
         }
 
         public jbasjdf PreviewjbasjdfWith(Card other)

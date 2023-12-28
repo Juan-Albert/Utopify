@@ -2,6 +2,6 @@
 {
     public static class TraitRelationshipToHappiness
     {
-        public static int ToPreviewHappiness(this Trait.Relationship what) => (int)what;
+        public static int ToPreviewHappiness(this Trait.Affinity what) => (int)what;
     };
 }

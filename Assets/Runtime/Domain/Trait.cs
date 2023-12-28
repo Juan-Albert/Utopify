@@ -5,7 +5,7 @@ namespace Runtime.Domain
 {
     public record Trait
     {
-        public enum Relationship
+        public enum Affinity
         {
             Neutral = 0,
             Friend = 1,
@@ -31,13 +31,13 @@ namespace Runtime.Domain
             enemiesIds = enemies.ToArray();
         }
 
-        public Relationship RelationWith(Trait friend)
+        public Affinity AffinityWith(Trait friend)
         {
             if (friendsIds?.Contains(friend.id) ?? false)
-                return Relationship.Friend;
+                return Affinity.Friend;
             if (enemiesIds?.Contains(friend.id) ?? false)
-                return Relationship.Enemy;
-            return Relationship.Neutral;
+                return Affinity.Enemy;
+            return Affinity.Neutral;
         }
     }
 }

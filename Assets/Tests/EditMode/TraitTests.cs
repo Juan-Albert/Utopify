@@ -15,7 +15,7 @@ namespace Tests.EditMode
             var friend = new Trait("friend", Array.Empty<string>(), Array.Empty<string>());
             var sut = new Trait("some", new[] { "friend" }, Array.Empty<string>());
 
-            sut.RelationWith(friend).Should().Be(Relationship.Friend);
+            sut.AffinityWith(friend).Should().Be(Affinity.Friend);
         }
 
         [Test]
@@ -24,7 +24,7 @@ namespace Tests.EditMode
             var enemy = new Trait("enemy", Array.Empty<string>(), Array.Empty<string>());
             var sut = new Trait("some", Array.Empty<string>(), new[] { "enemy" });
 
-            sut.RelationWith(enemy).Should().Be(Relationship.Enemy);
+            sut.AffinityWith(enemy).Should().Be(Affinity.Enemy);
         }
 
         [Test]
@@ -33,7 +33,7 @@ namespace Tests.EditMode
             var neutral = new Trait("whatever", Array.Empty<string>(), Array.Empty<string>());
             var sut = new Trait("some", Enumerable.Empty<string>(), Enumerable.Empty<string>());
 
-            sut.RelationWith(neutral).Should().Be(Relationship.Neutral);
+            sut.AffinityWith(neutral).Should().Be(Affinity.Neutral);
         }
     }
 }
