@@ -62,16 +62,16 @@ namespace Tests.EditMode
         public void PreviewRelationship()
         {
             Card.WithTraits(Some)
-                .PreviewjbasjdfWith(Card.WithTraits(NeutralOfSome))
-                .Should().Be(Card.jbasjdf.Neutral);
+                .PreviewRelationshipWith(Card.WithTraits(NeutralOfSome))
+                .Should().Be(Card.Relationship.Neutral);
             
             Card.WithTraits(Some)
-                .PreviewjbasjdfWith(Card.WithTraits(FriendOfSome))
-                .Should().Be(Card.jbasjdf.Positive);
+                .PreviewRelationshipWith(Card.WithTraits(FriendOfSome))
+                .Should().Be(Card.Relationship.Positive);
             
             Card.WithTraits(Some)
-                .PreviewjbasjdfWith(Card.WithTraits(EnemyOfSome))
-                .Should().Be(Card.jbasjdf.Negative);
+                .PreviewRelationshipWith(Card.WithTraits(EnemyOfSome))
+                .Should().Be(Card.Relationship.Negative);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Runtime.Domain
 {
     public record Card
     {
-        public enum jbasjdf
+        public enum Relationship
         {
             Neutral = 0,
             Positive = 1,
@@ -32,12 +32,12 @@ namespace Runtime.Domain
             return traits.Sum(t => other.traits.Sum(o => t.AffinityWith(o).ToPreviewHappiness()));
         }
 
-        public jbasjdf PreviewjbasjdfWith(Card other)
+        public Relationship PreviewRelationshipWith(Card other)
             => PreviewHappinessWith(other) switch
             {
-                > 0 => jbasjdf.Positive,
-                < 0 => jbasjdf.Negative,
-                _ => jbasjdf.Neutral
+                > 0 => Relationship.Positive,
+                < 0 => Relationship.Negative,
+                _ => Relationship.Neutral
             };
     }
 }
