@@ -164,5 +164,17 @@ namespace Tests.EditMode
             Board.Empty.PlaceAt((0, 0), Card.WithTraits(Some)).PlaceAt((0, 1), Card.WithTraits(Some)).AvailableTiles
                 .Should().NotContain((0, 0));
         }
+        
+        [Test]
+        public void Relationship_Between_TwoNeighbourTiles()
+        {
+            Board.Empty.PlaceAt((0, 0), Card.WithTraits(Some)).PlaceAt((0, 1), Card.WithTraits(Some))
+                .RelationshipBetween((0, 0), (0, 1))
+                .Should().Be(Card.Relationship.Neutral);
+
+            Board.Empty.PlaceAt((0, 0), Card.WithTraits(Some)).PlaceAt((0, 1), Card.WithTraits(FriendOfSome))
+                .RelationshipBetween((0, 0), (0, 1))
+                .Should().Be(Card.Relationship.Positive);
+        }
     }
 }

@@ -54,6 +54,16 @@ namespace Runtime.Domain
             return tilesWithCard[one].PreviewHappinessWith(tilesWithCard[other]);
         }
 
+        public Card.Relationship RelationshipBetween((int, int) one, (int, int) other)
+        {
+            if (!ExistsAt(one) || !ExistsAt(other))
+                throw new System.NotSupportedException("Ambos Tiles tienen que tener cartas");
+            if (!one.AreNeighbours(other))
+                throw new System.NotSupportedException("Ambas Tiles tienen que ser vecinas");
+
+            return tilesWithCard[one].PreviewRelationshipWith(tilesWithCard[other]);
+        }
+
         public int HappinessOf((int, int) origin)
             => origin.Neighbours()
                 .Where(ExistsAt)
