@@ -176,5 +176,12 @@ namespace Tests.EditMode
                 .RelationshipBetween((0, 0), (0, 1))
                 .Should().Be(Card.Relationship.Positive);
         }
+
+        [Test]
+        public void skdfjbgkjadg()
+        {
+            new [] { (0, 0), (1, 1) }.Connections().Should().HaveCount(0);
+            new [] { (0, 0), (0, 1) }.Connections().Should().HaveCount(1);
+        }
     }
 }
