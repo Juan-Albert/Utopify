@@ -47,7 +47,18 @@ namespace Tests.EditMode
     3.1 Clicable tile
         3.1.1 La vista hace cosas rara con el on mouse down --> Lo ignoramos.
     3.2 vista para la carta
+        3.2.1 Vista base de una carta
+        3.2.2 Visualizar los trait de una carta (podemos probar a hacerlo con colores para no tener que pintar sprites) <--
     3.3 vista para la conexion
+        3.3.1 Vista base para una conexion
+        3.3.2 Visualizar el estado de la conexion <--
  4. Felicidad global.
- 5. Mano. Si no hacemos mano al principio, al clicar una casilla se pone una carta cualquiera o lo que sa.
+ 5. Mano. Si no hacemos mano al principio, al clicar una casilla se pone una carta cualquiera o lo que sea (Mano Fake). <--
+ 
+ //// Refactors
+ 1. Encapsular las tuplas de posiciones
+ 2. Hacer un builder para los test de board
+ 3. Extraer a otra suite los test de neighbouring
+ 4. Unificar la separación de los tiles del tablero en la vista 
+ 
  */
