@@ -191,5 +191,12 @@ namespace Tests.EditMode
         {
             Board.Empty.Connections.Should().BeEmpty();
         }
+
+        [Test]
+        public void BoardWith_IsolatedCards_HasNoConnections()
+        {
+            Board.Empty.PlaceAt((0, 0), Card.WithTraits(Some)).PlaceAt((1, 1), Card.WithTraits(Some))
+                .Connections.Should().BeEmpty();
+        }
     }
 }
