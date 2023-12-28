@@ -132,13 +132,13 @@ namespace Tests.EditMode
         {
             Board.Empty.AvailableTiles.Should().HaveCount(9);
         }
-        
+
         [Test]
         public void ExcludeOccupiedTiles_FromAvailables()
         {
             Board.Empty
                 .PlaceAt((0, 0), Card.WithTraits(Some))
-                .AvailableTiles.Should().NotContain((0,0));
+                .AvailableTiles.Should().NotContain((0, 0));
         }
 
         [Test]
@@ -146,8 +146,8 @@ namespace Tests.EditMode
         {
             Board.Empty
                 .PlaceAt((0, 0), Card.WithTraits(Some))
-                .AvailableTiles.Should().Contain((-1,0))
-                .And.Contain((0,-1));
+                .AvailableTiles.Should().Contain((-1, 0))
+                .And.Contain((0, -1));
         }
 
         [Test]
@@ -164,7 +164,7 @@ namespace Tests.EditMode
             Board.Empty.PlaceAt((0, 0), Card.WithTraits(Some)).PlaceAt((0, 1), Card.WithTraits(Some)).AvailableTiles
                 .Should().NotContain((0, 0));
         }
-        
+
         [Test]
         public void Relationship_Between_TwoNeighbourTiles()
         {
@@ -178,10 +178,12 @@ namespace Tests.EditMode
         }
 
         [Test]
-        public void skdfjbgkjadg()
+        public void Connections()
         {
-            new [] { (0, 0), (1, 1) }.Connections().Should().HaveCount(0);
-            new [] { (0, 0), (0, 1) }.Connections().Should().HaveCount(1);
+            new[] { (0, 0), (1, 1) }.Connections().Should().HaveCount(0);
+            new[] { (0, 0), (0, 1) }.Connections().Should().HaveCount(1);
+            new[] { (0, 0), (0, 1), (1, 0) }.Connections().Should().HaveCount(2);
+            new[] { (0, 0), (0, 1), (1, 0), (1, 1) }.Connections().Should().HaveCount(4);
         }
     }
 }

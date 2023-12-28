@@ -32,7 +32,6 @@ namespace Runtime.Domain
         {
             if(ExistsAt(where))
                 throw new System.NotSupportedException();
-
             if (!AvailableTiles.Contains(where))
                 throw new System.NotSupportedException();
 
