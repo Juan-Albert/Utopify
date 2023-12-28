@@ -12,7 +12,7 @@ namespace Runtime.Domain
         public static Board Empty => new(new Dictionary<(int, int), Card>());
         public int Happiness => IsolatedCards.Sum(HappinessOf);
         IEnumerable<(int, int)> IsolatedCards => OccupiedTiles.WithoutNeighbours();
-        private IEnumerable<(int, int)> OccupiedTiles => tilesWithCard.Keys;
+        public IEnumerable<(int x, int y)> OccupiedTiles => tilesWithCard.Keys;
         public IEnumerable<(int x, int y)> AvailableTiles => BuildBoard().Concat(NeighboursOfTiles).Except(OccupiedTiles).Distinct();
         public IEnumerable<(int, int)> NeighboursOfTiles => OccupiedTiles.SelectMany(Neighbouring.Neighbours);
 

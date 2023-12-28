@@ -6,6 +6,7 @@ using UnityEngine;
 public class BoardRenderer : MonoBehaviour
 {
     [SerializeField] ClickableTile emptyTile = null;
+    [SerializeField] GameObject cardPrefab = null;
 
     Board board;
 
@@ -23,6 +24,21 @@ public class BoardRenderer : MonoBehaviour
     {
         DeletePreviousBoard();
         GenerateBoardTiles();
+        GenerateCards();
+    }
+
+    void GenerateCards()
+    {
+        for (var i = 0; i < board.OccupiedTiles.Count(); i++)
+        {
+            PlaceCardAt(board.OccupiedTiles.ElementAt(i));
+        }
+    }
+
+    void PlaceCardAt((int x, int y) elementAt)
+    {
+        var card = Instantiate(cardPrefab, transform);
+        card.transform.position = new Vector3(elementAt.x + (elementAt.x * 0.2f), elementAt.y + (elementAt.y * 0.2f), 0);
     }
 
     void DeletePreviousBoard()
@@ -47,4 +63,4 @@ public class BoardRenderer : MonoBehaviour
     }
     
     public void PlaceAt((int, int) where, Card card) => board = board.PlaceAt(where, card);
-}
+}   

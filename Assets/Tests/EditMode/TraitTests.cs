@@ -45,7 +45,7 @@ namespace Tests.EditMode
  2. Noción de si una conexión entre dos casillas es positiva, negativa o neutral. 
  3. Vista pa poner cartas. Y que salgan las conexiones. 
     3.1 Clicable tile
-        3.1.1 La vista hace cosas rara con el on mouse down <-
+        3.1.1 La vista hace cosas rara con el on mouse down --> Lo ignoramos.
     3.2 vista para la carta
     3.3 vista para la conexion
  4. Felicidad global.
