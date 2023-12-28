@@ -32,5 +32,21 @@ namespace Runtime.Domain
 
             return result;
         }
+        
+        public static IEnumerable<((int x, int y),(int x, int y))> Connections(this IEnumerable<(int, int)> tiles)
+        {
+            var result = new List<((int x, int y),(int x, int y))>();
+            
+            foreach (var tile in tiles)
+            foreach (var neighbour in tile.Neighbours())
+            {
+                if(tiles.Contains(neighbour)) continue;
+                // if (result.Contains((neighbour, coordinate))) continue;
+
+                result.Add((tile, neighbour));
+            }
+
+            return result;
+        }
     }
 }

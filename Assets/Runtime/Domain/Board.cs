@@ -15,6 +15,7 @@ namespace Runtime.Domain
         public IEnumerable<(int x, int y)> OccupiedTiles => tilesWithCard.Keys;
         public IEnumerable<(int x, int y)> AvailableTiles => BuildBoard().Concat(NeighboursOfTiles).Except(OccupiedTiles).Distinct();
         public IEnumerable<(int, int)> NeighboursOfTiles => OccupiedTiles.SelectMany(Neighbouring.Neighbours);
+        // public IEnumerable<((int x, int y), (int x, int y))> Connections => OccupiedTiles.SelectMany(Neighbouring.Connections);
 
         public static IEnumerable<(int, int)> BuildBoard()
         {
