@@ -43,7 +43,7 @@ namespace Tests.EditMode
         {
             Board.Empty
                 .PlaceAt((0, 0), Card.WithTraits(Some))
-                .PlaceAt((5465, 4224), Card.WithTraits(Some))
+                .PlaceAt((1, 1), Card.WithTraits(Some))
                 .Happiness
                 .Should().Be(0);
         }
