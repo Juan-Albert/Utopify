@@ -198,5 +198,12 @@ namespace Tests.EditMode
             Board.Empty.PlaceAt((0, 0), Card.WithTraits(Some)).PlaceAt((1, 1), Card.WithTraits(Some))
                 .Connections.Should().BeEmpty();
         }
+
+        [Test]
+        public void ConnectNeighbourCards()
+        {
+            Board.Empty.PlaceAt((0, 0), Card.WithTraits(Some)).PlaceAt((0, 1), Card.WithTraits(Some))
+                .Connections.Should().HaveCount(1);
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace Runtime.Domain
             BuildBoard().Concat(NeighboursOfTiles).Except(OccupiedTiles).Distinct();
 
         public IEnumerable<(int, int)> NeighboursOfTiles => OccupiedTiles.SelectMany(Neighbouring.Neighbours);
-        public IEnumerable<((int x, int y), (int x, int y))> Connections => Array.Empty<((int, int), (int, int))>();
+        public IEnumerable<((int x, int y), (int x, int y))> Connections => OccupiedTiles.Connections();
 
         public static IEnumerable<(int, int)> BuildBoard()
         {
