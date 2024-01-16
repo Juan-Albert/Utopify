@@ -546,9 +546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d0a9d8f8c764e96980955681d315ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: friend
-  friends: []
-  enemies: []
+  isFriend: 0
 --- !u!4 &1786285452
 Transform:
   m_ObjectHideFlags: 0
