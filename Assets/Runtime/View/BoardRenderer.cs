@@ -40,7 +40,7 @@ public class BoardRenderer : MonoBehaviour
     void PlaceConnection(((int x, int y), (int x, int y)) connection)
     {
         var tile = Instantiate(connectionPrefab, transform);
-        tile.Configure(connection);
+        tile.Configure(connection, board.RelationshipBetween(connection.Item1, connection.Item2));
     }
 
     void GenerateCards()
