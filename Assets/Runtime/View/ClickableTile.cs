@@ -1,6 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
 using Runtime.Domain;
 using UnityEngine;
+
+public struct asfasfas
+{
+    public string id;
+    public Color howLooksLike;
+
+    public asfasfas(string id, Color howLooksLike)
+    {
+        this.id = id;
+        this.howLooksLike = howLooksLike;
+    }
+}
+
+public class Hardcodedadsfsad : MonoBehaviour
+{
+    [SerializeField] List<asfasfas> fsafsa = new List<asfasfas> { new asfasfas("friend", Color.red),new asfasfas("enemyOfFriend", Color.red) };
+}
 
 public class ClickableTile : MonoBehaviour
 {
