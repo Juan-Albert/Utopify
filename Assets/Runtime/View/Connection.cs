@@ -14,12 +14,9 @@ public class Connection : MonoBehaviour
         ChangeColor(ColorOf(adwgf));
     }
 
-    void ChangeColor(Color whichOne)
-    {
-        LineRenderer.startColor = whichOne;
-        LineRenderer.endColor = whichOne;
-    }
-    
+    void ChangeColor(Color whichOne) 
+        => LineRenderer.material.color = whichOne;
+
     private Color ColorOf(Card.Relationship adwgf)
     {
         switch (adwgf)
