@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 using Runtime.Domain;
@@ -48,6 +49,16 @@ namespace Tests.EditMode
                 .Should().Be(0);
         }
 
+        [Test]
+        public void asfsa()
+        {
+            Board.Empty
+                .PlaceAt((0, 0), Card.WithTraits(Friend2OfSome))
+                .PlaceAt((0, 1), Card.WithTraits(Enemy2OfSome))
+                .CardAt((0, 0))
+                .Traits.First().id.Should().Be("friend2");
+        }
+        
         [Test]
         public void Happiness_IsSumOfIndividualHappiness()
         {
