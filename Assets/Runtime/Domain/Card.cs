@@ -14,6 +14,8 @@ namespace Runtime.Domain
         }
 
         readonly Trait[] traits;
+        
+        public IEnumerable<Trait> Traits => traits;
 
         Card(IEnumerable<Trait> traits)
         {

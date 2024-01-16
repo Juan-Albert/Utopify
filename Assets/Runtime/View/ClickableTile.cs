@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Runtime.Domain;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public struct TraitLook
 {
@@ -25,7 +27,19 @@ public class PlacedCard : MonoBehaviour
 
     public void Depict(Card toBeDepicted)
     {
+        ChangeColor(ColorOf(toBeDepicted));
+    }
+
+    void ChangeColor(Color colorOf)
+    {
+        throw new NotImplementedException();
+    }
+
+    Color ColorOf(Card toBeDepicted)
+    {
+        Assert.IsTrue(toBeDepicted.Traits.Any());
         
+        return looks.Single().howLooksLike;
     }
 }
 
