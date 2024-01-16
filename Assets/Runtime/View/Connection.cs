@@ -25,7 +25,7 @@ public class Connection : MonoBehaviour
         switch (adwgf)
         {
             case Card.Relationship.Neutral:
-                return Color.gray;
+                return Color.yellow;
             case Card.Relationship.Positive:
                 return Color.green;
             case Card.Relationship.Negative:
