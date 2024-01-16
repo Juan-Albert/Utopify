@@ -12,7 +12,7 @@ namespace Runtime.Domain
             Enemy = -1
         }
 
-        readonly string id;
+        public readonly string id;
         readonly string[] friendsIds;
         readonly string[] enemiesIds;
 

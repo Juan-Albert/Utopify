@@ -23,6 +23,8 @@ public class PlacedCard : MonoBehaviour
     {
         Assert.IsTrue(toBeDepicted.Traits.Any());
         
-        return looks.Single().howLooksLike;
+        return looks.Single(asfasf).howLooksLike;
+
+        bool asfasf(TraitLook x) => toBeDepicted.Traits.First().id.Equals(x.id);
     }
 }
