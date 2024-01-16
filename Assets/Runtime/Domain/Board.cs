@@ -75,7 +75,10 @@ namespace Runtime.Domain
 
         public Card CardAt((int x, int y) elementAt)
         {
-            throw new NotImplementedException();
+            if (!ExistsAt(elementAt))
+                throw new NotSupportedException();
+            
+            return tilesWithCard[elementAt];
         }
     }
 }

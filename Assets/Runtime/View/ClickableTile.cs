@@ -9,7 +9,7 @@ public class ClickableTile : MonoBehaviour
 
     void OnMouseDown()
     {
-        board.PlaceAt(whereIs, Card.WithTraits(new Trait("random", Array.Empty<string>(), Array.Empty<string>())));
+        board.PlaceAt(whereIs, Card.WithTraits(new Trait("friend", Array.Empty<string>(), Array.Empty<string>())));
     }
 
     public void Configure(BoardRenderer board, (int x, int y) whereIs)
