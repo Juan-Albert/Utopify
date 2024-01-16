@@ -17,7 +17,7 @@ public class PlacedCard : MonoBehaviour
         => ChangeColor(ColorOf(toBeDepicted));
 
     void ChangeColor(Color colorOf) 
-        => GetComponentsInChildren<Renderer>().Single().sharedMaterial.color = colorOf;
+        => GetComponentsInChildren<Renderer>().Single().material.color = colorOf;
 
     Color ColorOf(Card toBeDepicted)
     {
