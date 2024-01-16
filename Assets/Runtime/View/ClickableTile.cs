@@ -3,21 +3,30 @@ using System.Collections.Generic;
 using Runtime.Domain;
 using UnityEngine;
 
-public struct asfasfas
+public struct TraitLook
 {
     public string id;
     public Color howLooksLike;
 
-    public asfasfas(string id, Color howLooksLike)
+    public TraitLook(string id, Color howLooksLike)
     {
         this.id = id;
         this.howLooksLike = howLooksLike;
     }
 }
 
-public class Hardcodedadsfsad : MonoBehaviour
+public class PlacedCard : MonoBehaviour
 {
-    [SerializeField] List<asfasfas> fsafsa = new List<asfasfas> { new asfasfas("friend", Color.red),new asfasfas("enemyOfFriend", Color.red) };
+    List<TraitLook> looks = new List<TraitLook> 
+        { 
+            new("friend", Color.green),
+            new("enemyOfFriend", Color.red)
+        };
+
+    public void Depict(Card toBeDepicted)
+    {
+        
+    }
 }
 
 public class ClickableTile : MonoBehaviour
