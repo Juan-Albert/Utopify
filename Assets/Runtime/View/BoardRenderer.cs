@@ -6,7 +6,7 @@ using UnityEngine;
 public class BoardRenderer : MonoBehaviour
 {
     [SerializeField] ClickableTile emptyTile = null;
-    [SerializeField] GameObject cardPrefab = null;
+    [SerializeField] PlacedCard cardPrefab = null;
     [SerializeField] Connection connectionPrefab = null;
 
     Board board;
@@ -56,6 +56,7 @@ public class BoardRenderer : MonoBehaviour
         var card = Instantiate(cardPrefab, transform);
         card.transform.position =
             new Vector3(elementAt.x + (elementAt.x * 0.2f), elementAt.y + (elementAt.y * 0.2f), 0);
+        card.Depict(board.CardAt(elementAt));
     }
 
     void DeletePreviousBoard()

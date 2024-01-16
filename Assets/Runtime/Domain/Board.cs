@@ -72,5 +72,10 @@ namespace Runtime.Domain
             => origin.Neighbours()
                 .Where(ExistsAt)
                 .Sum(tile => HappinessBetween(origin, tile));
+
+        public Card CardAt((int x, int y) elementAt)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

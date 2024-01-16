@@ -23,8 +23,8 @@ public class PlacedCard : MonoBehaviour
     {
         Assert.IsTrue(toBeDepicted.Traits.Any());
         
-        return looks.Single(asfasf).howLooksLike;
+        return looks.Single(ContainedInCard).howLooksLike;
 
-        bool asfasf(TraitLook x) => toBeDepicted.Traits.First().id.Equals(x.id);
+        bool ContainedInCard(TraitLook x) => toBeDepicted.Traits.First().id.Equals(x.id);
     }
 }
